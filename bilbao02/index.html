@@ -800,9 +800,44 @@ footer p {
   .feature-list { grid-template-columns: 1fr; }
   section { padding: 5rem 5vw; }
 }
-@media (max-width: 480px) {
-  .team-grid { grid-template-columns: 1fr; }
-  .schedule-row { grid-template-columns: 1fr; gap: 0.5rem; }
+/* ── LANG TOGGLE ── */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.2);
+  overflow: hidden;
+  margin-right: 1rem;
+}
+.lang-btn {
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.2s;
+}
+.lang-btn.active {
+  background: var(--basque-red);
+  color: white;
+}
+.lang-btn:hover:not(.active) {
+  color: white;
+}
+/* 7-column challenge grid */
+.challenge-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1px;
+  background: var(--line);
+  margin-top: 3rem;
+}
+@media (max-width: 768px) {
+  .challenge-cards { grid-template-columns: 1fr !important; }
 }
 </style>
 </head>
@@ -811,7 +846,13 @@ footer p {
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">GO<span>IS</span></a>
-  <a href="https://forms.gle/MR3zB6tixRteHMPF8" target="_blank" class="nav-apply">지금 신청하기</a>
+  <div style="display:flex;align-items:center;gap:0.8rem;">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-ko" onclick="setLang('ko')">KO</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="https://forms.gle/MR3zB6tixRteHMPF8" target="_blank" class="nav-apply" data-ko="지금 신청하기" data-en="Apply Now">지금 신청하기</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -854,8 +895,8 @@ footer p {
 
 <!-- WHY BILBAO -->
 <section class="why-bilbao">
-  <p class="section-eyebrow reveal">왜 빌바오인가</p>
-  <h2 class="section-title reveal">유럽 진출,<br>왜 빌바오에서 시작해야 하는가</h2>
+  <p class="section-eyebrow reveal" data-ko="왜 빌바오인가" data-en="Why Bilbao">왜 빌바오인가</p>
+  <h2 class="section-title reveal" data-ko="유럽 진출,<br>왜 빌바오에서 시작해야 하는가" data-en="Why Start Your<br>European Journey<br>from Bilbao?">유럽 진출,<br>왜 빌바오에서 시작해야 하는가</h2>
   <p class="section-body reveal">바스크(빌바오)는 스페인 북부의 작은 도시처럼 보이지만, 유럽에서 가장 밀도 높은 오픈이노베이션 생태계 중 하나입니다. 세계 최대 협동조합 기업 몬드라곤, 글로벌 제조·에너지·헬스 대기업들, 그리고 이를 연결하는 BAT·BerriUp·MTA가 한 도시에 집결해 있습니다. 빌바오는 진입장벽이 낮으면서 실질 협업이 빠르게 이루어지는 스타트업의 유럽 관문입니다.</p>
   <div class="bilbao-grid stagger">
     <div class="bilbao-card">
@@ -932,47 +973,52 @@ footer p {
 
 <!-- CHALLENGES -->
 <section class="challenges-section">
-  <p class="section-eyebrow reveal">BAT Open Innovation Challenges</p>
-  <h2 class="section-title reveal">유럽 대기업이<br>당신의 솔루션을<br>기다리고 있다</h2>
-  <p class="section-body reveal">BAT는 바스크·스페인 현지 대기업과 기관이 한국 등 해외 스타트업에게 직접 협업 과제를 제안하는 Open Innovation Challenges를 운영합니다. 현지 방문 기간 중 담당자와 직접 미팅하고, 귀국 후에도 온라인으로 지원할 수 있어 방문이 지속적인 협업 파이프라인으로 이어집니다.</p>
+  <p class="section-eyebrow reveal" data-ko="BAT Open Innovation Challenges" data-en="BAT Open Innovation Challenges">BAT Open Innovation Challenges</p>
+  <h2 class="section-title reveal" data-ko="유럽 대기업이<br>당신의 솔루션을<br>기다리고 있다" data-en="European Industry<br>Is Waiting for<br>Your Solution">유럽 대기업이<br>당신의 솔루션을<br>기다리고 있다</h2>
+  <p class="section-body reveal" data-ko="BAT는 바스크·스페인 현지 대기업과 기관이 한국 등 해외 스타트업에게 직접 협업 과제를 제안하는 Open Innovation Challenges를 운영합니다. 현지 방문 기간 중 담당자와 직접 미팅하고, 귀국 후에도 온라인으로 지원할 수 있어 방문이 지속적인 협업 파이프라인으로 이어집니다." data-en="BAT operates Open Innovation Challenges where major Basque and Spanish corporations directly propose collaboration opportunities to startups worldwide. Meet challenge managers in person during the visit, and continue applying online after returning home — your visit becomes a lasting pipeline for European partnerships.">BAT는 바스크·스페인 현지 대기업과 기관이 한국 등 해외 스타트업에게 직접 협업 과제를 제안하는 Open Innovation Challenges를 운영합니다. 현지 방문 기간 중 담당자와 직접 미팅하고, 귀국 후에도 온라인으로 지원할 수 있어 방문이 지속적인 협업 파이프라인으로 이어집니다.</p>
   <div class="challenge-cards stagger">
     <div class="challenge-card">
       <div class="icon">⚡</div>
-      <h3>에너지 & 지속가능성</h3>
-      <p>Iberdrola 등 유럽 에너지 대기업과의 그린테크·에너지 효율화 협업 과제</p>
+      <h3 data-ko="에너지 & 지속가능성" data-en="Energy & Sustainability">에너지 & 지속가능성</h3>
+      <p data-ko="Iberdrola 등 유럽 에너지 대기업과의 그린테크·에너지 효율화 협업 과제" data-en="Green tech & energy efficiency collaboration with European energy leaders including Iberdrola">Iberdrola 등 유럽 에너지 대기업과의 그린테크·에너지 효율화 협업 과제</p>
     </div>
     <div class="challenge-card">
       <div class="icon">🏭</div>
-      <h3>제조 & 인더스트리얼</h3>
-      <p>바스크 제조업 강점을 기반으로 한 스마트 팩토리·Industry 4.0 협업 기회</p>
+      <h3 data-ko="제조 & 인더스트리얼" data-en="Manufacturing & Industrial">제조 & 인더스트리얼</h3>
+      <p data-ko="바스크 제조업 강점을 기반으로 한 스마트 팩토리·Industry 4.0 협업 기회" data-en="Smart factory & Industry 4.0 opportunities built on the Basque manufacturing powerhouse">바스크 제조업 강점을 기반으로 한 스마트 팩토리·Industry 4.0 협업 기회</p>
     </div>
     <div class="challenge-card">
       <div class="icon">🧬</div>
-      <h3>바이오 & 헬스테크</h3>
-      <p>CIC bioGUNE, Gibela Therapeutics 등 바스크 바이오 클러스터와의 PoC 연계</p>
+      <h3 data-ko="바이오 & 헬스테크" data-en="Bio & Healthtech">바이오 & 헬스테크</h3>
+      <p data-ko="CIC bioGUNE, Gibela Therapeutics 등 바스크 바이오 클러스터와의 PoC 연계" data-en="PoC connections with the Basque bio cluster including CIC bioGUNE and Gibela Therapeutics">CIC bioGUNE, Gibela Therapeutics 등 바스크 바이오 클러스터와의 PoC 연계</p>
     </div>
     <div class="challenge-card">
       <div class="icon">🚗</div>
-      <h3>모빌리티 & 스마트시티</h3>
-      <p>CAF(철도·모빌리티 글로벌 리더)를 포함한 스마트 모빌리티 챌린지</p>
+      <h3 data-ko="모빌리티 & 스마트시티" data-en="Mobility & Smart City">모빌리티 & 스마트시티</h3>
+      <p data-ko="CAF(철도·모빌리티 글로벌 리더)를 포함한 스마트 모빌리티 챌린지" data-en="Smart mobility challenges including CAF, a global leader in rail and mobility">CAF(철도·모빌리티 글로벌 리더)를 포함한 스마트 모빌리티 챌린지</p>
     </div>
     <div class="challenge-card">
       <div class="icon">🌾</div>
-      <h3>애그리테크 & 푸드</h3>
-      <p>바스크의 농식품 강점 기반 기술 혁신 — 바스크 쿠이진 생태계와 연결</p>
+      <h3 data-ko="애그리테크 & 푸드" data-en="Agritech & Food">애그리테크 & 푸드</h3>
+      <p data-ko="바스크의 농식품 강점 기반 기술 혁신 — 바스크 쿠이진 생태계와 연결" data-en="Tech innovation rooted in Basque agri-food strength — connected to the Basque Cuisine ecosystem">바스크의 농식품 강점 기반 기술 혁신 — 바스크 쿠이진 생태계와 연결</p>
+    </div>
+    <div class="challenge-card">
+      <div class="icon">💻</div>
+      <h3 data-ko="IT 솔루션 & 생산성" data-en="IT Solutions & Productivity">IT 솔루션 & 생산성</h3>
+      <p data-ko="기업·기관의 생산성 향상과 정보기술력 강화를 위한 SaaS·AI·디지털 트랜스포메이션 솔루션" data-en="SaaS, AI, and digital transformation solutions to boost enterprise productivity and IT capability">기업·기관의 생산성 향상과 정보기술력 강화를 위한 SaaS·AI·디지털 트랜스포메이션 솔루션</p>
     </div>
     <div class="challenge-card">
       <div class="icon">🌍</div>
-      <h3>모든 분야 지원 가능</h3>
-      <p>귀국 후에도 bacceleratortower.com에서 Challenge를 확인하고 온라인으로 직접 신청 가능</p>
+      <h3 data-ko="모든 분야 지원 가능" data-en="All Sectors Welcome">모든 분야 지원 가능</h3>
+      <p data-ko="귀국 후에도 bacceleratortower.com에서 Challenge를 확인하고 온라인으로 직접 신청 가능" data-en="Browse open Challenges at bacceleratortower.com and apply directly online after returning home">귀국 후에도 bacceleratortower.com에서 Challenge를 확인하고 온라인으로 직접 신청 가능</p>
     </div>
   </div>
 </section>
 
 <!-- SCHEDULE -->
 <section class="schedule-section">
-  <p class="section-eyebrow reveal">프로그램 일정</p>
-  <h2 class="section-title reveal">모집부터 현지까지,<br>단계별 로드맵</h2>
+  <p class="section-eyebrow reveal" data-ko="프로그램 일정" data-en="Program Timeline">프로그램 일정</p>
+  <h2 class="section-title reveal" data-ko="모집부터 현지까지,<br>단계별 로드맵" data-en="From Application to<br>Bilbao — Step by Step">모집부터 현지까지,<br>단계별 로드맵</h2>
 
   <div class="schedule-grid reveal">
     <div class="schedule-row">
@@ -1048,7 +1094,7 @@ footer p {
   </div>
 
   <div style="margin-top:4rem;" class="reveal">
-    <p class="section-eyebrow" style="margin-bottom:1rem;">현지 세부 일정</p>
+    <p class="section-eyebrow onsite-eyebrow" style="margin-bottom:1rem;" data-ko="현지 세부 일정" data-en="On-Site Schedule (Bilbao)">현지 세부 일정</p>
     <table class="onsite-table">
       <thead>
         <tr>
@@ -1095,8 +1141,8 @@ footer p {
 
 <!-- TEAM -->
 <section class="team-section">
-  <p class="section-eyebrow reveal">운영팀</p>
-  <h2 class="section-title reveal">한국과 바스크를<br>직접 연결하는 사람들</h2>
+  <p class="section-eyebrow reveal" data-ko="운영팀" data-en="Our Team">운영팀</p>
+  <h2 class="section-title reveal" data-ko="한국과 바스크를<br>직접 연결하는 사람들" data-en="The People Bridging<br>Korea & the Basque Country">한국과 바스크를<br>직접 연결하는 사람들</h2>
   <div class="team-grid stagger">
     <div class="team-card">
       <img class="team-photo" src="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/01.john.jpeg" alt="원종호" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -1135,8 +1181,8 @@ footer p {
 
 <!-- PRICING -->
 <section class="pricing-section">
-  <p class="section-eyebrow reveal">참가비</p>
-  <h2 class="section-title reveal">투명한 비용 구조</h2>
+  <p class="section-eyebrow reveal" data-ko="참가비" data-en="Participation Fee">참가비</p>
+  <h2 class="section-title reveal" data-ko="투명한 비용 구조" data-en="Transparent Pricing">투명한 비용 구조</h2>
   <div class="pricing-card reveal">
     <div class="pricing-header">
       <h3>글로벌 오픈이노베이션 프로그램 Season 2</h3>
@@ -1186,6 +1232,279 @@ footer p {
 </footer>
 
 <script>
+// ── LANG SYSTEM ──────────────────────────────────────────
+const i18n = {
+  ko: {
+    'nav-apply': '지금 신청하기',
+    'hero-eyebrow': 'GOIS × BerriUp × BAT — Season 2, 2026',
+    'hero-ko': '한국과 바스크를 잇는',
+    'hero-title-main': 'GLOBAL<br>OPEN<br><span class="accent">INNOVATION</span>',
+    'hero-sub': '빌바오에서 열리는 B Acceleration Week에 참가하고, 유럽 기업·투자자와 직접 미팅하세요. 바스크는 당신의 유럽 진출 교두보입니다.',
+    'hero-cta': '지금 신청하기',
+    'deadline-text': '5월 8일 마감 · 현재 모집중 (최대 7개사)',
+    'stat1-label': '시즌1 참여기업',
+    'stat2-label': '기업당 현지 비즈니스 미팅',
+    'stat3-label': 'BerriUp 선발 시 바우처 지급',
+    'stat4-label': '시즌2 모집 (최대)',
+    'why-eyebrow': '왜 빌바오인가',
+    'why-title': '유럽 진출,<br>왜 빌바오에서 시작해야 하는가',
+    'why-body': '바스크(빌바오)는 스페인 북부의 작은 도시처럼 보이지만, 유럽에서 가장 밀도 높은 오픈이노베이션 생태계 중 하나입니다. 세계 최대 협동조합 기업 몬드라곤, 글로벌 제조·에너지·헬스 대기업들, 그리고 이를 연결하는 BAT·BerriUp·MTA가 한 도시에 집결해 있습니다. 빌바오는 진입장벽이 낮으면서 실질 협업이 빠르게 이루어지는 스타트업의 유럽 관문입니다.',
+    'bat-eyebrow': 'B Acceleration Week 2026',
+    'bat-title': '바스크 최대<br>스타트업 축제의<br>중심에 서다',
+    'team-eyebrow': '운영팀',
+    'team-title': '한국과 바스크를<br>직접 연결하는 사람들',
+    'pricing-eyebrow': '참가비',
+    'pricing-title': '투명한 비용 구조',
+    'apply-title': '지금 신청하세요',
+    'apply-sub': '4월 모집 시작 · 5월 8일 최종 선발 마감<br>최대 7개사만 선발됩니다. 빠를수록 유리합니다.',
+    'apply-btn': '신청서 작성하기 →',
+    'apply-contact': '문의: connect@gois.kr',
+    'sched-eyebrow': '프로그램 일정',
+    'sched-title': '모집부터 현지까지,<br>단계별 로드맵',
+    'sched-onsite': '현지 세부 일정',
+    'th-date': '일자', 'th-type': '구분', 'th-detail': '세부 일정',
+  },
+  en: {
+    'nav-apply': 'Apply Now',
+    'hero-eyebrow': 'GOIS × BerriUp × BAT — Season 2, 2026',
+    'hero-ko': 'Connecting Korea & the Basque Country',
+    'hero-title-main': 'GLOBAL<br>OPEN<br><span class="accent">INNOVATION</span>',
+    'hero-sub': 'Join B Acceleration Week in Bilbao. Meet European companies and investors face-to-face. The Basque Country is your gateway to Europe.',
+    'hero-cta': 'Apply Now',
+    'deadline-text': 'Deadline May 8 · Applications Open (max 7 teams)',
+    'stat1-label': 'Season 1 Startups',
+    'stat2-label': 'Business Meetings per Company',
+    'stat3-label': 'Voucher if Selected by BerriUp',
+    'stat4-label': 'Season 2 Spots (max)',
+    'why-eyebrow': 'Why Bilbao',
+    'why-title': 'Why Start Your<br>European Journey<br>from Bilbao?',
+    'why-body': "Bilbao may look like a small northern Spanish city, but it hosts one of Europe's densest open innovation ecosystems. Mondragon — the world's largest cooperative — global manufacturing, energy, and health corporations, and the connective tissue of BAT, BerriUp, and MTA are all concentrated in one city. Bilbao offers low barriers to entry and fast-moving collaboration — the startup gateway to Europe.",
+    'bat-eyebrow': 'B Acceleration Week 2026',
+    'bat-title': "Step into the Heart of<br>the Basque's Biggest<br>Startup Festival",
+    'team-eyebrow': 'Our Team',
+    'team-title': 'The People Bridging<br>Korea & the Basque Country',
+    'pricing-eyebrow': 'Participation Fee',
+    'pricing-title': 'Transparent Pricing',
+    'apply-title': 'Ready to Apply?',
+    'apply-sub': 'Applications open April · Final selection by May 8<br>Only 7 spots available. Apply early.',
+    'apply-btn': 'Fill Out Application →',
+    'apply-contact': 'Inquiries: connect@gois.kr',
+    'sched-eyebrow': 'Program Timeline',
+    'sched-title': 'From Application to<br>Bilbao — Step by Step',
+    'sched-onsite': 'On-Site Schedule (Bilbao)',
+    'th-date': 'Date', 'th-type': 'Type', 'th-detail': 'Details',
+  }
+};
+
+// Bilbao cards
+const bilbaoCards = {
+  ko: [
+    { num:'01', title:'실질적인 협업 파트너가 집결', desc:'에너지(Iberdrola), 제조·방산(CAF, Elecnor), 바이오(CIC bioGUNE), 금융(BBVA 본사)까지 글로벌 기업의 혁신 거점이 한 도시에 모여 있습니다. 바스크 정부의 강력한 스타트업 지원 정책이 협업을 제도적으로 뒷받침합니다.' },
+    { num:'02', title:'낮은 진입장벽, 빠른 의사결정', desc:'파리·런던·베를린과 달리 빌바오의 오픈이노베이션 생태계는 콤팩트하게 연결되어 있습니다. BerriUp 한 곳을 통해 현지 기업·투자자·기관 네트워크 전체에 접근할 수 있으며, 미팅에서 PoC·계약으로 이어지는 속도가 빠릅니다.' },
+    { num:'03', title:'바스크 정부의 적극적 투자 지원', desc:'바스크 정부는 스타트업 유럽 진출을 위한 펀드와 보조금을 운용합니다. BerriUp은 바스크 정부 지원 펀드 포함 4개 펀드(약 4,400억 원)와 연계되어 있으며, 선발 스타트업에게 항공·숙박 비용을 포함한 실질적 지원을 제공합니다.' },
+    { num:'04', title:'한국-바스크 협력의 실증된 트랙레코드', desc:'GOIS는 2026년 2~3월 Spain-Seoul Open Innovation Summit에서 한국 스타트업 6개사를 빌바오·바르셀로나에 연결, 3건의 MOU 체결과 다수의 PoC 협의를 완성했습니다. 시즌2는 이 검증된 네트워크와 방법론을 그대로 이어받습니다.' },
+  ],
+  en: [
+    { num:'01', title:'Where Real Partners Gather', desc:'Energy (Iberdrola), manufacturing & defense (CAF, Elecnor), biotech (CIC bioGUNE), and banking (BBVA HQ) — global innovation hubs concentrated in one city. The Basque government\'s strong startup support policies institutionally back every collaboration.' },
+    { num:'02', title:'Low Barriers, Fast Decisions', desc:"Unlike Paris, London, or Berlin, Bilbao's open innovation ecosystem is compact and tightly connected. Through BerriUp alone you gain access to the entire local corporate, investor, and institutional network — and deals move from meeting to PoC fast." },
+    { num:'03', title:'Active Investment from the Basque Government', desc:'The Basque Government operates dedicated funds and grants for startup internationalization. BerriUp connects to 4 funds including government-backed sources (approx. ₩440B), providing real financial support for selected startups including airfare and accommodation.' },
+    { num:'04', title:'A Proven Korea–Basque Track Record', desc:'In Feb–Mar 2026, GOIS connected 6 Korean startups to Bilbao & Barcelona at the Spain-Seoul Open Innovation Summit — resulting in 3 MOUs and multiple PoC agreements. Season 2 inherits this validated network and methodology.' },
+  ]
+};
+
+// Schedule rows
+const scheduleRows = {
+  ko: [
+    { date:'4월', sub:'모집 시작', title:'참여기업 모집 공고', desc:'서울시립대 캠퍼스타운 입주기업 및 일반 스타트업 대상 공개 모집. 서류 심사를 통해 발표 심사 대상자를 선별합니다.', tag:'최대 7개사 선발', tagClass:'' },
+    { date:'5월 8일', sub:'선발 마감', title:'최종 선발 완료', desc:'발표 심사 후 5월 8일까지 최종 참여기업을 확정합니다. 선발된 기업은 BerriUp 1:1 사전 인터뷰를 통해 현지 미팅 파트너 매칭을 시작합니다.', tag:'5/8 마감', tagClass:'gold' },
+    { date:'5~6월', sub:'파트너 매칭', title:'BerriUp 파트너 매칭 & BAT Challenge 사전 확인', desc:'BerriUp이 기업별 니즈 인터뷰를 바탕으로 현지 비즈니스 미팅 파트너(기업당 3건 이상)를 사전 확정합니다.', tag:'파트너 확정', tagClass:'green' },
+    { date:'6/22', sub:'출국', title:'인천 출발 → 빌바오 도착', desc:'BerriUp 파트너 사전 브리핑 및 현지 일정 최종 확인. 빌바오 현지 오리엔테이션.', tag:'', tagClass:'' },
+    { date:'6/23~24', sub:'비즈니스 미팅', title:'BerriUp 매칭 비즈니스 미팅 + BAT Challenge 담당자 미팅', desc:'사전 확정된 현지 기업·기관·투자사와의 1:1 대면 미팅 (기업당 3건 이상). BAT Open Innovation Challenges 담당자와의 직접 협업 과제 협의.', tag:'기업당 3건+ 미팅', tagClass:'' },
+    { date:'6/25~26', sub:'B Acceleration Week', title:'B Acceleration Week 2026 참가', desc:'BAT B Accelerator Tower에서 열리는 바스크 최대 스타트업 행사 참가. Startup World Cup 지역 결선 참관·참가. 유럽 스타트업·투자자·기업과의 광범위한 네트워킹.', tag:'B Acceleration Week', tagClass:'gold' },
+    { date:'6/27', sub:'귀국', title:'귀국 및 후속 액션플랜 수립', desc:'현지 방문 결과 정리. 후속 미팅·MOU 이행·BAT Challenge 신청 등 귀국 후 액션플랜 문서화.', tag:'후속 지원 계속', tagClass:'green' },
+  ],
+  en: [
+    { date:'April', sub:'Applications Open', title:'Open Recruitment', desc:'Open applications for campus-based startups and the general startup community. Shortlisted applicants proceed to a pitch review.', tag:'Up to 7 teams', tagClass:'' },
+    { date:'May 8', sub:'Selection Deadline', title:'Final Selection', desc:'Final teams confirmed by May 8 following pitch reviews. Selected companies begin 1:1 partner matching interviews with BerriUp.', tag:'Deadline 5/8', tagClass:'gold' },
+    { date:'May–Jun', sub:'Partner Matching', title:'BerriUp Matching & BAT Challenge Preview', desc:'BerriUp conducts individual needs interviews and pre-confirms business meeting partners (3+ per company). Applicable BAT Challenges are briefed in advance.', tag:'Partners Confirmed', tagClass:'green' },
+    { date:'Jun 22', sub:'Departure', title:'Incheon → Bilbao', desc:'Depart from Incheon. BerriUp partner briefing and final schedule review upon arrival in Bilbao.', tag:'', tagClass:'' },
+    { date:'Jun 23–24', sub:'Business Meetings', title:'BerriUp Matched Meetings + BAT Challenge Manager Meetings', desc:'1:1 face-to-face meetings with pre-confirmed local companies, investors, and institutions (3+ per company). Direct discussions with BAT Open Innovation Challenge leads.', tag:'3+ Meetings / Company', tagClass:'' },
+    { date:'Jun 25–26', sub:'B Acceleration Week', title:'B Acceleration Week 2026', desc:'Participate in the Basque\'s largest startup event at BAT B Accelerator Tower. Startup World Cup Regional Final. Wide networking with European startups, investors, and corporates.', tag:'B Acceleration Week', tagClass:'gold' },
+    { date:'Jun 27', sub:'Return', title:'Return & Action Plan', desc:'Summarize visit outcomes. Document follow-up action plan for meetings, MOU execution, and BAT Challenge applications.', tag:'Ongoing Support', tagClass:'green' },
+  ]
+};
+
+// Team members
+const teamMembers = {
+  ko: [
+    { initial:'J', name:'원종호', en:'John Won', role:'CEO · GOIS 대표', desc:'MTA(Mondragon Team Academy) 공인 팀코치이자 GOIS 대표이사. 팀 기업가정신(Team Entrepreneurship) 방법론을 기반으로 스타트업의 글로벌 진출을 코치합니다. BerriUp·BAT·MTA 등 유럽 파트너와의 실계약 운영, Spain-Seoul Summit 2026 기획·총괄.', photo:'https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/01.john.jpeg' },
+    { initial:'P', name:'이주열', en:'Paul Lee', role:'자문교수 · SVF 창립자', desc:'몬드라곤대학 서울랩 팀프러너십센터장. 서울벤처대학원대학교 교수이자 Seoul Venture Forum 창립자. MTA 한국 생태계를 이끌며 스타트업의 글로벌 스케일업 전략과 유럽·중동 생태계 연결을 주도합니다. Spain-Seoul Summit 2026 총괄.', photo:'https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/02.paul.jpeg' },
+    { initial:'R', name:'김강현', en:'Rio Kim', role:'B.nomad 대표 · CMO', desc:'B.nomad 대표이자 MTA LEINN International 팀코치. 스페인 현지 코디네이션 총괄을 맡아 BerriUp과의 실무 소통 및 현장 통역·동행 지원을 담당합니다. 스페인-한국 네트워크를 기반으로 현지 생태계를 깊이 이해합니다.', photo:'https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/03.rio.png' },
+    { initial:'JA', name:'욘 안데르', en:'Jon Ander Merodio', role:'BerriUp 대표이사 · 빌바오', desc:'BerriUp 대표이사(Director General). 한국-바스크 협업의 최전선에서 GOIS와 함께하며, 참여 스타트업의 현지 파트너 매칭과 바스크 생태계 연결을 직접 주도합니다.', photo:'https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/04.jon.jpeg' },
+  ],
+  en: [
+    { initial:'J', name:'John Won', en:'원종호', role:'CEO · GOIS', desc:'Certified MTA (Mondragon Team Academy) Team Coach and CEO of GOIS. Coaches startups on global expansion through Team Entrepreneurship methodology. Designed and led Spain-Seoul Open Innovation Summit 2026 with BerriUp, BAT, and MTA as live partners.', photo:'https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/01.john.jpeg' },
+    { initial:'P', name:'Paul Lee', en:'이주열', role:'Director, MTA Seoul Lab · SVF Founder', desc:'Director of the Teampreneur Center at MTA Seoul Lab (Mondragon University). Professor at Seoul Venture Graduate University. Founder of Seoul Venture Forum. Leads Korean MTA ecosystem and connects startups to European and Middle Eastern markets. Led Spain-Seoul Summit 2026.', photo:'https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/02.paul.jpeg' },
+    { initial:'R', name:'Rio Kim', en:'김강현', role:'CEO, B.nomad · CMO', desc:'CEO of B.nomad and MTA LEINN International Team Coach. Oversees all on-site coordination in Spain, manages BerriUp communications, and provides interpretation and on-the-ground support. Deep understanding of the Korea–Spain startup ecosystem.', photo:'https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/03.rio.png' },
+    { initial:'JA', name:'Jon Ander Merodio', en:'욘 안데르', role:'Director General, BerriUp · Bilbao', desc:'Director General of BerriUp, the heart of the Basque startup ecosystem. Directly leads partner matching for participating startups and connects them to the full Basque innovation network alongside GOIS.', photo:'https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/04.jon.jpeg' },
+  ]
+};
+
+// Pricing includes
+const pricingIncludes = {
+  ko: [
+    'BerriUp 1:1 비즈니스 미팅 매칭 (기업당 3건 이상, 도착 전 리스트 공유)',
+    'BAT Open Innovation Challenges 담당자 직접 미팅 연결',
+    '<a href="https://bacceleratortower.com/en/b-acceleration-week-2026/" target="_blank" style="color:var(--basque-red);text-decoration:none;border-bottom:1px solid rgba(212,43,43,0.4);">B Acceleration Week 2026 ↗</a> 참가 (6/25~26, Startup World Cup 지역 결선 포함)',
+    '현지 코디네이터 동행 (일정 조율 지원)',
+    '현장 미팅 결과 정리 보고서 및 귀국 후 3개월 후속 팔로업',
+    'MOU 초안 작성 및 체결 지원',
+    'GOIS·BerriUp 사전·사후 성장진단 평가',
+  ],
+  en: [
+    'BerriUp 1:1 business meeting matching (3+ per company, partner list shared before arrival)',
+    'Direct meeting with BAT Open Innovation Challenge managers',
+    '<a href="https://bacceleratortower.com/en/b-acceleration-week-2026/" target="_blank" style="color:var(--basque-red);text-decoration:none;border-bottom:1px solid rgba(212,43,43,0.4);">B Acceleration Week 2026 ↗</a> participation (Jun 25–26, incl. Startup World Cup Regional Final)',
+    'On-site coordinator support (logistics & coordination)',
+    'Post-meeting summary report & 3-month follow-up after return',
+    'MOU draft preparation & signing support',
+    'Pre/post program assessment by GOIS & BerriUp',
+  ]
+};
+
+// Onsite table rows
+const onsiteRows = {
+  ko: [
+    { date:'6/22 MON', type:'이동·도착', detail:'인천 출발 → 빌바오 도착 / BerriUp 파트너 브리핑 / 현지 오리엔테이션' },
+    { date:'6/23 TUE', type:'<span class="tag-mtg">비즈니스 미팅 1일차</span>', detail:'BerriUp 매칭 파트너 1:1 대면 미팅 1~2건 / 현지 기업·기관·투자사 직접 방문' },
+    { date:'6/24 WED', type:'<span class="tag-mtg">비즈니스 미팅 2일차</span>', detail:'BerriUp 매칭 파트너 미팅 완료 + BAT Open Innovation Challenges 담당자 미팅 / 협업 조건 협의' },
+    { date:'6/25 THU', type:'<span class="tag-bat">B Acceleration Week Day 1</span>', detail:'BAT B Accelerator Tower 행사 참가 / Startup World Cup 지역 결선 / 글로벌 투자자·기업 네트워킹 / 산업별 세션' },
+    { date:'6/26 FRI', type:'<span class="tag-bat">B Acceleration Week Day 2</span>', detail:'B Acceleration Week 2일차 / 추가 네트워킹 / 팔로업 미팅 / 최종 결과 정리' },
+    { date:'6/27 SAT', type:'귀국', detail:'귀국 / 후속 액션플랜 문서화' },
+  ],
+  en: [
+    { date:'6/22 MON', type:'Arrival', detail:'Depart Incheon → Arrive Bilbao / BerriUp partner briefing / Local orientation' },
+    { date:'6/23 TUE', type:'<span class="tag-mtg">Business Meetings Day 1</span>', detail:'BerriUp-matched 1:1 meetings (1–2 sessions) / Direct visits to local companies, investors & institutions' },
+    { date:'6/24 WED', type:'<span class="tag-mtg">Business Meetings Day 2</span>', detail:'Complete BerriUp-matched meetings + BAT Open Innovation Challenges manager meeting / Discuss collaboration terms' },
+    { date:'6/25 THU', type:'<span class="tag-bat">B Acceleration Week Day 1</span>', detail:'BAT B Accelerator Tower event / Startup World Cup Regional Final / Global investor & corporate networking / Industry sessions' },
+    { date:'6/26 FRI', type:'<span class="tag-bat">B Acceleration Week Day 2</span>', detail:'B Acceleration Week Day 2 / Additional networking / Follow-up meetings / Final wrap-up' },
+    { date:'6/27 SAT', type:'Return', detail:'Return home / Document follow-up action plan' },
+  ]
+};
+
+function setLang(lang) {
+  const t = i18n[lang];
+  document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
+
+  // Toggle buttons
+  document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  // All data-ko/data-en elements
+  document.querySelectorAll('[data-ko]').forEach(el => {
+    const val = lang === 'ko' ? el.getAttribute('data-ko') : el.getAttribute('data-en');
+    if (val !== null) el.innerHTML = val;
+  });
+
+  // Nav apply
+  document.querySelector('.nav-apply').textContent = t['nav-apply'];
+
+  // Hero
+  document.querySelector('.hero-eyebrow').lastChild.textContent = t['hero-eyebrow'];
+  document.querySelector('.hero-title .ko').textContent = t['hero-ko'];
+  document.querySelector('.hero-cta-row .btn-primary').childNodes[0].textContent = t['hero-cta'];
+  document.querySelector('.deadline-pill').innerHTML = `<span class="dot"></span>${t['deadline-text']}`;
+
+  // Stats labels
+  const statLabels = document.querySelectorAll('.stat-label');
+  ['stat1-label','stat2-label','stat3-label','stat4-label'].forEach((k,i) => {
+    if(statLabels[i]) statLabels[i].textContent = t[k];
+  });
+
+  // Bilbao cards
+  const cards = document.querySelectorAll('.bilbao-card');
+  bilbaoCards[lang].forEach((c, i) => {
+    if(cards[i]) {
+      cards[i].querySelector('h3').textContent = c.title;
+      cards[i].querySelector('p').textContent = c.desc;
+    }
+  });
+
+  // Schedule rows
+  const schedGrid = document.querySelector('.schedule-grid');
+  if(schedGrid) {
+    schedGrid.innerHTML = scheduleRows[lang].map(r => `
+      <div class="schedule-row">
+        <div class="schedule-date">${r.date}<span class="sub">${r.sub}</span></div>
+        <div class="schedule-content">
+          <h4>${r.title}</h4>
+          <p>${r.desc}</p>
+          ${r.tag ? `<span class="schedule-tag ${r.tagClass}">${r.tag}</span>` : ''}
+        </div>
+      </div>`).join('');
+  }
+
+  // Onsite table
+  const tbody = document.querySelector('.onsite-table tbody');
+  const thead = document.querySelector('.onsite-table thead tr');
+  if(tbody) {
+    tbody.innerHTML = onsiteRows[lang].map(r => `<tr><td class="day-cell">${r.date}</td><td>${r.type}</td><td>${r.detail}</td></tr>`).join('');
+    if(thead) thead.innerHTML = `<th>${t['th-date']}</th><th>${t['th-type']}</th><th>${t['th-detail']}</th>`;
+  }
+
+  // Team grid
+  const teamGrid = document.querySelector('.team-grid');
+  if(teamGrid) {
+    teamGrid.innerHTML = teamMembers[lang].map(m => `
+      <div class="team-card">
+        <img class="team-photo" src="${m.photo}" alt="${m.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="team-initial" style="display:none">${m.initial}</div>
+        <div class="team-name">${m.name}</div>
+        <div class="team-name-en">${m.en}</div>
+        <div class="team-role">${m.role}</div>
+        <div class="team-desc">${m.desc}</div>
+      </div>`).join('');
+  }
+
+  // Pricing includes
+  const incList = document.querySelector('.includes-list');
+  if(incList) {
+    incList.innerHTML = pricingIncludes[lang].map(li => `<li>${li}</li>`).join('');
+  }
+
+  // Pricing header & body text
+  const pricingHeader = document.querySelector('.pricing-header');
+  if(pricingHeader) {
+    pricingHeader.querySelector('h3').textContent = lang === 'ko' ? '글로벌 오픈이노베이션 프로그램 Season 2' : 'Global Open Innovation Program Season 2';
+    pricingHeader.querySelector('p').textContent = lang === 'ko' ? '빌바오 현지 방문 + B Acceleration Week + BerriUp 비즈니스 미팅 패키지' : 'Bilbao Site Visit + B Acceleration Week + BerriUp Business Meeting Package';
+  }
+
+  const svfLabel = document.querySelector('.price-svf span:first-child');
+  if(svfLabel) svfLabel.textContent = lang === 'ko' ? '🏷️ Seoul Venture Forum 회원' : '🏷️ Seoul Venture Forum Members';
+  const svfBadge = document.querySelector('.price-svf-badge');
+  if(svfBadge) svfBadge.textContent = lang === 'ko' ? 'SVF 멤버 할인가' : 'SVF Member Rate';
+
+  const priceNote = document.querySelector('.price-note');
+  if(priceNote) priceNote.textContent = lang === 'ko' ? '※ 항공권·숙박비 별도 (BerriUp 선발 시 2,000유로 바우처 지원)' : '※ Flights & accommodation not included (€2,000 voucher if selected by BerriUp)';
+
+  const excludes = document.querySelector('.excludes');
+  if(excludes) excludes.innerHTML = lang === 'ko'
+    ? '<strong>별도 항목</strong>: 항공권(왕복) · 현지 숙박비(5박) · 현지 식비·교통비 · 비자 및 여행자보험<br><br>🎁 <strong>BerriUp 프로그램 선발 시</strong>: 항공권·숙박료 명목의 <strong>2,000유로 바우처</strong> 지급'
+    : '<strong>Excluded</strong>: Round-trip airfare · Accommodation (5 nights) · Meals & local transport · Visa & travel insurance<br><br>🎁 <strong>If selected by BerriUp</strong>: <strong>€2,000 voucher</strong> for airfare & accommodation';
+
+  // Section eyebrows / titles (onsite)
+  const onsiteLabel = document.querySelector('[data-sched-onsite]');
+  // Apply section
+  document.querySelector('.apply-section h2').textContent = t['apply-title'];
+  document.querySelector('.apply-section > p').innerHTML = t['apply-sub'];
+  document.querySelector('.btn-apply').textContent = t['apply-btn'];
+  document.querySelector('.apply-deadline').textContent = t['apply-contact'];
+
+  // Onsite section eyebrow
+  const onsiteEye = document.querySelector('.onsite-eyebrow');
+  if(onsiteEye) onsiteEye.textContent = t['sched-onsite'];
+}
+
 // Nav scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
@@ -1196,9 +1515,7 @@ window.addEventListener('scroll', () => {
 const reveals = document.querySelectorAll('.reveal, .stagger');
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-    }
+    if (e.isIntersecting) e.target.classList.add('visible');
   });
 }, { threshold: 0.12 });
 reveals.forEach(el => obs.observe(el));
