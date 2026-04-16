@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOIS — Glocal Open Innovation Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── BRAND TOKENS (from GOIS Brand Identity Guide 2026) ── */
+:root {
+  --g-primary:  #1D9E75;
+  --g-dark:     #0F6E56;
+  --g-black:    #0A130D;
+  --g-charcoal: #1A1A1A;
+  --g-gray:     #888888;
+  --g-lgray:    #BBBBBB;
+  --g-offwhite: #F5F5F3;
+  --g-white:    #FFFFFF;
+  --g-line:     #E2E8E4;
+  --g-card-bg:  #0F1F16;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--g-offwhite);
+  color: var(--g-charcoal);
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--g-black); }
+::-webkit-scrollbar-thumb { background: var(--g-primary); }
+
+/* ── TYPE SCALE ── */
+.t-eyebrow {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.68rem; font-weight: 400;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--g-primary);
+}
+.t-display {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 100; line-height: 1.05;
+}
+.t-heading {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300; line-height: 1.2;
+}
+.t-body { font-size: 0.9rem; line-height: 1.8; color: var(--g-gray); }
+.t-tagline {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300; font-style: italic;
+  color: var(--g-primary); letter-spacing: 0.04em;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%;
+  background: rgba(10,19,13,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(29,158,117,0.15);
+  transition: height 0.3s;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 0.85rem;
+  text-decoration: none;
+}
+/* SVG symbol inline */
+.nav-symbol svg { width: 28px; height: 28px; }
+.nav-wordmark {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.3rem; font-weight: 400;
+  color: var(--g-white); letter-spacing: 0.25em;
+}
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.72rem; font-weight: 300;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--g-primary); }
+.nav-cta {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.7rem; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--g-black); background: var(--g-primary);
+  padding: 0.5rem 1.4rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--g-dark); color: var(--g-white); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  background: var(--g-black);
+  display: flex; align-items: center;
+  padding: 100px 6% 80px;
+  position: relative; overflow: hidden;
+}
+/* Brand symbol arc — CSS drawn */
+.hero-arc {
+  position: absolute; right: 4%; top: 50%; transform: translateY(-50%);
+  width: min(55vw, 560px); height: min(55vw, 560px);
+  pointer-events: none;
+}
+.hero-arc-outer {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 1px solid rgba(29,158,117,0.25);
+}
+.hero-arc-mid {
+  position: absolute; inset: 12%; border-radius: 50%;
+  border: 1px solid rgba(29,158,117,0.12);
+  animation: rotate 40s linear infinite;
+}
+.hero-arc-inner {
+  position: absolute; inset: 26%; border-radius: 50%;
+  border: 1px solid rgba(29,158,117,0.08);
+  animation: rotate 25s linear infinite reverse;
+}
+/* Center node dot */
+.hero-arc::after {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--g-primary);
+  box-shadow: 0 0 24px rgba(29,158,117,0.6);
+}
+/* Open gap arc — the 270° brand symbol on the left */
+.hero-arc-line {
+  position: absolute; top: 50%; right: calc(4% + min(55vw,560px) * 0.5 - 12px);
+  transform: translateY(-50%);
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid var(--g-primary);
+  border-right-color: transparent;
+  box-shadow: 0 0 16px rgba(29,158,117,0.4);
+}
+
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Grain overlay */
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1;
+}
+/* Top green line */
+#hero::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--g-primary); z-index: 2;
+}
+
+.hero-content { position: relative; z-index: 3; max-width: 680px; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--g-primary);
+}
+
+h1.hero-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 100;
+  color: var(--g-white);
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.8rem;
+  opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+}
+h1.hero-title .accent { color: var(--g-primary); }
+
+.hero-tagline {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-weight: 300; color: rgba(255,255,255,0.55);
+  line-height: 1.8; max-width: 520px;
+  margin-bottom: 0.7rem;
+  opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+}
+.hero-tagline-en {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.88rem; font-weight: 300; font-style: italic;
+  color: rgba(29,158,117,0.65); letter-spacing: 0.04em;
+  margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 0.9s 0.62s forwards;
+}
+
+.hero-actions {
+  display: flex; align-items: center; gap: 1.5rem;
+  opacity: 0; animation: fadeUp 0.9s 0.75s forwards;
+}
+.btn-primary {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.72rem; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  background: var(--g-primary); color: var(--g-black);
+  padding: 0.9rem 2rem; text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--g-dark); color: var(--g-white); transform: translateY(-2px); }
+.btn-ghost {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.72rem; font-weight: 300;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: var(--g-primary); border-color: var(--g-primary); }
+
+/* Hero stats */
+.hero-stats {
+  position: absolute; bottom: 3rem; left: 6%;
+  display: flex; gap: 3rem; z-index: 3;
+  opacity: 0; animation: fadeIn 1s 1.2s forwards;
+}
+.hero-stat-n {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.8rem; font-weight: 100; color: var(--g-primary);
+  line-height: 1;
+}
+.hero-stat-l {
+  font-size: 0.68rem; color: rgba(255,255,255,0.3);
+  letter-spacing: 0.1em; margin-top: 0.3rem;
+}
+.hero-stats-divider {
+  width: 1px; height: 40px; align-self: center;
+  background: rgba(29,158,117,0.2);
+}
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+/* ── SECTION BASE ── */
+section { padding: 110px 6%; }
+
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── ABOUT ── */
+#about {
+  background: var(--g-offwhite);
+  display: grid; grid-template-columns: 1fr 1.15fr; gap: 8%; align-items: center;
+}
+.about-symbol {
+  position: relative; aspect-ratio: 1; max-width: 420px;
+}
+/* Draw the brand symbol large */
+.about-symbol-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid;
+}
+.about-symbol-ring:nth-child(1) { inset: 0; border-color: rgba(29,158,117,0.2); }
+.about-symbol-ring:nth-child(2) { inset: 14%; border-color: rgba(29,158,117,0.12); animation: rotate 35s linear infinite; }
+.about-symbol-ring:nth-child(3) { inset: 28%; border-color: rgba(29,158,117,0.08); animation: rotate 22s linear infinite reverse; }
+.about-symbol-center {
+  position: absolute; inset: 38%; border-radius: 50%;
+  background: var(--g-black);
+  display: flex; align-items: center; justify-content: center;
+}
+.about-symbol-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--g-primary);
+  box-shadow: 0 0 20px rgba(29,158,117,0.7);
+}
+/* Orbit nodes */
+.about-orbit {
+  position: absolute; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--g-white);
+  border: 1px solid var(--g-line);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 16px rgba(10,19,13,0.08);
+}
+.about-orbit-t { top: 3%; left: 50%; transform: translateX(-50%); }
+.about-orbit-r { right: 3%; top: 50%; transform: translateY(-50%); }
+.about-orbit-b { bottom: 3%; left: 50%; transform: translateX(-50%); }
+.about-orbit-l { left: 3%; top: 50%; transform: translateY(-50%); }
+
+.about-cards { margin-top: 2.2rem; display: flex; flex-direction: column; gap: 0.9rem; }
+.about-card {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1.1rem 1.3rem;
+  background: var(--g-white);
+  border-left: 2px solid var(--g-primary);
+  box-shadow: 0 2px 14px rgba(10,19,13,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.about-card:nth-child(2) { border-color: var(--g-dark); }
+.about-card:nth-child(3) { border-color: #2A6A50; }
+.about-card:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(10,19,13,0.1); }
+.about-card-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.about-card-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.25rem; }
+.about-card-body { font-size: 0.82rem; color: var(--g-gray); line-height: 1.65; }
+
+/* ── PHILOSOPHY ── */
+#philosophy { background: var(--g-black); position: relative; overflow: hidden; }
+#philosophy::before {
+  content:''; position:absolute; width:600px; height:600px;
+  background: radial-gradient(circle, rgba(29,158,117,0.06) 0%, transparent 65%);
+  bottom: -200px; right: -100px; pointer-events:none;
+}
+.philosophy-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; position:relative; z-index:1; }
+.pillar {
+  background: var(--g-card-bg);
+  border: 1px solid rgba(29,158,117,0.12);
+  border-top: 2px solid var(--g-primary);
+  padding: 2.2rem 1.8rem;
+  transition: background 0.3s, transform 0.25s;
+}
+.pillar:nth-child(2) { border-top-color: var(--g-dark); }
+.pillar:nth-child(3) { border-top-color: #2A6A50; }
+.pillar:hover { background: rgba(29,158,117,0.07); transform: translateY(-4px); }
+.pillar-icon { font-size: 2rem; margin-bottom: 1rem; }
+.pillar-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.2rem; font-weight: 300; color: var(--g-white);
+  margin-bottom: 0.25rem;
+}
+.pillar-sub { font-size: 0.75rem; color: var(--g-primary); letter-spacing: 0.08em; margin-bottom: 1rem; }
+.pillar-rule { width: 24px; height: 1px; background: rgba(255,255,255,0.12); margin-bottom: 1rem; }
+.pillar-body { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.75; }
+
+/* ── SERVICES ── */
+#services { background: var(--g-white); }
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
+.svc-card {
+  border: 1px solid var(--g-line); padding: 2.2rem 1.8rem;
+  position: relative; overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.svc-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: var(--g-primary); transform: scaleX(0); transform-origin:left;
+  transition: transform 0.4s;
+}
+.svc-card:nth-child(2)::before { background: var(--g-dark); }
+.svc-card:nth-child(3)::before { background: #2A6A50; }
+.svc-card:hover::before { transform: scaleX(1); }
+.svc-card:hover { box-shadow: 0 8px 36px rgba(10,19,13,0.08); transform: translateY(-4px); }
+.svc-num {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2.8rem; font-weight: 100; color: var(--g-line);
+  line-height: 1; margin-bottom: 1.4rem;
+}
+.svc-title { font-size: 0.95rem; font-weight: 700; line-height: 1.4; margin-bottom: 1rem; }
+.svc-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.svc-list li {
+  font-size: 0.83rem; color: var(--g-gray); line-height: 1.6;
+  padding-left: 1rem; position: relative;
+}
+.svc-list li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--g-primary); font-size: 0.65rem; top: 4px;
+}
+
+/* ── PROGRAM ── */
+#program { background: var(--g-offwhite); }
+.seasons { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.2rem; margin-top: 3rem; }
+.season-card {
+  background: var(--g-white);
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(10,19,13,0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.season-card:hover { transform: translateY(-5px); box-shadow: 0 10px 32px rgba(10,19,13,0.12); }
+.season-hd {
+  background: var(--g-black);
+  padding: 1.6rem 1.4rem 1.4rem;
+}
+.season-card:nth-child(2) .season-hd { background: var(--g-dark); }
+.season-card:nth-child(3) .season-hd { background: #2A6A50; }
+.season-card:nth-child(4) .season-hd { background: #1A5040; }
+.season-flag { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.season-month {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2.2rem; font-weight: 100; color: var(--g-white);
+  line-height: 1.1;
+}
+.season-city { font-size: 0.72rem; color: rgba(255,255,255,0.55); margin-top: 0.25rem; letter-spacing: 0.06em; }
+.season-bd { padding: 1.4rem; }
+.season-event {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.7rem; font-weight: 400; color: var(--g-primary);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+.season-card:nth-child(2) .season-event { color: var(--g-dark); }
+.season-card:nth-child(3) .season-event { color: #2A6A50; }
+.season-card:nth-child(4) .season-event { color: #1A5040; }
+.season-desc { font-size: 0.82rem; color: var(--g-gray); line-height: 1.7; margin-bottom: 0.8rem; }
+.season-partner { font-size: 0.72rem; color: var(--g-lgray); border-top: 1px solid var(--g-line); padding-top: 0.7rem; }
+
+/* ── PROCESS ── */
+#process { background: var(--g-black); position: relative; overflow: hidden; }
+#process::before {
+  content:''; position:absolute; width:500px; height:500px;
+  background: radial-gradient(circle, rgba(29,158,117,0.05) 0%, transparent 65%);
+  top: -100px; left: -100px; pointer-events:none;
+}
+.process-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: rgba(255,255,255,0.05);
+  margin-top: 3rem; position: relative; z-index: 1;
+}
+.process-step {
+  background: var(--g-card-bg);
+  padding: 1.8rem 1.6rem;
+  border-top: 2px solid transparent;
+  transition: background 0.25s, transform 0.2s;
+  position: relative;
+}
+.process-step:nth-child(1) { border-top-color: var(--g-primary); }
+.process-step:nth-child(2) { border-top-color: var(--g-primary); }
+.process-step:nth-child(3) { border-top-color: var(--g-primary); }
+.process-step:nth-child(4) { border-top-color: var(--g-dark); }
+.process-step:nth-child(5) { border-top-color: var(--g-dark); }
+.process-step:nth-child(6) { border-top-color: var(--g-dark); }
+.process-step:nth-child(7) { border-top-color: #2A6A50; }
+.process-step:nth-child(8) { border-top-color: #2A6A50; }
+.process-step:nth-child(9) { border-top-color: #2A6A50; }
+.process-step:hover { background: rgba(29,158,117,0.06); transform: translateY(-3px); }
+.process-num {
+  position: absolute; top: 1.2rem; right: 1.4rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2rem; font-weight: 100; color: rgba(29,158,117,0.1);
+}
+.process-icon { font-size: 1.4rem; margin-bottom: 0.7rem; }
+.process-title { font-size: 0.9rem; font-weight: 700; color: var(--g-white); margin-bottom: 0.6rem; line-height: 1.4; }
+.process-body { font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.7; }
+.process-phase { font-size: 0.65rem; color: var(--g-primary); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.8rem; font-family: 'Josefin Sans', sans-serif; }
+.process-footer {
+  margin-top: 2.5rem; padding: 1.8rem 2rem;
+  background: rgba(29,158,117,0.07);
+  border: 1px solid rgba(29,158,117,0.2);
+  display: flex; align-items: flex-start; gap: 1.5rem;
+  position: relative; z-index: 1;
+}
+.process-footer-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+.process-footer-text { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+.process-footer-text strong { color: var(--g-primary); }
+
+/* ── ECOSYSTEM ── */
+#ecosystem { background: var(--g-black); position: relative; overflow: hidden; }
+#ecosystem::after {
+  content:''; position:absolute; width:400px; height:400px;
+  background: radial-gradient(circle, rgba(29,158,117,0.04) 0%, transparent 65%);
+  bottom: 0; right: 5%; pointer-events:none;
+}
+.partners-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1.2rem; margin-top: 3rem; position:relative; z-index:1;
+}
+.partner-card {
+  background: var(--g-card-bg);
+  border: 1px solid rgba(29,158,117,0.12);
+  border-left: 2px solid var(--g-primary);
+  padding: 1.3rem 1.4rem;
+  transition: background 0.25s, transform 0.2s;
+}
+.partner-card:nth-child(2) { border-left-color: var(--g-dark); }
+.partner-card:nth-child(3) { border-left-color: #2A6A50; }
+.partner-card:nth-child(4) { border-left-color: var(--g-primary); }
+.partner-card:nth-child(5) { border-left-color: var(--g-dark); }
+.partner-card:nth-child(6) { border-left-color: #2A6A50; }
+.partner-card:nth-child(7) { border-left-color: #1A5040; }
+.partner-card:nth-child(8) { border-left-color: var(--g-primary); }
+.partner-card:hover { background: rgba(29,158,117,0.06); transform: translateX(3px); }
+.partner-head { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.65rem; }
+.partner-icon { font-size: 1.1rem; margin-top: 2px; }
+.partner-name { font-size: 0.88rem; font-weight: 700; color: var(--g-white); line-height: 1.3; }
+.partner-city { font-size: 0.7rem; color: var(--g-primary); margin-top: 0.15rem; letter-spacing: 0.04em; }
+.partner-role { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.65; }
+.partner-tag {
+  display: inline-block; margin-top: 0.6rem;
+  background: rgba(29,158,117,0.15); border: 1px solid rgba(29,158,117,0.25);
+  padding: 0.15rem 0.6rem; font-size: 0.68rem; color: rgba(29,158,117,0.8);
+  font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.05em;
+}
+/* Stats strip */
+.eco-stats {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: rgba(255,255,255,0.05);
+  margin-top: 3rem; position: relative; z-index: 1;
+}
+.eco-stat {
+  background: rgba(15,31,22,0.8);
+  padding: 1.6rem; text-align: center;
+}
+.eco-stat-n {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2.4rem; font-weight: 100; color: var(--g-primary);
+}
+.eco-stat-l { font-size: 0.72rem; color: rgba(255,255,255,0.3); margin-top: 0.3rem; letter-spacing: 0.08em; }
+
+/* ── TEAM ── */
+#team { background: var(--g-black); }
+.team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-top: 3rem; }
+.team-card {
+  background: var(--g-card-bg);
+  border: 1px solid rgba(29,158,117,0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.team-card:hover { transform: translateY(-5px); box-shadow: 0 10px 32px rgba(0,0,0,0.3); }
+.team-photo {
+  aspect-ratio: 1; overflow: hidden;
+  background: var(--g-black);
+}
+.team-photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: grayscale(20%);
+  transition: filter 0.3s, transform 0.4s;
+}
+.team-card:hover .team-photo img { filter: grayscale(0%); transform: scale(1.04); }
+.team-info { padding: 1.3rem 1.4rem; }
+.team-name { font-size: 0.95rem; font-weight: 700; color: var(--g-white); margin-bottom: 0.2rem; }
+.team-role { font-size: 0.75rem; color: var(--g-primary); font-weight: 500; margin-bottom: 0.15rem; }
+.team-role-sub { font-size: 0.7rem; color: rgba(255,255,255,0.3); font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.03em; margin-bottom: 0.8rem; }
+.team-bio { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.7; border-top: 1px solid rgba(29,158,117,0.1); padding-top: 0.8rem; }
+
+/* ── CONTACT ── */
+#contact {
+  background: var(--g-black);
+  text-align: center; position: relative; overflow: hidden;
+  padding-top: 0; padding-bottom: 100px;
+}
+.contact-divider {
+  height: 1px; background: rgba(29,158,117,0.15);
+  max-width: 80%; margin: 0 auto 100px;
+}
+#contact::before {
+  content:''; position:absolute; width:700px; height:700px;
+  background: radial-gradient(circle, rgba(29,158,117,0.06) 0%, transparent 60%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  pointer-events:none;
+}
+.contact-inner { position: relative; z-index: 1; }
+.contact-symbol {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1.5px solid var(--g-primary);
+  border-right-color: transparent;
+  margin: 0 auto 2rem;
+  animation: rotate 8s linear infinite;
+}
+.contact-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 100; color: var(--g-white);
+  line-height: 1.2; margin-bottom: 1.2rem;
+}
+.contact-verse {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.88rem; font-weight: 300; font-style: italic;
+  color: rgba(29,158,117,0.5); margin-bottom: 3.5rem;
+}
+.contact-box {
+  display: inline-block;
+  border: 1px solid rgba(29,158,117,0.25);
+  padding: 2.5rem 4rem;
+  min-width: 440px;
+  position: relative;
+}
+.contact-box::before {
+  content: 'CONTACT';
+  position: absolute; top: -0.5rem; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.6rem; letter-spacing: 0.35em;
+  color: var(--g-primary); background: var(--g-black); padding: 0 1rem;
+}
+.contact-items { display: flex; flex-direction: column; gap: 1rem; }
+.contact-item {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.7rem; font-size: 0.9rem;
+}
+.contact-item-icon { font-size: 0.95rem; opacity: 0.6; }
+.contact-item a { color: rgba(29,158,117,0.85); text-decoration: none; transition: color 0.2s; }
+.contact-item a:hover { color: var(--g-primary); }
+.contact-item.loc span { color: rgba(255,255,255,0.3); font-size: 0.82rem; }
+.contact-rule { width: 30px; height: 1px; background: rgba(29,158,117,0.15); margin: 0.2rem auto; }
+
+/* ── FOOTER ── */
+footer {
+  background: #060D09;
+  padding: 1.8rem 6%;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(29,158,117,0.1);
+}
+.footer-logo { display: flex; align-items: center; gap: 0.6rem; }
+.footer-logo svg { width: 20px; height: 20px; }
+.footer-logo-text {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 400;
+  color: rgba(255,255,255,0.3); letter-spacing: 0.2em;
+}
+.footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.15); font-family: 'Josefin Sans', sans-serif; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1180px) {
+  .seasons { grid-template-columns: repeat(2,1fr); }
+  .partners-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 1024px) {
+  #about { grid-template-columns: 1fr; }
+  .about-symbol { display: none; }
+  .philosophy-grid, .services-grid { grid-template-columns: 1fr 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .process-grid { grid-template-columns: 1fr 1fr; }
+  .eco-stats { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 640px) {
+  section { padding: 80px 5%; }
+  nav { padding: 0 5%; }
+  .nav-links { display: none; }
+  .philosophy-grid, .services-grid, .seasons, .partners-grid, .team-grid, .process-grid { grid-template-columns: 1fr; }
+  .contact-box { min-width: unset; padding: 2rem 1.5rem; width: 100%; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <!-- Brand Symbol SVG -->
+    <div class="nav-symbol">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="13" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="68.5 20.4" stroke-dashoffset="0"/>
+        <circle cx="16" cy="16" r="2.5" fill="#1D9E75"/>
+        <circle cx="6.5" cy="16" r="1.5" fill="#1D9E75" opacity="0.5"/>
+      </svg>
+    </div>
+    <span class="nav-wordmark">GOIS</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">소개</a></li>
+    <li><a href="#philosophy">철학</a></li>
+    <li><a href="#program">프로그램</a></li>
+    <li><a href="#process">프로세스</a></li>
+    <li><a href="#ecosystem">파트너</a></li>
+    <li><a href="#team">팀</a></li>
+  </ul>
+  <a href="mailto:connect@gois.kr" class="nav-cta">문의하기</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <!-- Brand arc decoration -->
+  <div class="hero-arc">
+    <div class="hero-arc-outer"></div>
+    <div class="hero-arc-mid"></div>
+    <div class="hero-arc-inner"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      <span class="t-eyebrow">Glocal Open Innovation Studio · 2026</span>
+    </div>
+    <h1 class="hero-title">
+      글로벌<br>
+      <span class="accent">오픈 이노베이션</span><br>
+      생태계를 연결합니다
+    </h1>
+    <p class="hero-tagline">
+      한국의 혁신적인 스타트업과 유럽의 살아있는 생태계 사이,<br>
+      GOIS는 신뢰의 다리를 놓습니다.
+    </p>
+    <p class="hero-tagline-en">Bridging roots to reach the world.</p>
+    <div class="hero-actions">
+      <a href="https://bilbao2.gois.kr" target="_blank" class="btn-primary">프로그램 보기</a>
+      <a href="#about" class="btn-ghost">GOIS 알아보기 →</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-n">10+</div>
+      <div class="hero-stat-l">유럽 거점 도시</div>
+    </div>
+    <div class="hero-stats-divider"></div>
+    <div>
+      <div class="hero-stat-n">3회</div>
+      <div class="hero-stat-l">연간 프로그램</div>
+    </div>
+    <div class="hero-stats-divider"></div>
+    <div>
+      <div class="hero-stat-n">7+</div>
+      <div class="hero-stat-l">시즌별 스타트업</div>
+    </div>
+    <div class="hero-stats-divider"></div>
+    <div>
+      <div class="hero-stat-n">8+</div>
+      <div class="hero-stat-l">파트너 기관</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="about-symbol reveal">
+    <div class="about-symbol-ring"></div>
+    <div class="about-symbol-ring"></div>
+    <div class="about-symbol-ring"></div>
+    <div class="about-symbol-center"><div class="about-symbol-dot"></div></div>
+    <div class="about-orbit about-orbit-t">🌱</div>
+    <div class="about-orbit about-orbit-r">🌍</div>
+    <div class="about-orbit about-orbit-b">🤝</div>
+    <div class="about-orbit about-orbit-l">💡</div>
+  </div>
+
+  <div>
+    <p class="t-eyebrow reveal">Who We Are</p>
+    <h2 class="t-heading reveal" style="font-size:clamp(2rem,4vw,3rem);margin:0.8rem 0 1rem;">우리는<br>누구인가요?</h2>
+    <p class="t-body reveal" style="max-width:560px;">
+      GOIS(글로컬 오픈 이노베이션 스튜디오)는 한국의 혁신적인 스타트업과
+      유럽의 살아있는 생태계를 연결하는 전문 스튜디오입니다.
+      단순한 소개가 아닌, 씨앗이 뿌리내릴 때까지 함께 머무는 파트너입니다.
+    </p>
+    <div class="about-cards">
+      <div class="about-card reveal">
+        <div class="about-card-icon">🌍</div>
+        <div>
+          <div class="about-card-title">설립 배경</div>
+          <div class="about-card-body">글로컬(Glocal) — 지역 생태계의 깊이와 글로벌 연결의 넓이를 동시에 추구하는 오픈 이노베이션 전문 법인입니다.</div>
+        </div>
+      </div>
+      <div class="about-card reveal">
+        <div class="about-card-icon">🌱</div>
+        <div>
+          <div class="about-card-title">핵심 철학</div>
+          <div class="about-card-body">단순한 비즈니스 매칭이 아니라, 지속 가능한 생태계를 함께 가꾸어가는 파트너십을 지향합니다.</div>
+        </div>
+      </div>
+      <div class="about-card reveal">
+        <div class="about-card-icon">🤝</div>
+        <div>
+          <div class="about-card-title">사업 방식</div>
+          <div class="about-card-body">체계적인 BDS로 스타트업의 유럽 진출을 처음부터 끝까지 함께합니다. 소개에서 끝나지 않습니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PHILOSOPHY ═══ -->
+<section id="philosophy">
+  <p class="t-eyebrow reveal">Our Philosophy</p>
+  <h2 class="t-heading reveal" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--g-white);margin:0.8rem 0 0.8rem;">우리가 일하는 방식</h2>
+  <p class="reveal" style="font-size:0.9rem;color:rgba(255,255,255,0.4);font-style:italic;max-width:620px;">모든 좋은 일은 작은 씨앗에서 시작됩니다. 우리는 그 씨앗을 심고, 가꾸고, 함께 열매 맺는 사람들입니다.</p>
+  <div class="philosophy-grid">
+    <div class="pillar reveal">
+      <div class="pillar-icon">🌱</div>
+      <div class="pillar-title">겨자씨처럼</div>
+      <div class="pillar-sub">작지만 강한 시작</div>
+      <div class="pillar-rule"></div>
+      <p class="pillar-body">아주 작은 씨앗 하나가 거대한 나무가 되듯, GOIS는 스타트업 한 팀의 도전이 글로벌 생태계를 바꾸는 첫 걸음이 된다고 믿습니다.</p>
+    </div>
+    <div class="pillar reveal">
+      <div class="pillar-icon">🧂</div>
+      <div class="pillar-title">소금처럼</div>
+      <div class="pillar-sub">있어야 할 자리에서</div>
+      <div class="pillar-rule"></div>
+      <p class="pillar-body">드러나지 않아도 맛을 살리는 소금처럼, 파트너와 스타트업 사이에서 신뢰의 매개자로 존재합니다. 섬기는 마음이 우리의 힘입니다.</p>
+    </div>
+    <div class="pillar reveal">
+      <div class="pillar-icon">💡</div>
+      <div class="pillar-title">빛처럼</div>
+      <div class="pillar-sub">가능성을 밝히는 안내자</div>
+      <div class="pillar-rule"></div>
+      <p class="pillar-body">한국의 혁신 기술이 유럽에서 빛날 수 있도록 길을 엽니다. 어두운 곳을 밝히는 것이 우리의 소명입니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services">
+  <p class="t-eyebrow reveal">What We Do</p>
+  <h2 class="t-heading reveal" style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin:0.8rem 0 0.6rem;">GOIS가 함께하는 방식</h2>
+  <p class="t-body reveal" style="max-width:580px;">소개에서 끝나지 않습니다. 딜의 처음부터 끝까지, 씨앗이 뿌리내릴 때까지 함께합니다.</p>
+  <div class="services-grid">
+    <div class="svc-card reveal">
+      <div class="svc-num">01</div>
+      <div class="svc-title">BDS<br>(Business Development Service)</div>
+      <ul class="svc-list">
+        <li>유럽 현지 파트너 매칭 및 미팅 주선</li>
+        <li>투자자 & 액셀러레이터 네트워크 연결</li>
+        <li>현지 시장 조사 및 진출 전략 수립</li>
+        <li>협상 지원 및 딜 매니지먼트 (CC 원칙)</li>
+      </ul>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">02</div>
+      <div class="svc-title">연간 3회<br>오픈 이노베이션 프로그램</div>
+      <ul class="svc-list">
+        <li>3월 바르셀로나 (4YFN · MWC)</li>
+        <li>6월 파리 (VivaTech)</li>
+        <li>11월 헬싱키 (Slush, 계획중)</li>
+        <li>연중상시 빌바오 방문 프로그램</li>
+      </ul>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">03</div>
+      <div class="svc-title">생태계 파트너십<br>& 컨설팅</div>
+      <ul class="svc-list">
+        <li>유럽 파트너 네트워크 전략적 활용</li>
+        <li>정부 보조금 · 그랜트 프로그램 연계</li>
+        <li>중장기 협업 구조 설계 (MOU·JV·투자)</li>
+        <li>성과 기반 보수 구조 (Success Fee)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROGRAM ═══ -->
+<section id="program">
+  <p class="t-eyebrow reveal">Our Program</p>
+  <h2 class="t-heading reveal" style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin:0.8rem 0 0.6rem;">연간 3회, 유럽의 혁신 현장과<br>직접 만납니다</h2>
+  <p class="t-body reveal">유럽의 살아있는 혁신 현장과 직접 연결됩니다. 매 시즌, 엄선된 스타트업이 현지 생태계와 만납니다.</p>
+  <div class="seasons">
+    <div class="season-card reveal">
+      <div class="season-hd">
+        <div class="season-flag">🇪🇸</div>
+        <div class="season-month">3월</div>
+        <div class="season-city">바르셀로나, 스페인</div>
+      </div>
+      <div class="season-bd">
+        <div class="season-event">4YFN · MWC Barcelona</div>
+        <p class="season-desc">모바일·ICT 분야 세계 최대 행사와 연계, 글로벌 기업 및 투자자와의 접점을 만듭니다.</p>
+        <div class="season-partner">Teamlabs · Barcelona Activa</div>
+      </div>
+    </div>
+    <div class="season-card reveal">
+      <div class="season-hd">
+        <div class="season-flag">🇫🇷</div>
+        <div class="season-month">6월</div>
+        <div class="season-city">파리, 프랑스</div>
+      </div>
+      <div class="season-bd">
+        <div class="season-event">VivaTech</div>
+        <p class="season-desc">유럽 최대 스타트업 & 테크 행사. 글로벌 대기업과 스타트업이 만나는 혁신의 장입니다.</p>
+        <div class="season-partner">Station F · French Tech</div>
+      </div>
+    </div>
+    <div class="season-card reveal">
+      <div class="season-hd">
+        <div class="season-flag">🇫🇮</div>
+        <div class="season-month" style="font-size:1.6rem;">11월<br><span style="font-size:0.75rem;opacity:0.65;letter-spacing:0.04em;">계획중</span></div>
+        <div class="season-city">헬싱키, 핀란드</div>
+      </div>
+      <div class="season-bd">
+        <div class="season-event">Slush</div>
+        <p class="season-desc">유럽 최고의 스타트업·VC 행사. 핀란드 및 북유럽 생태계와 연결, 글로벌 투자 네트워크를 구축합니다.</p>
+        <div class="season-partner">Timii Akatemia Global · Nordic Partners</div>
+      </div>
+    </div>
+    <div class="season-card reveal">
+      <div class="season-hd">
+        <div class="season-flag">🇪🇸</div>
+        <div class="season-month" style="font-size:1.5rem;line-height:1.2;">연중<br>상시</div>
+        <div class="season-city">빌바오, 스페인</div>
+      </div>
+      <div class="season-bd">
+        <div class="season-event">방문 프로그램</div>
+        <p class="season-desc">바스크 혁신 생태계 거점 방문. 파트너 미팅, PoC 논의, 소프트랜딩 지원을 연중 상시로 운영합니다.</p>
+        <div class="season-partner">BerriUp · BAT Accelerator</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCESS ═══ -->
+<section id="process">
+  <p class="t-eyebrow reveal">How We Work</p>
+  <h2 class="t-heading reveal" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--g-white);margin:0.8rem 0 0.6rem;">글로벌 오픈 이노베이션<br>9단계 프로세스</h2>
+  <p class="reveal" style="font-size:0.88rem;color:rgba(255,255,255,0.38);font-style:italic;max-width:640px;">이주열 교수의 검증된 방법론을 기반으로, GOIS는 체계적인 9단계 프로세스로 실질적인 성과를 만들어갑니다.</p>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="process-num">01</div>
+      <div class="process-icon">🌐</div>
+      <div class="process-title">글로벌 파트너 Pool 구성</div>
+      <p class="process-body">AC/VC, CVC, PoC 가능 기업을 발굴·확보합니다. 지역별 파트너 DB 구축 및 MOU 체결.</p>
+      <div class="process-phase">국내 준비 단계</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">02</div>
+      <div class="process-icon">📢</div>
+      <div class="process-title">스타트업 모집 · 홍보</div>
+      <p class="process-body">SVF 네트워크, 창업중심대학, AC·VC 연계를 통해 유럽 진출 희망 스타트업을 발굴합니다.</p>
+      <div class="process-phase">국내 준비 단계</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">03</div>
+      <div class="process-icon">📋</div>
+      <div class="process-title">IR 자료 접수</div>
+      <p class="process-body">한·영문 IR 자료와 3분 영문 Pitching 영상을 수집합니다. 템플릿과 코칭을 제공합니다.</p>
+      <div class="process-phase">국내 준비 단계</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">04</div>
+      <div class="process-icon">🔍</div>
+      <div class="process-title">국내 1차 스크리닝</div>
+      <p class="process-body">서류 검토 + IR·Pitching 코칭을 진행합니다. 탈락이 아닌 성장 기회로 접근합니다.</p>
+      <div class="process-phase">선발 단계</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">05</div>
+      <div class="process-icon">📨</div>
+      <div class="process-title">글로벌 파트너에 자료 전달</div>
+      <p class="process-body">NDA 체결 후 통과 기업의 영문 IR 패키지를 글로벌 파트너에게 전달합니다.</p>
+      <div class="process-phase">선발 단계</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">06</div>
+      <div class="process-icon">🌍</div>
+      <div class="process-title">글로벌 파트너 스크리닝</div>
+      <p class="process-body">현지 파트너의 5개 기준(시장적합성·팀역량·기술차별성·성장가능성·협력의지)으로 평가합니다.</p>
+      <div class="process-phase">선발 단계</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">07</div>
+      <div class="process-icon">🎤</div>
+      <div class="process-title">선발 확정 + 현지 Pitching</div>
+      <p class="process-body">최종 선발 기업 확정 후 현지에서 투자자 앞에 Pitching을 진행하고 1:1 미팅을 주선합니다.</p>
+      <div class="process-phase">현지 활동 단계</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">08</div>
+      <div class="process-icon">🤝</div>
+      <div class="process-title">현지 GBD 활동</div>
+      <p class="process-body">파트너·기업들과 현지에서 직접 만납니다. GOIS가 딜 매니저로서 모든 커뮤니케이션에 동행합니다.</p>
+      <div class="process-phase">현지 활동 단계</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">09</div>
+      <div class="process-icon">🌱</div>
+      <div class="process-title">Follow-Up & PoC 지원</div>
+      <p class="process-body">PoC 계약·현지 법인 설립·투자 유치까지 실질적 성과가 날 때까지 관리가 계속됩니다.</p>
+      <div class="process-phase">성과 후속 단계</div>
+    </div>
+  </div>
+  <div class="process-footer reveal">
+    <div class="process-footer-icon">💡</div>
+    <p class="process-footer-text">
+      <strong>핵심 원칙:</strong> GOIS는 모든 파트너 커뮤니케이션에 CC되어 딜의 처음부터 끝까지 함께합니다.
+      이 9단계 프로세스는 이주열 교수의 글로벌 오픈 이노베이션 방법론을 기반으로 설계되었습니다.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ ECOSYSTEM ═══ -->
+<section id="ecosystem">
+  <p class="t-eyebrow reveal">Partner Network</p>
+  <h2 class="t-heading reveal" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--g-white);margin:0.8rem 0 0.6rem;">함께 만들어가는 생태계</h2>
+  <p class="reveal" style="font-size:0.88rem;color:rgba(255,255,255,0.4);font-style:italic;max-width:600px;">GOIS의 파트너는 단순한 계약 관계가 아닙니다. 같은 방향을 바라보며 함께 생태계를 가꾸는 동반자들입니다.</p>
+  <div class="partners-grid">
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🚀</div>
+        <div>
+          <div class="partner-name">BerriUp</div>
+          <div class="partner-city">Bilbao, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role">바스크 지역 대표 액셀러레이터. 스페인 정부 연계 프로그램 및 현지 소프트랜딩 지원</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">⚡</div>
+        <div>
+          <div class="partner-name">BAT Accelerator</div>
+          <div class="partner-city">Bilbao, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role">바스크 지역 스타트업 액셀러레이션 & 투자 프로그램 운영기관</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🎓</div>
+        <div>
+          <div class="partner-name">MTA (Mondragon Team Academy)</div>
+          <div class="partner-city">Bilbao, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role">몬드라곤 협동조합 네트워크. 사회혁신·기술 특화. 전 세계 20개국+ 파트너 네트워크</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🎯</div>
+        <div>
+          <div class="partner-name">Teamlabs</div>
+          <div class="partner-city">Barcelona, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role">바르셀로나 기반 혁신 스튜디오. 교육·창업 생태계와의 연계 허브</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🌆</div>
+        <div>
+          <div class="partner-name">Barcelona Activa</div>
+          <div class="partner-city">Barcelona, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role">바르셀로나 시 공식 창업 지원 기관. 현지 네트워크 및 인프라 지원</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🌍</div>
+        <div>
+          <div class="partner-name">Timii Akatemia Global</div>
+          <div class="partner-city">UK · Netherlands · France · Finland</div>
+        </div>
+      </div>
+      <p class="partner-role">핀란드식 팀 학습 기반의 글로벌 창업 교육 네트워크</p>
+      <span class="partner-tag">UK · Netherlands · France 등</span>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🏛️</div>
+        <div>
+          <div class="partner-name">Mondragon Cooperative Group</div>
+          <div class="partner-city">Basque Country, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role">세계 최대 협동조합 그룹. 산업·기술·금융 등 다양한 분야의 글로벌 협동조합 생태계</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🎓</div>
+        <div>
+          <div class="partner-name">Mondragon University</div>
+          <div class="partner-city">Bilbao, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role">몬드라곤 협동조합 기반 대학. LEINN 프로그램을 통한 글로벌 팀프러너십 교육 거점</p>
+    </div>
+  </div>
+  <div class="eco-stats">
+    <div class="eco-stat reveal">
+      <div class="eco-stat-n">10+</div>
+      <div class="eco-stat-l">유럽 거점 도시</div>
+    </div>
+    <div class="eco-stat reveal">
+      <div class="eco-stat-n">7+</div>
+      <div class="eco-stat-l">시즌별 참여 스타트업</div>
+    </div>
+    <div class="eco-stat reveal">
+      <div class="eco-stat-n">3회</div>
+      <div class="eco-stat-l">연간 프로그램</div>
+    </div>
+    <div class="eco-stat reveal">
+      <div class="eco-stat-n">8+</div>
+      <div class="eco-stat-l">파트너 기관</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TEAM ═══ -->
+<section id="team">
+  <p class="t-eyebrow reveal">Our People</p>
+  <h2 class="t-heading reveal" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--g-white);margin:0.8rem 0 0.6rem;">함께하는 사람들</h2>
+  <p class="reveal" style="font-size:0.88rem;color:rgba(255,255,255,0.38);font-style:italic;">사람이 생태계의 씨앗입니다. 신뢰할 수 있는 사람들이 GOIS를 만들어갑니다.</p>
+  <div class="team-grid">
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/01.john.jpeg" alt="원종호 John" loading="lazy">
+      </div>
+      <div class="team-info">
+        <div class="team-name">원종호 (John)</div>
+        <div class="team-role">대표이사</div>
+        <div class="team-role-sub">Representative Director</div>
+        <p class="team-bio">GOIS의 설립자이자 대표. 한국-유럽 오픈 이노베이션 생태계 구축을 위해 직접 현장을 뛰며 파트너십을 만들어갑니다.</p>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/03.rio.png" alt="김강현 Rio" loading="lazy">
+      </div>
+      <div class="team-info">
+        <div class="team-name">김강현 (Rio)</div>
+        <div class="team-role">CMO · Co-founder</div>
+        <div class="team-role-sub">B.nomad 대표 · MTA LEINN 팀코치</div>
+        <p class="team-bio">GOIS 공동 창업자. B.nomad 대표이자 MTA LEINN International 팀코치. 브랜드 전략과 생태계 커뮤니케이션을 담당합니다.</p>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/02.paul.jpeg" alt="이주열 Paul" loading="lazy">
+      </div>
+      <div class="team-info">
+        <div class="team-name">이주열 (Paul)</div>
+        <div class="team-role">자문교수</div>
+        <div class="team-role-sub">Advisory Professor · SVF Founder</div>
+        <p class="team-bio">몬드라곤대학 서울랩 팀프러너십 센터장 · 서울벤처대학원대학교 교수. SVF 창립자이자 GOIS 자문교수로 글로벌 OI 프로세스 설계를 이끕니다.</p>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/04.jon.jpeg" alt="Jon Ander 욘" loading="lazy">
+      </div>
+      <div class="team-info">
+        <div class="team-name">Jon Ander (욘)</div>
+        <div class="team-role">스페인 파트너</div>
+        <div class="team-role-sub">Spanish Partner · Shareholder</div>
+        <p class="team-bio">BerriUp 대표이사. 바스크 생태계의 깊은 네트워크를 보유한 GOIS의 유럽 파트너이자 공동 주주입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="contact-divider"></div>
+  <div class="contact-inner">
+    <div class="contact-symbol"></div>
+    <h2 class="contact-title reveal">함께 씨앗을 심겠습니다</h2>
+    <p class="t-body reveal" style="color:rgba(255,255,255,0.35);max-width:480px;margin:0 auto 0.8rem;">작은 시작을 귀하게 여기며, 파트너와 함께 뿌리내리는 생태계를 만들어갑니다.</p>
+    <p class="contact-verse reveal">"보잘것없는 것 하나가 세상을 채웁니다"</p>
+    <div class="contact-box reveal">
+      <div class="contact-items">
+        <div class="contact-item">
+          <span class="contact-item-icon">✉️</span>
+          <span><a href="mailto:connect@gois.kr">connect@gois.kr</a></span>
+        </div>
+        <div class="contact-rule"></div>
+        <div class="contact-item">
+          <span class="contact-item-icon">🌐</span>
+          <span><a href="https://gois.kr" target="_blank">gois.kr</a></span>
+        </div>
+        <div class="contact-rule"></div>
+        <div class="contact-item loc">
+          <span class="contact-item-icon">📍</span>
+          <span>충남 천안시, 대한민국</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-logo">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="13" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="68.5 20.4"/>
+      <circle cx="16" cy="16" r="2.5" fill="#1D9E75"/>
+    </svg>
+    <span class="footer-logo-text">GOIS</span>
+  </div>
+  <span class="footer-copy">Glocal Open Innovation Studio · 주식회사 글로컬오픈이노베이션스튜디오</span>
+  <span class="footer-copy">© 2026 GOIS</span>
+</footer>
+
+<script>
+// ── Scroll reveal ──
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const siblings = [...entry.target.parentElement.querySelectorAll('.reveal')];
+    const idx = siblings.indexOf(entry.target);
+    setTimeout(() => entry.target.classList.add('visible'), idx * 70);
+    io.unobserve(entry.target);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── Nav shrink ──
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.style.height = window.scrollY > 60 ? '52px' : '64px';
+}, { passive: true });
+
+// ── Nav active section highlight ──
+const sections = [...document.querySelectorAll('section[id]')];
+const links = [...document.querySelectorAll('.nav-links a')];
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  links.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#'+cur
+      ? 'var(--g-primary)' : 'rgba(255,255,255,0.55)';
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
