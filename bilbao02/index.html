@@ -3,8 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GOIS Season 2 — 빌바오 글로벌 오픈이노베이션</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+KR:wght@300;400;700&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<title>GOIS × Bilbao — Global Open Innovation Season 2</title>
+<meta property="og:title" content="GOIS Global Open Innovation — Season 2 Bilbao">
+<meta property="og:description" content="빌바오 B Acceleration Week 참가 + BerriUp 비즈니스 미팅 + BAT Open Innovation Challenges. 5월 8일 마감, 최대 7개사.">
+<meta property="og:image" content="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/05.BAT.JPG">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="800">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GOIS Global Open Innovation — Season 2 Bilbao">
+<meta name="twitter:description" content="Join B Acceleration Week in Bilbao. Business meetings + BAT Challenges + BerriUp network. Deadline May 8.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/05.BAT.JPG">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:wght@300;400&family=Noto+Serif+KR:wght@300;400;700&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <style>
 :root {
   --basque-red: #D42B2B;
@@ -708,13 +718,37 @@ nav.scrolled {
   padding: 1rem 6vw;
 }
 .nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
-  letter-spacing: 0.05em;
+  flex-shrink: 0;
 }
-.nav-logo span { color: var(--basque-red); }
+.nav-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.nav-logo-gois {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  letter-spacing: 0.28em;
+  color: white;
+  line-height: 1;
+  border-bottom: 1.5px solid #1D9E75;
+  padding-bottom: 2px;
+}
+.nav-logo-sub {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.42rem;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.4;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 .nav-apply {
   background: var(--basque-red);
   color: white;
@@ -739,9 +773,19 @@ footer {
   gap: 1rem;
 }
 footer .logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.4rem;
-  color: rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.45;
+}
+footer .logo-gois {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.05rem;
+  letter-spacing: 0.25em;
+  color: white;
+  border-bottom: 1px solid #1D9E75;
+  padding-bottom: 1px;
 }
 footer .logo span { color: var(--basque-red); }
 footer p {
@@ -845,7 +889,19 @@ footer p {
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-logo">GO<span>IS</span></a>
+  <a href="#" class="nav-logo">
+    <!-- GOIS Symbol: 270° arc + center node + two end nodes (#1D9E75 on dark) -->
+    <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;flex-shrink:0;">
+      <path d="M 16.56 5.44 A 8 8 0 1 1 16.56 16.56" stroke="#1D9E75" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      <circle cx="11" cy="11" r="1.7" fill="#1D9E75"/>
+      <circle cx="16.56" cy="5.44" r="1.1" fill="#1D9E75"/>
+      <circle cx="16.56" cy="16.56" r="1.1" fill="#1D9E75"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-gois">GOIS</span>
+      <span class="nav-logo-sub">Glocal Open Innovation Studio</span>
+    </div>
+  </a>
   <div style="display:flex;align-items:center;gap:0.8rem;">
     <div class="lang-toggle">
       <button class="lang-btn active" id="btn-ko" onclick="setLang('ko')">KO</button>
@@ -858,15 +914,15 @@ footer p {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <p class="hero-eyebrow">GOIS × BerriUp × BAT — Season 2, 2026</p>
+  <p class="hero-eyebrow" data-ko="GOIS × BerriUp × BAT — Season 2, 2026" data-en="GOIS × BerriUp × BAT — Season 2, 2026">GOIS × BerriUp × BAT — Season 2, 2026</p>
   <h1 class="hero-title">
-    <span class="ko">한국과 바스크를 잇는</span>
+    <span class="ko" data-ko="한국과 바스크를 잇는" data-en="Connecting Korea & the Basque Country">한국과 바스크를 잇는</span>
     GLOBAL<br>OPEN<br><span class="accent">INNOVATION</span>
   </h1>
-  <p class="hero-sub">빌바오에서 열리는 B Acceleration Week에 참가하고, 유럽 기업·투자자와 직접 미팅하세요. 바스크는 당신의 유럽 진출 교두보입니다.</p>
+  <p class="hero-sub" data-ko="빌바오에서 열리는 B Acceleration Week에 참가하고, 유럽 기업·투자자와 직접 미팅하세요. 바스크는 당신의 유럽 진출 교두보입니다." data-en="Join B Acceleration Week in Bilbao. Meet European companies and investors face-to-face. The Basque Country is your gateway to Europe.">빌바오에서 열리는 B Acceleration Week에 참가하고, 유럽 기업·투자자와 직접 미팅하세요. 바스크는 당신의 유럽 진출 교두보입니다.</p>
   <div class="hero-cta-row">
-    <a href="https://forms.gle/MR3zB6tixRteHMPF8" target="_blank" class="btn-primary">지금 신청하기</a>
-    <div class="deadline-pill">
+    <a href="https://forms.gle/MR3zB6tixRteHMPF8" target="_blank" class="btn-primary" data-ko="지금 신청하기" data-en="Apply Now">지금 신청하기</a>
+    <div class="deadline-pill" data-ko='<span class="dot"></span>5월 8일 마감 · 현재 모집중 (최대 7개사)' data-en='<span class="dot"></span>Deadline May 8 · Applications Open (max 7 teams)'>
       <span class="dot"></span>
       5월 8일 마감 · 현재 모집중 (최대 7개사)
     </div>
@@ -877,19 +933,19 @@ footer p {
 <div class="stats-bar stagger">
   <div class="stat">
     <span class="stat-num">6</span>
-    <span class="stat-label">시즌1 참여기업</span>
+    <span class="stat-label" data-ko="시즌1 참여기업" data-en="Season 1 Startups">시즌1 참여기업</span>
   </div>
   <div class="stat">
-    <span class="stat-num">3건+</span>
-    <span class="stat-label">기업당 현지 비즈니스 미팅</span>
+    <span class="stat-num" data-ko="3건+" data-en="3+">3건+</span>
+    <span class="stat-label" data-ko="기업당 현지 비즈니스 미팅" data-en="Business Meetings per Company">기업당 현지 비즈니스 미팅</span>
   </div>
   <div class="stat">
     <span class="stat-num">2,000€</span>
-    <span class="stat-label">BerriUp 선발 시 바우처 지급</span>
+    <span class="stat-label" data-ko="BerriUp 선발 시 바우처 지급" data-en="Voucher if Selected by BerriUp">BerriUp 선발 시 바우처 지급</span>
   </div>
   <div class="stat">
-    <span class="stat-num">7개사</span>
-    <span class="stat-label">시즌2 모집 (최대)</span>
+    <span class="stat-num" data-ko="7개사" data-en="7 Teams">7개사</span>
+    <span class="stat-label" data-ko="시즌2 모집 (최대)" data-en="Season 2 Spots (max)">시즌2 모집 (최대)</span>
   </div>
 </div>
 
@@ -897,7 +953,7 @@ footer p {
 <section class="why-bilbao">
   <p class="section-eyebrow reveal" data-ko="왜 빌바오인가" data-en="Why Bilbao">왜 빌바오인가</p>
   <h2 class="section-title reveal" data-ko="유럽 진출,<br>왜 빌바오에서 시작해야 하는가" data-en="Why Start Your<br>European Journey<br>from Bilbao?">유럽 진출,<br>왜 빌바오에서 시작해야 하는가</h2>
-  <p class="section-body reveal">바스크(빌바오)는 스페인 북부의 작은 도시처럼 보이지만, 유럽에서 가장 밀도 높은 오픈이노베이션 생태계 중 하나입니다. 세계 최대 협동조합 기업 몬드라곤, 글로벌 제조·에너지·헬스 대기업들, 그리고 이를 연결하는 BAT·BerriUp·MTA가 한 도시에 집결해 있습니다. 빌바오는 진입장벽이 낮으면서 실질 협업이 빠르게 이루어지는 스타트업의 유럽 관문입니다.</p>
+  <p class="section-body reveal" data-ko="바스크(빌바오)는 스페인 북부의 작은 도시처럼 보이지만, 유럽에서 가장 밀도 높은 오픈이노베이션 생태계 중 하나입니다. 세계 최대 협동조합 기업 몬드라곤, 글로벌 제조·에너지·헬스 대기업들, 그리고 이를 연결하는 BAT·BerriUp·MTA가 한 도시에 집결해 있습니다. 빌바오는 진입장벽이 낮으면서 실질 협업이 빠르게 이루어지는 스타트업의 유럽 관문입니다." data-en="Bilbao may look like a small northern Spanish city, but it hosts one of Europe's densest open innovation ecosystems. Mondragon — the world's largest cooperative — global manufacturing, energy, and health corporations, and the connective tissue of BAT, BerriUp, and MTA are all concentrated in one city. Bilbao offers low barriers to entry and fast-moving collaboration — the startup gateway to Europe.">바스크(빌바오)는 스페인 북부의 작은 도시처럼 보이지만, 유럽에서 가장 밀도 높은 오픈이노베이션 생태계 중 하나입니다. 세계 최대 협동조합 기업 몬드라곤, 글로벌 제조·에너지·헬스 대기업들, 그리고 이를 연결하는 BAT·BerriUp·MTA가 한 도시에 집결해 있습니다. 빌바오는 진입장벽이 낮으면서 실질 협업이 빠르게 이루어지는 스타트업의 유럽 관문입니다.</p>
   <div class="bilbao-grid stagger">
     <div class="bilbao-card">
       <span class="bilbao-num">01</span>
@@ -924,39 +980,39 @@ footer p {
 
 <!-- BAT SECTION -->
 <section class="bat-section">
-  <p class="section-eyebrow reveal">B Acceleration Week 2026</p>
-  <h2 class="section-title reveal">바스크 최대<br>스타트업 축제의<br>중심에 서다</h2>
+  <p class="section-eyebrow reveal" data-ko="B Acceleration Week 2026" data-en="B Acceleration Week 2026">B Acceleration Week 2026</p>
+  <h2 class="section-title reveal" data-ko="바스크 최대<br>스타트업 축제의<br>중심에 서다" data-en="Step into the Heart of<br>the Basque's Biggest<br>Startup Festival">바스크 최대<br>스타트업 축제의<br>중심에 서다</h2>
   <div class="bat-highlight reveal">
     <h3><a href="https://bacceleratortower.com/en/b-acceleration-week-2026/" target="_blank" style="color:inherit;text-decoration:none;border-bottom:2px solid rgba(255,255,255,0.2);">BAT B Accelerator Tower<br>Open Innovation Week ↗</a></h3>
-    <p>BAT(B Accelerator Tower)는 바스크 지역 최대 스타트업·혁신 허브입니다. 매년 열리는 B Acceleration Week는 스타트업·기업·투자자가 한자리에 집결하는 바스크 오픈이노베이션의 정점입니다. Pegasus Tech Ventures와의 파트너십으로 <strong>Startup World Cup 지역 결선</strong>도 개최됩니다. 우승팀은 샌프란시스코 글로벌 파이널에서 <strong>$1,000,000 투자상</strong>을 놓고 경쟁합니다.</p>
-    <a href="https://bacceleratortower.com/en/b-acceleration-week-2026/" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;color:var(--basque-red);font-size:0.85rem;font-weight:600;text-decoration:none;letter-spacing:0.04em;margin-bottom:1.5rem;border-bottom:1px solid rgba(212,43,43,0.3);padding-bottom:0.2rem;">B Acceleration Week 2026 공식 페이지 →</a>
+    <p data-ko="BAT(B Accelerator Tower)는 바스크 지역 최대 스타트업·혁신 허브입니다. 매년 열리는 B Acceleration Week는 스타트업·기업·투자자가 한자리에 집결하는 바스크 오픈이노베이션의 정점입니다. Pegasus Tech Ventures와의 파트너십으로 <strong>Startup World Cup 지역 결선</strong>도 개최됩니다. 우승팀은 샌프란시스코 글로벌 파이널에서 <strong>$1,000,000 투자상</strong>을 놓고 경쟁합니다." data-en="BAT (B Accelerator Tower) is the Basque region's largest startup and innovation hub. The annual B Acceleration Week brings together startups, corporates, and investors — the pinnacle of Basque open innovation. In partnership with Pegasus Tech Ventures, it hosts the <strong>Startup World Cup Regional Final</strong>. The winning team competes for a <strong>$1,000,000 investment prize</strong> at the San Francisco Global Final.">BAT(B Accelerator Tower)는 바스크 지역 최대 스타트업·혁신 허브입니다. 매년 열리는 B Acceleration Week는 스타트업·기업·투자자가 한자리에 집결하는 바스크 오픈이노베이션의 정점입니다. Pegasus Tech Ventures와의 파트너십으로 <strong>Startup World Cup 지역 결선</strong>도 개최됩니다. 우승팀은 샌프란시스코 글로벌 파이널에서 <strong>$1,000,000 투자상</strong>을 놓고 경쟁합니다.</p>
+    <a href="https://bacceleratortower.com/en/b-acceleration-week-2026/" target="_blank" class="bat-link-text" data-ko="B Acceleration Week 2026 공식 페이지 →" data-en="B Acceleration Week 2026 Official Page →" style="display:inline-flex;align-items:center;gap:0.5rem;color:var(--basque-red);font-size:0.85rem;font-weight:600;text-decoration:none;letter-spacing:0.04em;margin-bottom:1.5rem;border-bottom:1px solid rgba(212,43,43,0.3);padding-bottom:0.2rem;">B Acceleration Week 2026 공식 페이지 →</a>
     <div class="feature-list">
       <div class="feature-item">
         <div class="feature-icon">🏆</div>
         <div class="feature-item-text">
-          <h4>Startup World Cup 지역 결선</h4>
-          <p>우승팀은 샌프란시스코 글로벌 파이널 진출권 획득</p>
+          <h4 data-ko="Startup World Cup 지역 결선" data-en="Startup World Cup Regional Final">Startup World Cup 지역 결선</h4>
+          <p data-ko="우승팀은 샌프란시스코 글로벌 파이널 진출권 획득" data-en="Winners advance to the San Francisco Global Final">우승팀은 샌프란시스코 글로벌 파이널 진출권 획득</p>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-icon">🤝</div>
         <div class="feature-item-text">
-          <h4>글로벌 투자자·기업 네트워킹</h4>
-          <p>유럽 VC, 기업 CVC, 액셀러레이터와 직접 연결</p>
+          <h4 data-ko="글로벌 투자자·기업 네트워킹" data-en="Global Investor & Corporate Networking">글로벌 투자자·기업 네트워킹</h4>
+          <p data-ko="유럽 VC, 기업 CVC, 액셀러레이터와 직접 연결" data-en="Direct connections with European VCs, corporate CVCs, and accelerators">유럽 VC, 기업 CVC, 액셀러레이터와 직접 연결</p>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-icon">🔓</div>
         <div class="feature-item-text">
-          <h4>Open Innovation Challenges</h4>
-          <p>바스크·스페인 대기업이 직접 제안하는 협업 과제에 참여 가능</p>
+          <h4 data-ko="Open Innovation Challenges" data-en="Open Innovation Challenges">Open Innovation Challenges</h4>
+          <p data-ko="바스크·스페인 대기업이 직접 제안하는 협업 과제에 참여 가능" data-en="Apply to collaboration challenges proposed directly by Basque and Spanish corporations">바스크·스페인 대기업이 직접 제안하는 협업 과제에 참여 가능</p>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-icon">💡</div>
         <div class="feature-item-text">
-          <h4>산업별 심층 세션</h4>
-          <p>에너지, 제조, 바이오, 모빌리티 등 산업별 최신 트렌드</p>
+          <h4 data-ko="산업별 심층 세션" data-en="Industry Deep-Dive Sessions">산업별 심층 세션</h4>
+          <p data-ko="에너지, 제조, 바이오, 모빌리티 등 산업별 최신 트렌드" data-en="Latest trends across energy, manufacturing, biotech, mobility, and more">에너지, 제조, 바이오, 모빌리티 등 산업별 최신 트렌드</p>
         </div>
       </div>
     </div>
@@ -965,8 +1021,8 @@ footer p {
   <div class="voucher-box reveal" style="margin-top:3rem;">
     <div class="voucher-amount">€2,000</div>
     <div class="voucher-text">
-      <h4>BerriUp 프로그램 선발 시 바우처 지급</h4>
-      <p>참여 스타트업 중 BerriUp 액셀러레이터 프로그램에 선발될 경우, 항공권·숙박비 명목의 2,000유로 바우처를 지급받을 수 있습니다. 유럽 현지 진출에 소요되는 실질 비용을 지원합니다.</p>
+      <h4 data-ko="BerriUp 프로그램 선발 시 바우처 지급" data-en="€2,000 Voucher if Selected by BerriUp">BerriUp 프로그램 선발 시 바우처 지급</h4>
+      <p data-ko="참여 스타트업 중 BerriUp 액셀러레이터 프로그램에 선발될 경우, 항공권·숙박비 명목의 2,000유로 바우처를 지급받을 수 있습니다. 유럽 현지 진출에 소요되는 실질 비용을 지원합니다." data-en="Startups selected for the BerriUp accelerator program receive a €2,000 voucher for airfare and accommodation — covering real costs of your European journey.">참여 스타트업 중 BerriUp 액셀러레이터 프로그램에 선발될 경우, 항공권·숙박비 명목의 2,000유로 바우처를 지급받을 수 있습니다. 유럽 현지 진출에 소요되는 실질 비용을 지원합니다.</p>
     </div>
   </div>
 </section>
@@ -1226,9 +1282,17 @@ footer p {
 
 <!-- FOOTER -->
 <footer>
-  <div class="logo">GO<span>IS</span></div>
-  <p>주식회사 글로컬오픈이노베이션스튜디오 · connect@gois.kr</p>
-  <p>현지 파트너: BerriUp · BAT B Accelerator Tower, 빌바오, Spain</p>
+  <div class="logo">
+    <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;flex-shrink:0;">
+      <path d="M 16.56 5.44 A 8 8 0 1 1 16.56 16.56" stroke="#1D9E75" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      <circle cx="11" cy="11" r="1.7" fill="#1D9E75"/>
+      <circle cx="16.56" cy="5.44" r="1.1" fill="#1D9E75"/>
+      <circle cx="16.56" cy="16.56" r="1.1" fill="#1D9E75"/>
+    </svg>
+    <span class="logo-gois">GOIS</span>
+  </div>
+  <p data-ko="주식회사 글로컬오픈이노베이션스튜디오 · connect@gois.kr" data-en="Glocal Open Innovation Studio Inc. · connect@gois.kr">주식회사 글로컬오픈이노베이션스튜디오 · connect@gois.kr</p>
+  <p data-ko="현지 파트너: BerriUp · BAT B Accelerator Tower, 빌바오, Spain" data-en="Local Partners: BerriUp · BAT B Accelerator Tower, Bilbao, Spain">현지 파트너: BerriUp · BAT B Accelerator Tower, 빌바오, Spain</p>
 </footer>
 
 <script>
@@ -1400,28 +1464,13 @@ function setLang(lang) {
   document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 
-  // All data-ko/data-en elements
+  // Universal: all elements with data-ko / data-en
   document.querySelectorAll('[data-ko]').forEach(el => {
     const val = lang === 'ko' ? el.getAttribute('data-ko') : el.getAttribute('data-en');
     if (val !== null) el.innerHTML = val;
   });
 
-  // Nav apply
-  document.querySelector('.nav-apply').textContent = t['nav-apply'];
-
-  // Hero
-  document.querySelector('.hero-eyebrow').lastChild.textContent = t['hero-eyebrow'];
-  document.querySelector('.hero-title .ko').textContent = t['hero-ko'];
-  document.querySelector('.hero-cta-row .btn-primary').childNodes[0].textContent = t['hero-cta'];
-  document.querySelector('.deadline-pill').innerHTML = `<span class="dot"></span>${t['deadline-text']}`;
-
-  // Stats labels
-  const statLabels = document.querySelectorAll('.stat-label');
-  ['stat1-label','stat2-label','stat3-label','stat4-label'].forEach((k,i) => {
-    if(statLabels[i]) statLabels[i].textContent = t[k];
-  });
-
-  // Bilbao cards
+  // Bilbao cards (dynamically rendered)
   const cards = document.querySelectorAll('.bilbao-card');
   bilbaoCards[lang].forEach((c, i) => {
     if(cards[i]) {
@@ -1430,7 +1479,7 @@ function setLang(lang) {
     }
   });
 
-  // Schedule rows
+  // Schedule rows (dynamically rendered)
   const schedGrid = document.querySelector('.schedule-grid');
   if(schedGrid) {
     schedGrid.innerHTML = scheduleRows[lang].map(r => `
@@ -1452,7 +1501,7 @@ function setLang(lang) {
     if(thead) thead.innerHTML = `<th>${t['th-date']}</th><th>${t['th-type']}</th><th>${t['th-detail']}</th>`;
   }
 
-  // Team grid
+  // Team grid (dynamically rendered)
   const teamGrid = document.querySelector('.team-grid');
   if(teamGrid) {
     teamGrid.innerHTML = teamMembers[lang].map(m => `
@@ -1466,43 +1515,38 @@ function setLang(lang) {
       </div>`).join('');
   }
 
-  // Pricing includes
+  // Pricing includes list
   const incList = document.querySelector('.includes-list');
-  if(incList) {
-    incList.innerHTML = pricingIncludes[lang].map(li => `<li>${li}</li>`).join('');
-  }
+  if(incList) incList.innerHTML = pricingIncludes[lang].map(li => `<li>${li}</li>`).join('');
 
-  // Pricing header & body text
+  // Pricing header
   const pricingHeader = document.querySelector('.pricing-header');
   if(pricingHeader) {
-    pricingHeader.querySelector('h3').textContent = lang === 'ko' ? '글로벌 오픈이노베이션 프로그램 Season 2' : 'Global Open Innovation Program Season 2';
-    pricingHeader.querySelector('p').textContent = lang === 'ko' ? '빌바오 현지 방문 + B Acceleration Week + BerriUp 비즈니스 미팅 패키지' : 'Bilbao Site Visit + B Acceleration Week + BerriUp Business Meeting Package';
+    pricingHeader.querySelector('h3').textContent = lang === 'ko'
+      ? '글로벌 오픈이노베이션 프로그램 Season 2'
+      : 'Global Open Innovation Program Season 2';
+    pricingHeader.querySelector('p').textContent = lang === 'ko'
+      ? '빌바오 현지 방문 + B Acceleration Week + BerriUp 비즈니스 미팅 패키지'
+      : 'Bilbao Site Visit + B Acceleration Week + BerriUp Business Meeting Package';
   }
 
+  // Pricing SVF badge and note
   const svfLabel = document.querySelector('.price-svf span:first-child');
   if(svfLabel) svfLabel.textContent = lang === 'ko' ? '🏷️ Seoul Venture Forum 회원' : '🏷️ Seoul Venture Forum Members';
   const svfBadge = document.querySelector('.price-svf-badge');
   if(svfBadge) svfBadge.textContent = lang === 'ko' ? 'SVF 멤버 할인가' : 'SVF Member Rate';
-
+  const priceUnit = document.querySelector('.price-main .price-unit');
+  if(priceUnit) priceUnit.textContent = lang === 'ko' ? '만원' : 'M KRW';
+  const svfUnit = document.querySelector('.price-svf .price-unit');
+  if(svfUnit) svfUnit.textContent = lang === 'ko' ? '만원' : 'M KRW';
   const priceNote = document.querySelector('.price-note');
-  if(priceNote) priceNote.textContent = lang === 'ko' ? '※ 항공권·숙박비 별도 (BerriUp 선발 시 2,000유로 바우처 지원)' : '※ Flights & accommodation not included (€2,000 voucher if selected by BerriUp)';
-
+  if(priceNote) priceNote.textContent = lang === 'ko'
+    ? '※ 항공권·숙박비 별도 (BerriUp 선발 시 2,000유로 바우처 지원)'
+    : '※ Flights & accommodation not included (€2,000 voucher if selected by BerriUp)';
   const excludes = document.querySelector('.excludes');
   if(excludes) excludes.innerHTML = lang === 'ko'
     ? '<strong>별도 항목</strong>: 항공권(왕복) · 현지 숙박비(5박) · 현지 식비·교통비 · 비자 및 여행자보험<br><br>🎁 <strong>BerriUp 프로그램 선발 시</strong>: 항공권·숙박료 명목의 <strong>2,000유로 바우처</strong> 지급'
     : '<strong>Excluded</strong>: Round-trip airfare · Accommodation (5 nights) · Meals & local transport · Visa & travel insurance<br><br>🎁 <strong>If selected by BerriUp</strong>: <strong>€2,000 voucher</strong> for airfare & accommodation';
-
-  // Section eyebrows / titles (onsite)
-  const onsiteLabel = document.querySelector('[data-sched-onsite]');
-  // Apply section
-  document.querySelector('.apply-section h2').textContent = t['apply-title'];
-  document.querySelector('.apply-section > p').innerHTML = t['apply-sub'];
-  document.querySelector('.btn-apply').textContent = t['apply-btn'];
-  document.querySelector('.apply-deadline').textContent = t['apply-contact'];
-
-  // Onsite section eyebrow
-  const onsiteEye = document.querySelector('.onsite-eyebrow');
-  if(onsiteEye) onsiteEye.textContent = t['sched-onsite'];
 }
 
 // Nav scroll
