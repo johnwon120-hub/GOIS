@@ -46,8 +46,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 6vw 8vh;
-  overflow: hidden;
+  padding: 6rem 6vw 8vh;
 }
 
 .hero-bg {
@@ -148,7 +147,6 @@ body {
   cursor: pointer;
   transition: all 0.25s ease;
   position: relative;
-  overflow: hidden;
 }
 .btn-primary::after {
   content: '→';
@@ -248,7 +246,6 @@ section { padding: 8rem 6vw; }
 .why-bilbao {
   background: linear-gradient(135deg, #0D0D0D 0%, #101018 100%);
   position: relative;
-  overflow: hidden;
 }
 .why-bilbao::before {
   content: 'BILBAO';
@@ -566,7 +563,6 @@ section { padding: 8rem 6vw; }
 .pricing-section {
   background: #0A0A0E;
   position: relative;
-  overflow: hidden;
 }
 .pricing-section::before {
   content: '';
@@ -644,7 +640,6 @@ section { padding: 8rem 6vw; }
   padding: 8rem 6vw;
   text-align: center;
   position: relative;
-  overflow: hidden;
 }
 .apply-section::before {
   content: '';
@@ -705,17 +700,20 @@ nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  padding: 1.5rem 6vw;
+  height: 64px;
+  padding: 0 6vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.3s;
+  transition: background 0.3s, border 0.3s;
+  background: rgba(10,10,12,0.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 nav.scrolled {
-  background: rgba(13,13,13,0.95);
-  backdrop-filter: blur(12px);
+  background: rgba(10,10,12,0.97);
+  backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--line);
-  padding: 1rem 6vw;
 }
 .nav-logo {
   display: flex;
@@ -723,18 +721,19 @@ nav.scrolled {
   gap: 10px;
   text-decoration: none;
   flex-shrink: 0;
+  overflow: visible;
 }
 .nav-logo-text {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
 }
 .nav-logo-gois {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 400;
-  font-size: 1.25rem;
-  letter-spacing: 0.28em;
-  color: white;
+  font-size: 1.2rem;
+  letter-spacing: 0.3em;
+  color: #ffffff;
   line-height: 1;
   border-bottom: 1.5px solid #1D9E75;
   padding-bottom: 2px;
@@ -742,9 +741,9 @@ nav.scrolled {
 .nav-logo-sub {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 300;
-  font-size: 0.42rem;
-  letter-spacing: 0.16em;
-  color: rgba(255,255,255,0.45);
+  font-size: 0.44rem;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.4);
   line-height: 1.4;
   text-transform: uppercase;
   white-space: nowrap;
@@ -776,15 +775,16 @@ footer .logo {
   display: flex;
   align-items: center;
   gap: 8px;
-  opacity: 0.45;
+  height: 126px;
+  overflow: visible;
 }
 footer .logo-gois {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 400;
-  font-size: 1.05rem;
+  font-size: 1rem;
   letter-spacing: 0.25em;
-  color: white;
-  border-bottom: 1px solid #1D9E75;
+  color: rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(29,158,117,0.5);
   padding-bottom: 1px;
 }
 footer .logo span { color: var(--basque-red); }
@@ -890,17 +890,11 @@ footer p {
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">
-    <!-- GOIS Symbol: 270° arc + center node + two end nodes (#1D9E75 on dark) -->
-    <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;flex-shrink:0;">
-      <path d="M 16.56 5.44 A 8 8 0 1 1 16.56 16.56" stroke="#1D9E75" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-      <circle cx="11" cy="11" r="1.7" fill="#1D9E75"/>
-      <circle cx="16.56" cy="5.44" r="1.1" fill="#1D9E75"/>
-      <circle cx="16.56" cy="16.56" r="1.1" fill="#1D9E75"/>
-    </svg>
-    <div class="nav-logo-text">
-      <span class="nav-logo-gois">GOIS</span>
-      <span class="nav-logo-sub">Glocal Open Innovation Studio</span>
-    </div>
+    <img
+      src="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/GOIS%20logo/GOIS_Logo_Transparent_ForDark.png"
+      alt="GOIS — Glocal Open Innovation Studio"
+      style="height:126px;width:auto;display:block;position:relative;z-index:2;"
+    >
   </a>
   <div style="display:flex;align-items:center;gap:0.8rem;">
     <div class="lang-toggle">
@@ -1274,22 +1268,20 @@ footer p {
 
 <!-- APPLY -->
 <section class="apply-section">
-  <h2>지금 신청하세요</h2>
-  <p>4월 모집 시작 · 5월 8일 최종 선발 마감<br>최대 7개사만 선발됩니다. 빠를수록 유리합니다.</p>
-  <a href="https://forms.gle/MR3zB6tixRteHMPF8" target="_blank" class="btn-apply">신청서 작성하기 →</a>
-  <p class="apply-deadline">문의: connect@gois.kr</p>
+  <h2 data-ko="지금 신청하세요" data-en="Ready to Apply?">지금 신청하세요</h2>
+  <p data-ko="4월 모집 시작 · 5월 8일 최종 선발 마감<br>최대 7개사만 선발됩니다. 빠를수록 유리합니다." data-en="Applications open April · Final selection by May 8<br>Only 7 spots available. Apply early.">4월 모집 시작 · 5월 8일 최종 선발 마감<br>최대 7개사만 선발됩니다. 빠를수록 유리합니다.</p>
+  <a href="https://forms.gle/MR3zB6tixRteHMPF8" target="_blank" class="btn-apply" data-ko="신청서 작성하기 →" data-en="Fill Out Application →">신청서 작성하기 →</a>
+  <p class="apply-deadline" data-ko="문의: connect@gois.kr" data-en="Inquiries: connect@gois.kr">문의: connect@gois.kr</p>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="logo">
-    <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;flex-shrink:0;">
-      <path d="M 16.56 5.44 A 8 8 0 1 1 16.56 16.56" stroke="#1D9E75" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-      <circle cx="11" cy="11" r="1.7" fill="#1D9E75"/>
-      <circle cx="16.56" cy="5.44" r="1.1" fill="#1D9E75"/>
-      <circle cx="16.56" cy="16.56" r="1.1" fill="#1D9E75"/>
-    </svg>
-    <span class="logo-gois">GOIS</span>
+    <img
+      src="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/GOIS%20logo/GOIS_Logo_Transparent_ForDark.png"
+      alt="GOIS"
+      style="height:126px;width:auto;display:block;opacity:0.55;"
+    >
   </div>
   <p data-ko="주식회사 글로컬오픈이노베이션스튜디오 · connect@gois.kr" data-en="Glocal Open Innovation Studio Inc. · connect@gois.kr">주식회사 글로컬오픈이노베이션스튜디오 · connect@gois.kr</p>
   <p data-ko="현지 파트너: BerriUp · BAT B Accelerator Tower, 빌바오, Spain" data-en="Local Partners: BerriUp · BAT B Accelerator Tower, Bilbao, Spain">현지 파트너: BerriUp · BAT B Accelerator Tower, 빌바오, Spain</p>
