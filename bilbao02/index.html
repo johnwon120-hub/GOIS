@@ -1241,6 +1241,7 @@ footer p {
     <div class="pricing-body">
       <div>
         <span class="price-main">1,000<span class="price-unit">만원</span></span>
+        <p class="price-vat-note" style="font-size:0.78rem; color:var(--muted); margin-top:0.4rem;">부가세 별도</p>
       </div>
       <div class="price-svf">
         <span style="font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:0.3rem;">🏷️ Seoul Venture Forum 회원</span>
@@ -1531,6 +1532,8 @@ function setLang(lang) {
   if(priceUnit) priceUnit.textContent = lang === 'ko' ? '만원' : 'M KRW';
   const svfUnit = document.querySelector('.price-svf .price-unit');
   if(svfUnit) svfUnit.textContent = lang === 'ko' ? '만원' : 'M KRW';
+  const vatNote = document.querySelector('.price-vat-note');
+  if(vatNote) vatNote.textContent = lang === 'ko' ? '부가세 별도' : 'VAT not included';
   const priceNote = document.querySelector('.price-note');
   if(priceNote) priceNote.textContent = lang === 'ko'
     ? '※ 항공권·숙박비 별도 (BerriUp 선발 시 2,000유로 바우처 지원)'
