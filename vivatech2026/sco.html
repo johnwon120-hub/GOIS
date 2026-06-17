@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCO Labs · K-Study OS · VivaTech 2026 · Hall 7.1 · 1H28</title>
+<meta name="description" content="SCO Labs (스코랩스) — K-Study OS. VivaTech 2026 Korea Pavilion, Hall 7.1, Booth 1H28.">
+<meta property="og:title" content="SCO Labs · K-Study OS at VivaTech 2026">
+<meta property="og:description" content="Validated with 5,475 students across 38 B2B centers in Korea. A self-directed learning OS that blends Korean discipline with European autonomy — entering the EU exam-prep market (Bac · Abitur · Maturità).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0710;
+    --bg-deep: #050308;
+    --c1: #FFE600;
+    --c2: #FF2D7E;
+    --accent: #FFE600;
+    --pink: #FF2D7E;
+    --yellow: #FFE600;
+    --white: #FFFFFF;
+    --gray: #A9A4B6;
+    --gray-dark: #4F4A5E;
+    /* next-card colors */
+    --nc1: #00E5FF;
+    --nc2: #00C49A;
+  }
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  ::selection { background: var(--c1); color: white; }
+
+  /* TOP */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    padding: 16px 32px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    backdrop-filter: blur(20px);
+    background: rgba(10,7,16,0.6);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    z-index: 100;
+  }
+  .topbar .back {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--gray);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .topbar .back:hover { color: white; }
+  .topbar .center {
+    display: flex; gap: 6px; align-items: center;
+    flex: 1; justify-content: center;
+  }
+  .topbar .center .mini {
+    width: 28px; height: 6px; border-radius: 1px;
+    background: rgba(255,255,255,0.15);
+    transition: background 0.2s;
+  }
+  .topbar .center .mini.active { background: linear-gradient(90deg, var(--c1), var(--c2)); }
+  .topbar .center .mini:hover { background: rgba(255,255,255,0.4); }
+  .topbar .booth {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; font-weight: 500;
+    color: var(--white);
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    padding: 8px 16px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  @media (max-width: 720px) {
+    .topbar .center { display: none; }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 160px 0 100px;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(900px 700px at 90% 10%, #FFE60055, transparent 60%),
+      radial-gradient(700px 600px at 5% 90%, #FF2D7E40, transparent 65%),
+      var(--bg);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 2; }
+
+  .hero .crumb {
+    display: flex; align-items: center; gap: 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--accent); font-weight: 600;
+    margin-bottom: 28px;
+  }
+  .hero .crumb .num {
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    color: white;
+    padding: 4px 12px;
+    font-weight: 700;
+    border-radius: 4px;
+  }
+  .hero .name-line {
+    display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+  .hero .name-line .name {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: white;
+    line-height: 1;
+  }
+  .hero .name-line .ko {
+    font-size: 18px; color: var(--gray);
+    font-weight: 400;
+  }
+  .hero .name-line .product {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--accent); font-weight: 600;
+    border: 1px solid currentColor;
+    padding: 5px 12px;
+    border-radius: 4px;
+  }
+
+  .hero h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(52px, 9vw, 132px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.94;
+    margin-bottom: 40px;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+  }
+  .hero h1 .stroke {
+    -webkit-text-stroke: 2px var(--white);
+    color: transparent;
+  }
+
+  .hero .lead {
+    font-size: clamp(17px, 1.5vw, 20px);
+    color: var(--gray);
+    max-width: 760px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero-meta .item .k {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 6px;
+  }
+  .hero-meta .item .v {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 600; color: white;
+  }
+  .hero-meta .item .v.grad {
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* PILLARS */
+  .pillars {
+    padding: 120px 0;
+    background: var(--bg-deep);
+  }
+  .pillars .head { max-width: 720px; margin-bottom: 64px; }
+  .pillars .eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .pillars h2 {
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .pillars h2 em {
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+  }
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .pillar {
+    background: var(--bg-deep);
+    padding: 48px 36px;
+  }
+  .pillar .k {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 48px; font-weight: 700;
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1; letter-spacing: -0.03em;
+    margin-bottom: 28px;
+  }
+  .pillar .t {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    color: white;
+  }
+  .pillar .d { color: var(--gray); font-size: 15px; line-height: 1.65; }
+  @media (max-width: 880px) {
+    .pillar-grid { grid-template-columns: 1fr; }
+  }
+
+  /* STATS */
+  .stats {
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    position: relative; overflow: hidden;
+  }
+  .stats::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(255,230,0,0.2), transparent 50%);
+    pointer-events: none;
+  }
+  .stats-inner { position: relative; }
+  .stats .eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.85); font-weight: 700;
+    margin-bottom: 56px;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+  .stat .v {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .stat .k {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+  @media (max-width: 880px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+
+  /* MEET US AT BOOTH */
+  .meetus {
+    padding: 120px 0;
+    background: var(--bg);
+  }
+  .meetus .container {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .meetus .left .eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .meetus h2 {
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .meetus h2 em {
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+  }
+  .meetus p {
+    color: var(--gray); font-size: 16px; line-height: 1.7;
+    margin-bottom: 36px;
+  }
+  .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 16px 28px;
+    font-weight: 600; font-size: 14px;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    color: white;
+  }
+  .btn-secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .btn:hover { transform: translateY(-2px); }
+
+  .booth-card-big {
+    background: linear-gradient(140deg, var(--c1) 0%, var(--c2) 100%);
+    padding: 60px 48px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 40px 80px -30px #FFE60066;
+  }
+  .booth-card-big::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(255,230,0,0.2), transparent 50%);
+  }
+  .booth-card-big .hall {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.85); font-weight: 600;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .booth-card-big .num {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(96px, 14vw, 168px);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    color: white;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .booth-card-big .meta {
+    color: white;
+    font-size: 15px;
+    line-height: 1.6;
+    position: relative;
+  }
+  .booth-card-big .meta b { font-weight: 700; display: block; margin-bottom: 4px; }
+  @media (max-width: 880px) {
+    .meetus .container { grid-template-columns: 1fr; }
+  }
+
+  /* ─── TOUR NAV (prev / dots / next + next-up card) ─── */
+  .tour-nav {
+    padding: 100px 0 120px;
+    background: var(--bg-deep);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .tour-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    flex-wrap: wrap;
+  }
+  .pager-link {
+    display: flex; flex-direction: column; gap: 4px;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--gray);
+    transition: color 0.2s;
+  }
+  .pager-link:hover { color: white; }
+  .pager-link .dir {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700;
+  }
+  .pager-link .who {
+    font-size: 16px; font-weight: 700; color: white;
+  }
+  .pager-link.prev { text-align: left; }
+  .pager-link.next { text-align: right; }
+
+  .dots {
+    display: flex; gap: 8px; align-items: center; justify-content: center;
+    flex: 1; max-width: 600px;
+  }
+  .dot {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.2s, border 0.2s;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 12px;
+    color: var(--gray);
+  }
+  .dot:hover { background: rgba(255,255,255,0.08); color: white; }
+  .dot.active {
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    border-color: transparent;
+    color: white;
+  }
+  .dot .dot-name { display: none; }
+  @media (min-width: 760px) { .dot .dot-name { display: inline; } }
+
+  .next-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 40px;
+    align-items: center;
+    padding: 60px 56px;
+    background: linear-gradient(135deg, var(--nc1) 0%, var(--nc2) 100%);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .next-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 40px 80px -30px #00E5FF66;
+  }
+  .next-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 90% 20%, rgba(255,255,255,0.15), transparent 50%);
+    pointer-events: none;
+  }
+  .next-card > * { position: relative; z-index: 1; }
+  .next-card .big-num {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(64px, 9vw, 120px);
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+  }
+  .next-card .info .label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.8); font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .next-card .info h3 {
+    font-size: clamp(26px, 3vw, 42px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: white;
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+  .next-card .info .teaser {
+    color: rgba(255,255,255,0.9);
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 500px;
+  }
+  .next-card .go {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 14px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: white;
+    display: flex; align-items: center; gap: 12px;
+    transition: gap 0.2s;
+  }
+  .next-card:hover .go { gap: 20px; }
+  @media (max-width: 880px) {
+    .next-card { grid-template-columns: 1fr; gap: 20px; padding: 40px 32px; }
+    .next-card .go { justify-self: end; }
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 80px 0 50px;
+    background: var(--bg);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .partners-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--yellow); font-weight: 700;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .partners {
+    display: flex; justify-content: center; align-items: center;
+    gap: 24px; flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+  .partners .p {
+    font-size: clamp(18px, 2.2vw, 30px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: white;
+  }
+  .partners .x {
+    font-size: clamp(18px, 2.2vw, 26px);
+    font-weight: 300;
+    color: var(--pink);
+  }
+  .footer-bar {
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    color: var(--gray-dark);
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back" href="index.html">
+    <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M5 1L1 5L5 9M1 5H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+    All 5 startups
+  </a>
+  <div class="center">
+    <a class="mini" href="aeac.html" title="01 · AEAC Bio"></a><a class="mini" href="msp.html" title="02 · MSP"></a><a class="mini" href="rina.html" title="03 · Rina Solution"></a><a class="mini active" href="sco.html" title="04 · SCO Labs"></a><a class="mini" href="greencity.html" title="05 · Green City Solution"></a>
+  </div>
+  <div class="booth">HALL 7.1 · 1H28</div>
+</div>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="crumb">
+      <span class="num">04</span>
+      <span>EDTECH · SAAS</span>
+    </div>
+    <div class="name-line">
+      <div class="name">SCO Labs</div>
+      <div class="ko">스코랩스</div>
+      <div class="product">K-Study OS</div>
+    </div>
+    <h1>
+      Self-Directed<br>
+      <span class="grad">Learning</span><br>
+      <span class="stroke">Operating System.</span>
+    </h1>
+    <p class="lead">Validated with 5,475 students across 38 B2B centers in Korea. A self-directed learning OS that blends Korean discipline with European autonomy — entering the EU exam-prep market (Bac · Abitur · Maturità).</p>
+
+    <div class="hero-meta">
+      <div class="item"><div class="k">Find us at</div><div class="v grad">Hall 7.1 · 1H28</div></div>
+      <div class="item"><div class="k">Dates</div><div class="v">Jun 17 – 20, 2026</div></div>
+      <div class="item"><div class="k">Venue</div><div class="v">Porte de Versailles</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pillars">
+  <div class="container">
+    <div class="head">
+      <div class="eyebrow">WHAT WE DO</div>
+      <h2>Three things,<br><em>done well.</em></h2>
+    </div>
+    <div class="pillar-grid">
+      
+      <div class="pillar">
+        <div class="k">01</div>
+        <div class="t">1:100+ Management</div>
+        <div class="d">One manager runs 100+ students at the quality of 1:1 coaching. Premium tutor outcomes at mass-market pricing.</div>
+      </div>
+      <div class="pillar">
+        <div class="k">02</div>
+        <div class="t">Behavior-pattern AI</div>
+        <div class="d">Reads behavior patterns, not faces. GDPR-by-design, DPIA complete, ISO27001/SOC2 target Q4 2026.</div>
+      </div>
+      <div class="pillar">
+        <div class="k">03</div>
+        <div class="t">CareTalk + 3-way chat</div>
+        <div class="d">Student, parent, and manager share one chat thread. The process becomes visible, not just the result.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="container stats-inner">
+    <div class="eyebrow">BY THE NUMBERS</div>
+    <div class="stats-grid">
+      
+      <div class="stat">
+        <div class="v">5,475</div>
+        <div class="k">Students managed</div>
+      </div>
+      <div class="stat">
+        <div class="v">38</div>
+        <div class="k">B2B partner centers</div>
+      </div>
+      <div class="stat">
+        <div class="v">+26 %</div>
+        <div class="k">Daily study time</div>
+      </div>
+      <div class="stat">
+        <div class="v">80 %</div>
+        <div class="k">12-month renewal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="meetus">
+  <div class="container">
+    <div class="left">
+      <div class="eyebrow">MEET US AT THE BOOTH</div>
+      <h2>Come see SCO Labs<br><em>at VivaTech.</em></h2>
+      <p>
+        SCO Labs is at the KOREATECH Korea Pavilion, <b>Hall 7.1 · Booth 1H28</b>, for all four days.
+        Live product demos, 1:1 business meetings, and partnership conversations all welcome.
+        Book a slot through the official VivaTech app, or just stop by.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://www.s-co.kr" target="_blank" rel="noopener">Visit website →</a>
+        <a class="btn btn-secondary" href="mailto:ceo.scolabs@gmail.com">Email us →</a>
+        <a class="btn btn-secondary" href="index.html">← All startups</a>
+      </div>
+    </div>
+    <div class="booth-card-big">
+      <div class="hall">HALL 7.1</div>
+      <div class="num">1H28</div>
+      <div class="meta">
+        <b>SCO Labs</b>
+        KOREATECH × VivaTech 2026<br>
+        June 17 — 20 · Paris
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOUR NAVIGATION — prev / dots / next, then big next-up card -->
+<section class="tour-nav">
+  <div class="container">
+
+    <div class="tour-top">
+      <a class="pager-link prev" href="rina.html">
+        <span class="dir">← Previous</span>
+        <span class="who">03 · Rina Solution</span>
+      </a>
+
+      <div class="dots">
+        <a class="dot" href="aeac.html" title="01 · AEAC Bio"><span>01</span><span class="dot-name">AEAC Bio</span></a><a class="dot" href="msp.html" title="02 · MSP"><span>02</span><span class="dot-name">MSP</span></a><a class="dot" href="rina.html" title="03 · Rina Solution"><span>03</span><span class="dot-name">Rina Solution</span></a><a class="dot active" href="sco.html" title="04 · SCO Labs"><span>04</span><span class="dot-name">SCO Labs</span></a><a class="dot" href="greencity.html" title="05 · Green City Solution"><span>05</span><span class="dot-name">Green City Solution</span></a>
+      </div>
+
+      <a class="pager-link next" href="greencity.html">
+        <span class="dir">Next →</span>
+        <span class="who">05 · Green City Solution</span>
+      </a>
+    </div>
+
+    <a class="next-card" href="greencity.html">
+      <div class="big-num">05 →</div>
+      <div class="info">
+        <div class="label">UP NEXT · GREENTECH · WATER</div>
+        <h3>Green City Solution</h3>
+        <p class="teaser">Real-time smart water analytics with a circular CO₂ adsorbent.</p>
+      </div>
+      <div class="go">
+        Continue
+        <svg width="28" height="14" viewBox="0 0 28 14" fill="none">
+          <path d="M21 1L27 7L21 13M1 7H27" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+        </svg>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="partners-label">PRESENTED BY</div>
+    <div class="partners">
+      <span class="p">KOREATECH</span>
+      <span class="x">×</span>
+      <span class="p">GOIS</span>
+      <span class="x">×</span>
+      <span class="p">Creative Valley</span>
+    </div>
+    <div class="footer-bar">
+      <div>© 2026 KOREATECH × GOIS × Creative Valley</div>
+      <div>VivaTech 2026 · Hall 7.1 · Booth 1H28</div>
+      <div>connect@gois.kr</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
