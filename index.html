@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOIS — Glocal Open Innovation Studio</title>
+<meta property="og:title" content="GOIS — Glocal Open Innovation Studio">
+<meta property="og:description" content="Where local roots grow global. Your innovation connected to the world.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gois.kr">
+<meta property="og:image" content="https://gois.kr/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GOIS — Glocal Open Innovation Studio">
+<meta name="twitter:description" content="Where local roots grow global. Your innovation connected to the world.">
+<meta name="twitter:image" content="https://gois.kr/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' stroke='%231D9E75' stroke-width='2' fill='none' stroke-dasharray='61.3 20.4' transform='rotate(-58 16 16)'/><circle cx='16' cy='16' r='3' fill='%231D9E75'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── BRAND TOKENS (from GOIS Brand Identity Guide 2026) ── */
+:root {
+  --g-primary:  #1D9E75;
+  --g-dark:     #0F6E56;
+  --g-black:    #0A130D;
+  --g-charcoal: #1A1A1A;
+  --g-gray:     #888888;
+  --g-lgray:    #BBBBBB;
+  --g-offwhite: #F5F5F3;
+  --g-white:    #FFFFFF;
+  --g-line:     #E2E8E4;
+  --g-card-bg:  #0F1F16;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--g-offwhite);
+  color: var(--g-charcoal);
+  overflow-x: hidden;
+}
+
+
+/* ── LANGUAGE TOGGLE ── */
+.lang-toggle {
+  display: flex; align-items: center; gap: 0;
+  border: 1px solid rgba(29,158,117,0.3);
+  overflow: hidden;
+  margin-right: 1rem;
+}
+.lang-btn {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.65rem; font-weight: 400;
+  letter-spacing: 0.15em;
+  padding: 0.38rem 0.75rem;
+  background: transparent; color: rgba(255,255,255,0.4);
+  cursor: pointer; border: none;
+  transition: background 0.2s, color 0.2s;
+}
+.lang-btn.active { background: var(--g-primary); color: var(--g-black); }
+.lang-btn:hover:not(.active) { color: var(--g-primary); }
+
+/* Bilingual system */
+[data-en] { display: none !important; }
+
+/* EN mode overrides — ultra-high specificity via JS class */
+html.lang-en [data-ko] { display: none !important; opacity: 0 !important; pointer-events: none !important; }
+html.lang-en [data-en] { display: revert !important; opacity: 1 !important; pointer-events: auto !important; }
+
+html.lang-en h1[data-en],
+html.lang-en h2[data-en],
+html.lang-en p[data-en],
+html.lang-en div[data-en] { display: block !important; }
+
+html.lang-en li[data-en] { display: list-item !important; }
+html.lang-en span[data-en] { display: inline !important; }
+html.lang-en a[data-en] { display: inline-block !important; }
+
+/* Ensure reveal animation also applies to EN elements in EN mode */
+html.lang-en [data-en].reveal { opacity: 0; }
+html.lang-en [data-en].reveal.visible { opacity: 1 !important; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--g-black); }
+::-webkit-scrollbar-thumb { background: var(--g-primary); }
+
+/* ── TYPE SCALE ── */
+.t-eyebrow {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.68rem; font-weight: 400;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--g-primary);
+}
+.t-display {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 100; line-height: 1.05;
+}
+.t-heading {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300; line-height: 1.2;
+}
+.t-body { font-size: 0.9rem; line-height: 1.8; color: var(--g-gray); }
+.t-tagline {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300; font-style: italic;
+  color: var(--g-primary); letter-spacing: 0.04em;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%;
+  background: rgba(10,19,13,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(29,158,117,0.15);
+  transition: height 0.3s;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 0.85rem;
+  text-decoration: none;
+}
+/* SVG symbol inline */
+.nav-symbol svg { width: 28px; height: 28px; }
+.nav-wordmark {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.3rem; font-weight: 400;
+  color: var(--g-white); letter-spacing: 0.25em;
+}
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.72rem; font-weight: 300;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--g-primary); }
+.nav-cta {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.7rem; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--g-black); background: var(--g-primary);
+  padding: 0.5rem 1.4rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--g-dark); color: var(--g-white); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  background: var(--g-black);
+  display: flex; align-items: center;
+  padding: 100px 6% 80px;
+  position: relative; overflow: hidden;
+}
+/* Brand symbol arc — CSS drawn */
+.hero-arc {
+  position: absolute; right: 4%; top: 50%; transform: translateY(-50%);
+  width: min(55vw, 560px); height: min(55vw, 560px);
+  pointer-events: none;
+}
+.hero-arc-outer {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 1px solid rgba(29,158,117,0.25);
+}
+.hero-arc-mid {
+  position: absolute; inset: 12%; border-radius: 50%;
+  border: 1px solid rgba(29,158,117,0.12);
+  animation: rotate 40s linear infinite;
+}
+.hero-arc-inner {
+  position: absolute; inset: 26%; border-radius: 50%;
+  border: 1px solid rgba(29,158,117,0.08);
+  animation: rotate 25s linear infinite reverse;
+}
+/* Center node dot */
+.hero-arc::after {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--g-primary);
+  box-shadow: 0 0 24px rgba(29,158,117,0.6);
+}
+/* Open gap arc — the 270° brand symbol on the left */
+.hero-arc-line {
+  position: absolute; top: 50%; right: calc(4% + min(55vw,560px) * 0.5 - 12px);
+  transform: translateY(-50%);
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid var(--g-primary);
+  border-right-color: transparent;
+  box-shadow: 0 0 16px rgba(29,158,117,0.4);
+}
+
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Grain overlay */
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1;
+}
+/* Top green line */
+#hero::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--g-primary); z-index: 2;
+}
+
+.hero-content { position: relative; z-index: 3; max-width: 680px; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--g-primary);
+}
+
+h1.hero-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 100;
+  color: var(--g-white);
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.8rem;
+  opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+}
+h1.hero-title .accent { color: var(--g-primary); }
+
+.hero-tagline {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-weight: 300; color: rgba(255,255,255,0.55);
+  line-height: 1.8; max-width: 520px;
+  margin-bottom: 0.7rem;
+  opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+}
+.hero-tagline-en {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.88rem; font-weight: 300; font-style: italic;
+  color: rgba(29,158,117,0.65); letter-spacing: 0.04em;
+  margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 0.9s 0.62s forwards;
+}
+
+.hero-actions {
+  display: flex; align-items: center; gap: 1.5rem;
+  opacity: 0; animation: fadeUp 0.9s 0.75s forwards;
+}
+.btn-primary {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.72rem; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  background: var(--g-primary); color: var(--g-black);
+  padding: 0.9rem 2rem; text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--g-dark); color: var(--g-white); transform: translateY(-2px); }
+.btn-ghost {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.72rem; font-weight: 300;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: var(--g-primary); border-color: var(--g-primary); }
+
+/* Hero stats */
+.hero-stats {
+  display: flex; gap: 3rem; z-index: 3;
+  margin-top: 3.5rem; flex-wrap: wrap;
+  opacity: 0; animation: fadeIn 1s 1.2s forwards;
+}
+.hero-stat-n {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.8rem; font-weight: 100; color: var(--g-primary);
+  line-height: 1;
+}
+.hero-stat-l {
+  font-size: 0.68rem; color: rgba(255,255,255,0.3);
+  letter-spacing: 0.1em; margin-top: 0.3rem;
+}
+.hero-stats-divider {
+  width: 1px; height: 40px; align-self: center;
+  background: rgba(29,158,117,0.2);
+}
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+/* ── SECTION BASE ── */
+section { padding: 110px 6%; }
+
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── ABOUT ── */
+#about {
+  background: var(--g-offwhite);
+  display: grid; grid-template-columns: 1fr 1.15fr; gap: 8%; align-items: center;
+}
+.about-symbol {
+  position: relative; aspect-ratio: 1; max-width: 420px;
+}
+/* Draw the brand symbol large */
+.about-symbol-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid;
+}
+.about-symbol-ring:nth-child(1) { inset: 0; border-color: rgba(29,158,117,0.2); }
+.about-symbol-ring:nth-child(2) { inset: 14%; border-color: rgba(29,158,117,0.12); animation: rotate 35s linear infinite; }
+.about-symbol-ring:nth-child(3) { inset: 28%; border-color: rgba(29,158,117,0.08); animation: rotate 22s linear infinite reverse; }
+.about-symbol-center {
+  position: absolute; inset: 38%; border-radius: 50%;
+  background: var(--g-black);
+  display: flex; align-items: center; justify-content: center;
+}
+.about-symbol-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--g-primary);
+  box-shadow: 0 0 20px rgba(29,158,117,0.7);
+}
+/* Orbit nodes */
+.about-orbit {
+  position: absolute; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--g-white);
+  border: 1px solid var(--g-line);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 16px rgba(10,19,13,0.08);
+}
+.about-orbit-t { top: 3%; left: 50%; transform: translateX(-50%); }
+.about-orbit-r { right: 3%; top: 50%; transform: translateY(-50%); }
+.about-orbit-b { bottom: 3%; left: 50%; transform: translateX(-50%); }
+.about-orbit-l { left: 3%; top: 50%; transform: translateY(-50%); }
+
+.about-cards {
+  margin-top: 2rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.about-card {
+  padding: 1.5rem 1.4rem 1.4rem;
+  background: var(--g-white);
+  border-top: 2px solid var(--g-primary);
+  box-shadow: 0 2px 16px rgba(10,19,13,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.about-card:nth-child(2) { border-top-color: var(--g-dark); }
+.about-card:nth-child(3) { border-top-color: #2A6A50; }
+.about-card:nth-child(4) { border-top-color: #1A5040; }
+.about-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(10,19,13,0.1); }
+.about-card-role {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.62rem; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--g-primary); margin-bottom: 0.7rem;
+}
+.about-card:nth-child(2) .about-card-role { color: var(--g-dark); }
+.about-card:nth-child(3) .about-card-role { color: #2A6A50; }
+.about-card:nth-child(4) .about-card-role { color: #1A5040; }
+.about-card-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.65rem; }
+.about-card-icon { font-size: 1.3rem; }
+.about-card-title { font-size: 0.95rem; font-weight: 700; color: var(--g-charcoal); }
+.about-card-body { font-size: 0.82rem; color: var(--g-gray); line-height: 1.7; }
+
+@media (max-width: 640px) {
+  .about-cards { grid-template-columns: 1fr; }
+}
+
+/* ── PHILOSOPHY ── */
+/* philosophy section removed */
+
+/* ── SERVICES ── */
+#services { background: var(--g-white); }
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
+.svc-card {
+  border: 1px solid var(--g-line); padding: 2.2rem 1.8rem;
+  position: relative; overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.svc-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: var(--g-primary); transform: scaleX(0); transform-origin:left;
+  transition: transform 0.4s;
+}
+.svc-card:nth-child(2)::before { background: var(--g-dark); }
+.svc-card:nth-child(3)::before { background: #2A6A50; }
+.svc-card:hover::before { transform: scaleX(1); }
+.svc-card:hover { box-shadow: 0 8px 36px rgba(10,19,13,0.08); transform: translateY(-4px); }
+.svc-num {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2.8rem; font-weight: 100; color: var(--g-line);
+  line-height: 1; margin-bottom: 1.4rem;
+}
+.svc-title { font-size: 0.95rem; font-weight: 700; line-height: 1.4; margin-bottom: 1rem; }
+.svc-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.svc-list li {
+  font-size: 0.83rem; color: var(--g-gray); line-height: 1.6;
+  padding-left: 1rem; position: relative;
+}
+.svc-list li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--g-primary); font-size: 0.65rem; top: 4px;
+}
+
+/* ── PROGRAM ── */
+#program { background: var(--g-offwhite); }
+.seasons { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.2rem; margin-top: 3rem; }
+.season-card {
+  background: var(--g-white);
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(10,19,13,0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.season-card:hover { transform: translateY(-5px); box-shadow: 0 10px 32px rgba(10,19,13,0.12); }
+.season-hd {
+  background: var(--g-black);
+  padding: 1.6rem 1.4rem 1.4rem;
+}
+.season-card:nth-child(2) .season-hd { background: var(--g-dark); }
+.season-card:nth-child(3) .season-hd { background: #2A6A50; }
+.season-card:nth-child(4) .season-hd { background: #1A5040; }
+.season-flag { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.season-month {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2.2rem; font-weight: 100; color: var(--g-white);
+  line-height: 1.1;
+}
+.season-city { font-size: 0.72rem; color: rgba(255,255,255,0.55); margin-top: 0.25rem; letter-spacing: 0.06em; }
+.season-bd { padding: 1.4rem; }
+.season-event {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.7rem; font-weight: 400; color: var(--g-primary);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+.season-card:nth-child(2) .season-event { color: var(--g-dark); }
+.season-card:nth-child(3) .season-event { color: #2A6A50; }
+.season-card:nth-child(4) .season-event { color: #1A5040; }
+.season-desc { font-size: 0.82rem; color: var(--g-gray); line-height: 1.7; margin-bottom: 0.8rem; }
+.season-partner { font-size: 0.72rem; color: var(--g-lgray); border-top: 1px solid var(--g-line); padding-top: 0.7rem; }
+
+/* ── PROCESS ── */
+#process { background: var(--g-black); position: relative; overflow: hidden; }
+#process::before {
+  content:''; position:absolute; width:500px; height:500px;
+  background: radial-gradient(circle, rgba(29,158,117,0.05) 0%, transparent 65%);
+  top: -100px; left: -100px; pointer-events:none;
+}
+.process-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: rgba(255,255,255,0.05);
+  margin-top: 3rem; position: relative; z-index: 1;
+}
+.process-step {
+  background: var(--g-card-bg);
+  padding: 1.8rem 1.6rem;
+  border-top: 2px solid transparent;
+  transition: background 0.25s, transform 0.2s;
+  position: relative;
+}
+.process-step:nth-child(1) { border-top-color: var(--g-primary); }
+.process-step:nth-child(2) { border-top-color: var(--g-primary); }
+.process-step:nth-child(3) { border-top-color: var(--g-primary); }
+.process-step:nth-child(4) { border-top-color: var(--g-dark); }
+.process-step:nth-child(5) { border-top-color: var(--g-dark); }
+.process-step:nth-child(6) { border-top-color: var(--g-dark); }
+.process-step:nth-child(7) { border-top-color: #2A6A50; }
+.process-step:nth-child(8) { border-top-color: #2A6A50; }
+.process-step:nth-child(9) { border-top-color: #2A6A50; }
+.process-step:hover { background: rgba(29,158,117,0.06); transform: translateY(-3px); }
+.process-num {
+  position: absolute; top: 1.2rem; right: 1.4rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2rem; font-weight: 100; color: rgba(29,158,117,0.1);
+}
+.process-icon { font-size: 1.4rem; margin-bottom: 0.7rem; }
+.process-title { font-size: 0.9rem; font-weight: 700; color: var(--g-white); margin-bottom: 0.6rem; line-height: 1.4; }
+.process-body { font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.7; }
+.process-phase { font-size: 0.65rem; color: var(--g-primary); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.8rem; font-family: 'Josefin Sans', sans-serif; }
+.process-footer {
+  margin-top: 2.5rem; padding: 1.8rem 2rem;
+  background: rgba(29,158,117,0.07);
+  border: 1px solid rgba(29,158,117,0.2);
+  display: flex; align-items: flex-start; gap: 1.5rem;
+  position: relative; z-index: 1;
+}
+.process-footer-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+.process-footer-text { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+.process-footer-text strong { color: var(--g-primary); }
+
+/* ── ECOSYSTEM ── */
+#ecosystem { background: var(--g-black); position: relative; overflow: hidden; }
+#ecosystem::after {
+  content:''; position:absolute; width:400px; height:400px;
+  background: radial-gradient(circle, rgba(29,158,117,0.04) 0%, transparent 65%);
+  bottom: 0; right: 5%; pointer-events:none;
+}
+.partners-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1.2rem; margin-top: 3rem; position:relative; z-index:1;
+}
+.partner-card {
+  background: var(--g-card-bg);
+  border: 1px solid rgba(29,158,117,0.12);
+  border-left: 2px solid var(--g-primary);
+  padding: 1.3rem 1.4rem;
+  transition: background 0.25s, transform 0.2s;
+}
+.partner-card:nth-child(4n+2) { border-left-color: var(--g-dark); }
+.partner-card:nth-child(4n+3) { border-left-color: #2A6A50; }
+.partner-card:nth-child(4n+4) { border-left-color: #1A5040; }
+.partner-card:hover { background: rgba(29,158,117,0.06); transform: translateX(3px); }
+.partner-head { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.65rem; }
+.partner-icon { font-size: 1.1rem; margin-top: 2px; }
+.partner-name { font-size: 0.88rem; font-weight: 700; color: var(--g-white); line-height: 1.3; }
+.partner-city { font-size: 0.7rem; color: var(--g-primary); margin-top: 0.15rem; letter-spacing: 0.04em; }
+.partner-role { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.65; }
+.partner-tag {
+  display: inline-block; margin-top: 0.6rem;
+  background: rgba(29,158,117,0.15); border: 1px solid rgba(29,158,117,0.25);
+  padding: 0.15rem 0.6rem; font-size: 0.68rem; color: rgba(29,158,117,0.8);
+  font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.05em;
+}
+.partner-cat-label {
+  font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.75rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--g-primary);
+  margin: 3rem 0 1rem; padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(29,158,117,0.15); position: relative; z-index: 1;
+}
+.partner-cat-label:first-of-type { margin-top: 0; }
+/* Stats strip */
+.eco-stats {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: rgba(255,255,255,0.05);
+  margin-top: 3rem; position: relative; z-index: 1;
+}
+.eco-stat {
+  background: rgba(15,31,22,0.8);
+  padding: 1.6rem; text-align: center;
+}
+.eco-stat-n {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2.4rem; font-weight: 100; color: var(--g-primary);
+}
+.eco-stat-l { font-size: 0.72rem; color: rgba(255,255,255,0.3); margin-top: 0.3rem; letter-spacing: 0.08em; }
+
+/* ── TEAM ── */
+#team { background: var(--g-black); }
+.team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-top: 3rem; }
+.team-card {
+  background: var(--g-card-bg);
+  border: 1px solid rgba(29,158,117,0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.team-card:hover { transform: translateY(-5px); box-shadow: 0 10px 32px rgba(0,0,0,0.3); }
+.team-photo {
+  aspect-ratio: 1; overflow: hidden;
+  background: var(--g-black);
+}
+.team-photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: grayscale(20%);
+  transition: filter 0.3s, transform 0.4s;
+}
+.team-card:hover .team-photo img { filter: grayscale(0%); transform: scale(1.04); }
+.team-info { padding: 1.3rem 1.4rem; }
+.team-name { font-size: 0.95rem; font-weight: 700; color: var(--g-white); margin-bottom: 0.2rem; }
+.team-role { font-size: 0.75rem; color: var(--g-primary); font-weight: 500; margin-bottom: 0.15rem; }
+.team-role-sub { font-size: 0.7rem; color: rgba(255,255,255,0.3); font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.03em; margin-bottom: 0.8rem; }
+.team-bio { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.7; border-top: 1px solid rgba(29,158,117,0.1); padding-top: 0.8rem; }
+
+/* ── CONTACT ── */
+#contact {
+  background: var(--g-black);
+  text-align: center; position: relative; overflow: hidden;
+  padding-top: 0; padding-bottom: 100px;
+}
+.contact-divider {
+  height: 1px; background: rgba(29,158,117,0.15);
+  max-width: 80%; margin: 0 auto 100px;
+}
+#contact::before {
+  content:''; position:absolute; width:700px; height:700px;
+  background: radial-gradient(circle, rgba(29,158,117,0.06) 0%, transparent 60%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  pointer-events:none;
+}
+.contact-inner { position: relative; z-index: 1; }
+.contact-symbol {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1.5px solid var(--g-primary);
+  border-right-color: transparent;
+  margin: 0 auto 2rem;
+  animation: rotate 8s linear infinite;
+}
+.contact-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 100; color: var(--g-white);
+  line-height: 1.2; margin-bottom: 1.2rem;
+}
+.contact-verse {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.88rem; font-weight: 300; font-style: italic;
+  color: rgba(29,158,117,0.5); margin-bottom: 3.5rem;
+}
+.contact-box {
+  display: inline-block;
+  border: 1px solid rgba(29,158,117,0.25);
+  padding: 2.5rem 4rem;
+  min-width: 440px;
+  position: relative;
+}
+.contact-box::before {
+  content: 'CONTACT';
+  position: absolute; top: -0.5rem; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.6rem; letter-spacing: 0.35em;
+  color: var(--g-primary); background: var(--g-black); padding: 0 1rem;
+}
+.contact-items { display: flex; flex-direction: column; gap: 1rem; }
+.contact-item {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.7rem; font-size: 0.9rem;
+}
+.contact-item-icon { font-size: 0.95rem; opacity: 0.6; }
+.contact-item a { color: rgba(29,158,117,0.85); text-decoration: none; transition: color 0.2s; }
+.contact-item a:hover { color: var(--g-primary); }
+.contact-item.loc span { color: rgba(255,255,255,0.3); font-size: 0.82rem; }
+.contact-rule { width: 30px; height: 1px; background: rgba(29,158,117,0.15); margin: 0.2rem auto; }
+
+/* ── FOOTER ── */
+footer {
+  background: #060D09;
+  padding: 1.8rem 6%;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(29,158,117,0.1);
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-sns { display: flex; align-items: center; gap: 1rem; }
+.footer-sns a {
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid rgba(29,158,117,0.25);
+  color: rgba(29,158,117,0.6);
+  text-decoration: none; font-size: 0.9rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.footer-sns a:hover { border-color: var(--g-primary); color: var(--g-primary); background: rgba(29,158,117,0.08); }
+.footer-logo { display: flex; align-items: center; gap: 0.6rem; }
+.footer-logo svg { width: 20px; height: 20px; }
+.footer-logo-text {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 400;
+  color: rgba(255,255,255,0.3); letter-spacing: 0.2em;
+}
+.footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.15); font-family: 'Josefin Sans', sans-serif; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1180px) {
+  .seasons { grid-template-columns: repeat(2,1fr); }
+  .partners-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 1024px) {
+  #about { grid-template-columns: 1fr; }
+  .about-symbol { display: none; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .process-grid { grid-template-columns: 1fr 1fr; }
+  .eco-stats { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 640px) {
+  section { padding: 80px 5%; }
+  nav { padding: 0 5%; }
+  .nav-links { display: none; }
+  .services-grid, .seasons, .partners-grid, .team-grid, .process-grid { grid-template-columns: 1fr; }
+  .contact-box { min-width: unset; padding: 2rem 1.5rem; width: 100%; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <!-- Brand Symbol SVG -->
+    <div class="nav-symbol">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="38" stroke="#1D9E75" stroke-width="9" stroke-linecap="round" stroke-dasharray="179 60" transform="rotate(-58 50 50)"/>
+        <circle cx="50" cy="50" r="7" fill="#1D9E75"/>
+      </svg>
+    </div>
+    <span class="nav-wordmark">GOIS</span>
+  </a>
+  <ul class="nav-links">
+    <li data-ko><a href="#about">소개</a></li>
+    <li data-ko><a href="#program">프로그램</a></li>
+    <li data-ko><a href="#process">프로세스</a></li>
+    <li data-ko><a href="#ecosystem">파트너</a></li>
+    <li data-ko><a href="#team">팀</a></li>
+    <li data-en><a href="#about">About</a></li>
+    <li data-en><a href="#program">Program</a></li>
+    <li data-en><a href="#process">Process</a></li>
+    <li data-en><a href="#ecosystem">Partners</a></li>
+    <li data-en><a href="#team">Team</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('ko')" id="btn-ko">KO</button>
+    <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+  </div>
+  <a href="mailto:connect@gois.kr" class="nav-cta" data-ko>문의하기</a>
+  <a href="mailto:connect@gois.kr" class="nav-cta" data-en>Contact</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <!-- Brand arc decoration -->
+  <div class="hero-arc">
+    <div class="hero-arc-outer"></div>
+    <div class="hero-arc-mid"></div>
+    <div class="hero-arc-inner"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      <span class="t-eyebrow">Glocal Open Innovation Studio · 2026</span>
+    </div>
+    <h1 class="hero-title" data-ko>
+      글로벌<br>
+      <span class="accent">오픈 이노베이션</span><br>
+      생태계를 연결합니다
+    </h1>
+    <h1 class="hero-title" data-en>
+      Connecting<br>
+      <span class="accent">Global Open</span><br>
+      Innovation Ecosystems
+    </h1>
+    <p class="hero-tagline" data-ko>
+      Where local roots grow global.<br>
+      Your innovation connected to the world.
+    </p>
+    <p class="hero-tagline" data-en>
+      Where local roots grow global.<br>
+      Your innovation connected to the world.
+    </p>
+
+    <div class="hero-actions">
+      <a href="https://gois.kr/season03/" target="_blank" class="btn-primary" data-ko>프로그램 보기</a>
+      <a href="#about" class="btn-ghost" data-ko>GOIS 알아보기 →</a>
+      <a href="https://gois.kr/season03/" target="_blank" class="btn-primary" data-en>View Program</a>
+      <a href="#about" class="btn-ghost" data-en>About GOIS →</a>
+    </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-n">6개</div>
+      <div class="hero-stat-l" data-ko>유럽 거점 도시</div>
+      <div class="hero-stat-l" data-en>European Hubs</div>
+    </div>
+    <div class="hero-stats-divider"></div>
+    <div>
+      <div class="hero-stat-n">3회</div>
+      <div class="hero-stat-l" data-ko>연간 프로그램</div>
+      <div class="hero-stat-l" data-en>Annual Programs</div>
+    </div>
+    <div class="hero-stats-divider"></div>
+    <div>
+      <div class="hero-stat-n">7+</div>
+      <div class="hero-stat-l" data-ko>시즌별 스타트업</div>
+      <div class="hero-stat-l" data-en>Startups / Season</div>
+    </div>
+    <div class="hero-stats-divider"></div>
+    <div>
+      <div class="hero-stat-n">20+</div>
+      <div class="hero-stat-l" data-ko>파트너 기관</div>
+      <div class="hero-stat-l" data-en>Partner Orgs</div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="about-symbol reveal">
+    <div class="about-symbol-ring"></div>
+    <div class="about-symbol-ring"></div>
+    <div class="about-symbol-ring"></div>
+    <div class="about-symbol-center"><div class="about-symbol-dot"></div></div>
+    <div class="about-orbit about-orbit-t">🌍</div>
+    <div class="about-orbit about-orbit-r">🌱</div>
+    <div class="about-orbit about-orbit-b">🧂</div>
+    <div class="about-orbit about-orbit-l">💡</div>
+  </div>
+
+  <div>
+    <p class="t-eyebrow reveal" data-ko>우리는 누구인가요</p>
+    <p class="t-eyebrow reveal" data-en>Who We Are</p>
+    <h2 class="t-heading reveal" data-ko style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin:0.6rem 0 0.9rem;">GOIS의 정체성</h2>
+    <h2 class="t-heading reveal" data-en style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin:0.6rem 0 0.9rem;">Our Identity</h2>
+    <p class="t-body reveal" data-ko style="max-width:540px;margin-bottom:1.5rem;">
+      GOIS는 한국의 혁신적인 스타트업과 유럽의 살아있는 생태계를 연결하는 전문 스튜디오입니다.
+      단순한 소개가 아닌, 씨앗이 뿌리내릴 때까지 함께 머무는 파트너입니다.
+    </p>
+    <p class="t-body reveal" data-en style="max-width:540px;margin-bottom:1.5rem;">
+      GOIS is a dedicated studio connecting Korea's most innovative startups with Europe's living ecosystems.
+      Where local roots grow global — we stay until your innovation is connected to the world.
+    </p>
+
+    <div class="about-cards">
+
+      <!-- WHO -->
+      <div class="about-card reveal">
+        <div class="about-card-role" data-ko>WHO — 정체성</div>
+        <div class="about-card-role" data-en>WHO — Identity</div>
+        <div class="about-card-head">
+          <span class="about-card-icon">🌍</span>
+          <span class="about-card-title" data-ko>글로컬 (Glocal)</span>
+          <span class="about-card-title" data-en>Glocal</span>
+        </div>
+        <p class="about-card-body" data-ko>
+          지역성과 글로벌성을 동시에 추구하는 오픈 이노베이션 전문 법인입니다.
+          서울에 뿌리를 두고, 유럽 생태계와 실질적으로 연결되는 다리를 만듭니다.
+        </p>
+        <p class="about-card-body" data-en>
+          An open innovation firm that pursues both local depth and global reach.
+          Rooted in Seoul, we build real bridges to European ecosystems.
+        </p>
+      </div>
+
+      <!-- WHY -->
+      <div class="about-card reveal">
+        <div class="about-card-role" data-ko>WHY — 미션</div>
+        <div class="about-card-role" data-en>WHY — Mission</div>
+        <div class="about-card-head">
+          <span class="about-card-icon">🌱</span>
+          <span class="about-card-title" data-ko>겨자씨 철학</span>
+          <span class="about-card-title" data-en>Mustard Seed Philosophy</span>
+        </div>
+        <p class="about-card-body" data-ko>
+          작은 씨앗 하나가 거대한 숲이 됩니다. 스타트업 한 팀의 도전이
+          글로벌 생태계를 바꾸는 출발점이 된다고 믿습니다.
+          우리는 그 가능성을 믿기에 이 일을 합니다.
+        </p>
+        <p class="about-card-body" data-en>
+          A tiny seed becomes a great forest. We believe one startup's challenge
+          is the starting point for transforming the global ecosystem.
+          That belief is why we do what we do.
+        </p>
+      </div>
+
+      <!-- HOW -->
+      <div class="about-card reveal">
+        <div class="about-card-role" data-ko>HOW — 방식 / 가치</div>
+        <div class="about-card-role" data-en>HOW — Value</div>
+        <div class="about-card-head">
+          <span class="about-card-icon">🧂</span>
+          <span class="about-card-title" data-ko>소금처럼 일하기</span>
+          <span class="about-card-title" data-en>Working Like Salt</span>
+        </div>
+        <p class="about-card-body" data-ko>
+          드러나지 않아도 본질을 살리는 소금처럼 일합니다.
+          파트너와 스타트업 사이에서 신뢰의 매개자로 존재하고,
+          모든 딜의 처음부터 끝까지 함께합니다. 섬기는 마음이 우리의 힘입니다.
+        </p>
+        <p class="about-card-body" data-en>
+          We work like salt — essential, but never overbearing.
+          We serve as a trusted mediator between partners and startups,
+          staying present from first contact to final deal. Service is our strength.
+        </p>
+      </div>
+
+      <!-- WHAT -->
+      <div class="about-card reveal">
+        <div class="about-card-role" data-ko>WHAT — 비전</div>
+        <div class="about-card-role" data-en>WHAT — Vision</div>
+        <div class="about-card-head">
+          <span class="about-card-icon">💡</span>
+          <span class="about-card-title" data-ko>빛처럼 만들기</span>
+          <span class="about-card-title" data-en>Building Like Light</span>
+        </div>
+        <p class="about-card-body" data-ko>
+          한국의 혁신 기술이 유럽에서 빛날 수 있도록 길을 엽니다.
+          지속 가능한 비즈니스 생태계를 함께 가꾸는 것,
+          그것이 GOIS가 만들어가는 미래입니다.
+        </p>
+        <p class="about-card-body" data-en>
+          We open paths for Korean innovation to shine across Europe.
+          Building a sustainable business ecosystem together —
+          that is the future GOIS is creating.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services">
+  <p class="t-eyebrow reveal" data-ko>What We Do</p>
+  <p class="t-eyebrow reveal" data-en>What We Do</p>
+  <h2 class="t-heading reveal" data-ko style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin:0.8rem 0 0.6rem;">GOIS가 함께하는 방식</h2>
+  <h2 class="t-heading reveal" data-en style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin:0.8rem 0 0.6rem;">How GOIS Works With You</h2>
+  <p class="t-body reveal" data-ko style="max-width:580px;">소개에서 끝나지 않습니다. 딜의 처음부터 끝까지, 씨앗이 뿌리내릴 때까지 함께합니다.</p>
+  <p class="t-body reveal" data-en style="max-width:580px;">We don't just make introductions. We stay with you from the first meeting to the final deal — until the seed takes root.</p>
+  <div class="services-grid">
+    <div class="svc-card reveal">
+      <div class="svc-num">01</div>
+      <div class="svc-title">BDS<br>(Business Development Service)</div>
+      <ul class="svc-list">
+        <li data-ko>유럽 현지 파트너 매칭 및 미팅 주선</li>
+        <li data-en>European partner matching & meeting arrangement</li>
+        <li data-ko>투자자 & 액셀러레이터 네트워크 연결</li>
+        <li data-en>Investor & accelerator network connection</li>
+        <li data-ko>현지 시장 조사 및 진출 전략 수립</li>
+        <li data-en>Local market research & entry strategy</li>
+        <li data-ko>협상 지원 및 딜 매니지먼트 (CC 원칙)</li>
+        <li data-en>Negotiation support & deal management (CC principle)</li>
+      </ul>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">02</div>
+      <div class="svc-title" data-ko>연간 3회<br>오픈 이노베이션 프로그램</div>
+      <div class="svc-title" data-en>Annual 3-Season<br>Open Innovation Program</div>
+      <ul class="svc-list">
+        <li data-ko>3월 바르셀로나 (4YFN · MWC)</li>
+        <li data-en>March — Barcelona (4YFN · MWC)</li>
+        <li data-ko>6월 파리·마드리드 (VivaTech · South Summit)</li>
+        <li data-en>June — Paris · Madrid (VivaTech · South Summit)</li>
+        <li data-ko>11월 마드리드·베를린 (Horizon Deep Tech Summit · Asia-Berlin Summit)</li>
+        <li data-en>November — Madrid · Berlin (Horizon Deep Tech Summit · Asia-Berlin Summit)</li>
+        <li data-ko>연중상시 빌바오 방문 프로그램</li>
+        <li data-en>Year-round Bilbao visit program</li>
+      </ul>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">03</div>
+      <div class="svc-title" data-ko>생태계 파트너십<br>& 컨설팅</div>
+      <div class="svc-title" data-en>Ecosystem Partnership<br>& Consulting</div>
+      <ul class="svc-list">
+        <li data-ko>유럽 파트너 네트워크 전략적 활용</li>
+        <li data-en>Strategic use of European partner network</li>
+        <li data-ko>정부 보조금 · 그랜트 프로그램 연계</li>
+        <li data-en>Government grant & subsidy program linkage</li>
+        <li data-ko>중장기 협업 구조 설계 (MOU·JV·투자)</li>
+        <li data-en>Long-term collaboration design (MOU·JV·Investment)</li>
+        <li data-ko>성과 기반 보수 구조 (Success Fee)</li>
+        <li data-en>Performance-based compensation (Success Fee)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROGRAM ═══ -->
+<section id="program">
+  <p class="t-eyebrow reveal" data-ko>Our Program</p>
+  <p class="t-eyebrow reveal" data-en>Our Program</p>
+  <h2 class="t-heading reveal" data-ko style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin:0.8rem 0 0.6rem;">연간 3회, 유럽의 혁신 현장과<br>직접 만납니다</h2>
+  <h2 class="t-heading reveal" data-en style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin:0.8rem 0 0.6rem;">3 Seasons a Year —<br>Meet Europe's Innovation Hubs Directly</h2>
+  <p class="t-body reveal" data-ko>유럽의 살아있는 혁신 현장과 직접 연결됩니다. 매 시즌, 엄선된 스타트업이 현지 생태계와 만납니다.</p>
+  <p class="t-body reveal" data-en>Directly connected to Europe's living innovation scenes. Each season, curated startups meet the local ecosystem.</p>
+  <div class="seasons">
+    <div class="season-card reveal">
+      <div class="season-hd">
+        <div class="season-flag">🇪🇸</div>
+        <div class="season-month" data-ko>3월</div>
+        <div class="season-month" data-en>March</div>
+        <div class="season-city" data-ko>바르셀로나, 스페인</div>
+        <div class="season-city" data-en>Barcelona, Spain</div>
+      </div>
+      <div class="season-bd">
+        <div class="season-event">4YFN · MWC Barcelona</div>
+        <p class="season-desc" data-ko>모바일·ICT 분야 세계 최대 행사와 연계, 글로벌 기업 및 투자자와의 접점을 만듭니다.</p>
+        <p class="season-desc" data-en>The world's largest mobile·ICT event. We create connections with global enterprises and investors.</p>
+        <div class="season-partner">Teamlabs · Barcelona Activa</div>
+      </div>
+    </div>
+    <div class="season-card reveal">
+      <div class="season-hd">
+        <div class="season-flag">🇫🇷 🇪🇸</div>
+        <div class="season-month" data-ko>6월</div>
+        <div class="season-month" data-en>June</div>
+        <div class="season-city" data-ko>파리 · 마드리드</div>
+        <div class="season-city" data-en>Paris · Madrid</div>
+      </div>
+      <div class="season-bd">
+        <div class="season-event">VivaTech <span style="opacity:.55;font-weight:300;" data-ko>— 파리</span><span style="opacity:.55;font-weight:300;" data-en>— Paris</span></div>
+        <p class="season-desc" data-ko>유럽 최대 스타트업 & 테크 행사. 글로벌 대기업과 스타트업이 만나는 혁신의 장입니다.</p>
+        <p class="season-desc" data-en>Europe's largest startup & tech event, where global corporations and startups converge.</p>
+        <div style="border-top:1px solid var(--g-line);margin-top:0.9rem;padding-top:0.9rem;">
+          <div class="season-event">South Summit <span style="opacity:.55;font-weight:300;" data-ko>— 마드리드</span><span style="opacity:.55;font-weight:300;" data-en>— Madrid</span></div>
+          <p class="season-desc" data-ko>스페인·남유럽 대표 스타트업·혁신 컨퍼런스. 글로벌 투자자와 기업이 한자리에 모입니다.</p>
+          <p class="season-desc" data-en>Spain and Southern Europe's leading startup & innovation conference, bringing together global investors and enterprises.</p>
+        </div>
+        <div class="season-partner">Station F · French Tech  ·  Futuro Perfecto</div>
+      </div>
+    </div>
+    <div class="season-card reveal">
+      <div class="season-hd">
+        <div class="season-flag">🇪🇸 🇱🇺 🇩🇪</div>
+        <div class="season-month" data-ko>11월</div>
+        <div class="season-month" data-en>November</div>
+        <div class="season-city" data-ko>마드리드 · 룩셈부르크 · 베를린</div>
+        <div class="season-city" data-en>Madrid · Luxembourg · Berlin</div>
+      </div>
+      <div class="season-bd">
+        <div class="season-event">Horizon Deep Tech Summit <span style="opacity:.55;font-weight:300;" data-ko>— 마드리드</span><span style="opacity:.55;font-weight:300;" data-en>— Madrid</span></div>
+        <p class="season-desc" data-ko>딥테크 스타트업을 위한 글로벌 투자유치 서밋. 200+ 연사, 300+ 투자자, 500+ 스타트업이 참여합니다. (2026.11.10–12)</p>
+        <p class="season-desc" data-en>Global fundraising summit for deep tech startups — 200+ speakers, 300+ investors, 500+ startups. (Nov 10–12, 2026)</p>
+        <div style="border-top:1px solid var(--g-line);margin-top:0.9rem;padding-top:0.9rem;">
+          <div class="season-event">Luxinnovation <span style="opacity:.55;font-weight:300;" data-ko>— 룩셈부르크</span><span style="opacity:.55;font-weight:300;" data-en>— Luxembourg</span></div>
+          <p class="season-desc" data-ko>룩셈부르크 정부 산하 혁신·투자유치 기관과의 매칭. R&D·투자 유치 프로그램에 연결합니다. (2026.11.23–24)</p>
+          <p class="season-desc" data-en>Matching with Luxembourg's government-backed innovation and investment agency, connecting to R&D and investment programs. (Nov 23–24, 2026)</p>
+        </div>
+        <div style="border-top:1px solid var(--g-line);margin-top:0.9rem;padding-top:0.9rem;">
+          <div class="season-event">Asia-Berlin Summit <span style="opacity:.55;font-weight:300;" data-ko>— 베를린</span><span style="opacity:.55;font-weight:300;" data-en>— Berlin</span></div>
+          <p class="season-desc" data-ko>아시아와 유럽 스타트업을 잇는 교류의 장. 독일·유럽 시장 진출 네트워크를 구축합니다. (2026.11.23–27)</p>
+          <p class="season-desc" data-en>A gathering connecting Asian and European startups, building networks for entry into the German and European market. (Nov 23–27, 2026)</p>
+        </div>
+        <div class="season-partner">Futuro Perfecto · Luxinnovation  ·  betahaus</div>
+      </div>
+    </div>
+    <div class="season-card reveal">
+      <div class="season-hd">
+        <div class="season-flag">🇪🇸</div>
+        <div class="season-month" data-ko style="font-size:1.5rem;line-height:1.2;">연중<br>상시</div>
+        <div class="season-month" data-en style="font-size:1.5rem;line-height:1.2;">Year<br>Round</div>
+        <div class="season-city" data-ko>빌바오, 스페인</div>
+        <div class="season-city" data-en>Bilbao, Spain</div>
+      </div>
+      <div class="season-bd">
+        <div class="season-event" data-ko>방문 프로그램</div>
+        <div class="season-event" data-en>Visit Program</div>
+        <p class="season-desc" data-ko>바스크 혁신 생태계 거점 방문. 파트너 미팅, PoC 논의, 소프트랜딩 지원을 연중 상시로 운영합니다.</p>
+        <p class="season-desc" data-en>Basque innovation hub visits. Partner meetings, PoC discussions, and soft-landing support available year-round.</p>
+        <div class="season-partner">BerriUp · BEAZ · BIND 4.0</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCESS ═══ -->
+<section id="process">
+  <p class="t-eyebrow reveal" data-ko>How We Work</p>
+  <p class="t-eyebrow reveal" data-en>How We Work</p>
+  <h2 class="t-heading reveal" data-ko style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--g-white);margin:0.8rem 0 0.6rem;">글로벌 오픈 이노베이션<br>9단계 프로세스</h2>
+  <h2 class="t-heading reveal" data-en style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--g-white);margin:0.8rem 0 0.6rem;">Global Open Innovation<br>9-Step Process</h2>
+  <p class="reveal" data-ko style="font-size:0.88rem;color:rgba(255,255,255,0.38);font-style:italic;max-width:640px;">이주열 교수의 검증된 방법론을 기반으로, GOIS는 체계적인 9단계 프로세스로 실질적인 성과를 만들어갑니다.</p>
+  <p class="reveal" data-en style="font-size:0.88rem;color:rgba(255,255,255,0.38);font-style:italic;max-width:640px;">GOIS delivers real results through a systematic 9-step process built on proven global open innovation methodology.</p>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="process-num">01</div>
+      <div class="process-icon">🌐</div>
+      <div class="process-title" data-ko>글로벌 파트너 Pool 구성</div>
+      <div class="process-title" data-en>Build Global Partner Pool</div>
+      <p class="process-body" data-ko>AC/VC, CVC, PoC 가능 기업을 발굴·확보합니다. 지역별 파트너 DB 구축 및 MOU 체결.</p>
+      <p class="process-body" data-en>Identify and secure AC/VC, CVC, and PoC-ready partners. Build a regional database and conclude MOUs.</p>
+      <div class="process-phase" data-ko>국내 준비 단계</div>
+      <div class="process-phase" data-en>Preparation Phase</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">02</div>
+      <div class="process-icon">📢</div>
+      <div class="process-title" data-ko>스타트업 모집 · 홍보</div>
+      <div class="process-title" data-en>Startup Recruitment</div>
+      <p class="process-body" data-ko>SVF 네트워크, 창업중심대학, AC·VC 연계를 통해 유럽 진출 희망 스타트업을 발굴합니다.</p>
+      <p class="process-body" data-en>Discover startups seeking European expansion through SVF network, universities, and AC·VC connections.</p>
+      <div class="process-phase" data-ko>국내 준비 단계</div>
+      <div class="process-phase" data-en>Preparation Phase</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">03</div>
+      <div class="process-icon">📋</div>
+      <div class="process-title" data-ko>IR 자료 접수</div>
+      <div class="process-title" data-en>IR Material Collection</div>
+      <p class="process-body" data-ko>한·영문 IR 자료와 3분 영문 Pitching 영상을 수집합니다. 템플릿과 코칭을 제공합니다.</p>
+      <p class="process-body" data-en>Collect Korean/English IR materials and 3-minute English pitching videos. Templates and coaching provided.</p>
+      <div class="process-phase" data-ko>국내 준비 단계</div>
+      <div class="process-phase" data-en>Preparation Phase</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">04</div>
+      <div class="process-icon">🔍</div>
+      <div class="process-title" data-ko>국내 1차 스크리닝</div>
+      <div class="process-title" data-en>Domestic 1st Screening</div>
+      <p class="process-body" data-ko>서류 검토 + IR·Pitching 코칭을 진행합니다. 탈락이 아닌 성장 기회로 접근합니다.</p>
+      <p class="process-body" data-en>Document review + IR·Pitching coaching. We approach screening as a growth opportunity, not elimination.</p>
+      <div class="process-phase" data-ko>선발 단계</div>
+      <div class="process-phase" data-en>Selection Phase</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">05</div>
+      <div class="process-icon">📨</div>
+      <div class="process-title" data-ko>글로벌 파트너에 자료 전달</div>
+      <div class="process-title" data-en>Deliver Materials to Global Partners</div>
+      <p class="process-body" data-ko>NDA 체결 후 통과 기업의 영문 IR 패키지를 글로벌 파트너에게 전달합니다.</p>
+      <p class="process-body" data-en>After NDA signing, deliver English IR packages of qualified companies to global partners.</p>
+      <div class="process-phase" data-ko>선발 단계</div>
+      <div class="process-phase" data-en>Selection Phase</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">06</div>
+      <div class="process-icon">🌍</div>
+      <div class="process-title" data-ko>글로벌 파트너 스크리닝</div>
+      <div class="process-title" data-en>Global Partner Screening</div>
+      <p class="process-body" data-ko>현지 파트너의 5개 기준(시장적합성·팀역량·기술차별성·성장가능성·협력의지)으로 평가합니다.</p>
+      <p class="process-body" data-en>Local partners evaluate using 5 criteria: market fit, team capability, tech differentiation, growth potential, collaboration intent.</p>
+      <div class="process-phase" data-ko>선발 단계</div>
+      <div class="process-phase" data-en>Selection Phase</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">07</div>
+      <div class="process-icon">🎤</div>
+      <div class="process-title" data-ko>선발 확정 + 현지 Pitching</div>
+      <div class="process-title" data-en>Finalize Selection + On-site Pitching</div>
+      <p class="process-body" data-ko>최종 선발 기업 확정 후 현지에서 투자자 앞에 Pitching을 진행하고 1:1 미팅을 주선합니다.</p>
+      <p class="process-body" data-en>After final selection, conduct on-site pitching to investors and arrange 1:1 meetings.</p>
+      <div class="process-phase" data-ko>현지 활동 단계</div>
+      <div class="process-phase" data-en>On-site Phase</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">08</div>
+      <div class="process-icon">🤝</div>
+      <div class="process-title" data-ko>현지 GBD 활동</div>
+      <div class="process-title" data-en>On-site GBD Activities</div>
+      <p class="process-body" data-ko>파트너·기업들과 현지에서 직접 만납니다. GOIS가 딜 매니저로서 모든 커뮤니케이션에 동행합니다.</p>
+      <p class="process-body" data-en>Meet partners and companies on-site. GOIS accompanies all communications as deal manager.</p>
+      <div class="process-phase" data-ko>현지 활동 단계</div>
+      <div class="process-phase" data-en>On-site Phase</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">09</div>
+      <div class="process-icon">🌱</div>
+      <div class="process-title" data-ko>Follow-Up & PoC 지원</div>
+      <div class="process-title" data-en>Follow-Up & PoC Support</div>
+      <p class="process-body" data-ko>PoC 계약·현지 법인 설립·투자 유치까지 실질적 성과가 날 때까지 관리가 계속됩니다.</p>
+      <p class="process-body" data-en>Management continues until real results — PoC contracts, local incorporation, and investment secured.</p>
+      <div class="process-phase" data-ko>성과 후속 단계</div>
+      <div class="process-phase" data-en>Follow-up Phase</div>
+    </div>
+  </div>
+  <div class="process-footer reveal">
+    <div class="process-footer-icon">💡</div>
+    <p class="process-footer-text" data-ko>
+      <strong>핵심 원칙:</strong> GOIS는 모든 파트너 커뮤니케이션에 CC되어 딜의 처음부터 끝까지 함께합니다.
+    </p>
+    <p class="process-footer-text" data-en>
+      <strong>Core Principle:</strong> GOIS is CC'd on all partner communications — staying involved from the first contact to the final deal.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ ECOSYSTEM ═══ -->
+<section id="ecosystem">
+  <p class="t-eyebrow reveal" data-ko>Partner Network</p>
+  <p class="t-eyebrow reveal" data-en>Partner Network</p>
+  <h2 class="t-heading reveal" data-ko style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--g-white);margin:0.8rem 0 0.6rem;">함께 만들어가는 생태계</h2>
+  <h2 class="t-heading reveal" data-en style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--g-white);margin:0.8rem 0 0.6rem;">Ecosystem We Build Together</h2>
+  <p class="reveal" data-ko style="font-size:0.88rem;color:rgba(255,255,255,0.4);font-style:italic;max-width:600px;">GOIS의 파트너는 단순한 계약 관계가 아닙니다. 같은 방향을 바라보며 함께 생태계를 가꾸는 동반자들입니다.</p>
+  <p class="reveal" data-en style="font-size:0.88rem;color:rgba(255,255,255,0.4);font-style:italic;max-width:600px;">GOIS partners are not just contractual relationships. They are companions who look in the same direction and cultivate the ecosystem together.</p>
+  <p class="partner-cat-label reveal" data-ko>스페인 · 바스크</p>
+  <p class="partner-cat-label reveal" data-en>Spain · Basque Country</p>
+  <div class="partners-grid">
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🏦</div>
+        <div>
+          <div class="partner-name">Basque Government · SPRI</div>
+          <div class="partner-city">Bilbao, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>바스크 정부 산하 오픈이노베이션 총괄 기관. BIND 4.0 플랫폼을 운영합니다.</p>
+      <p class="partner-role" data-en>The Basque Government's open innovation authority, operating the BIND 4.0 platform.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🚀</div>
+        <div>
+          <div class="partner-name">BerriUp</div>
+          <div class="partner-city">Bilbao, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>바스크 지역 대표 액셀러레이터. 스페인 정부 연계 프로그램 및 현지 소프트랜딩 지원</p>
+      <p class="partner-role" data-en>Basque region's leading accelerator. Spanish government-linked programs and local soft-landing support.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🏢</div>
+        <div>
+          <div class="partner-name">BEAZ (B Accelerator Tower)</div>
+          <div class="partner-city">Bilbao, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>바스크 지역 스타트업 창업지원 · 액셀러레이션 전문 기관</p>
+      <p class="partner-role" data-en>Basque region's startup incubation and acceleration institution.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🎓</div>
+        <div>
+          <div class="partner-name">Mondragon University</div>
+          <div class="partner-city">Bilbao, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>몬드라곤 협동조합 기반 대학. LEINN 프로그램을 통한 글로벌 팀프러너십 교육 거점</p>
+      <p class="partner-role" data-en>Mondragon cooperative-based university. Global team entrepreneurship education hub through the LEINN program.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">📚</div>
+        <div>
+          <div class="partner-name">MTA (Mondragon Team Academy)</div>
+          <div class="partner-city">Bilbao, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>몬드라곤 협동조합 네트워크. 사회혁신·기술 특화. 전 세계 20개국+ 파트너 네트워크</p>
+      <p class="partner-role" data-en>Mondragon cooperative network. Social innovation & tech specialization. 20+ country global partner network.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🏛️</div>
+        <div>
+          <div class="partner-name">Mondragon Cooperative Group</div>
+          <div class="partner-city">Basque Country, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>세계 최대 협동조합 그룹. 산업·기술·금융 등 다양한 분야의 글로벌 협동조합 생태계</p>
+      <p class="partner-role" data-en>World's largest cooperative group. Global cooperative ecosystem across industry, tech, and finance.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">⚙️</div>
+        <div>
+          <div class="partner-name">Dominion</div>
+          <div class="partner-city">Basque Country, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>산업 서비스 전문 글로벌 기업. 바스크 산업 파트너 네트워크의 핵심 기업입니다.</p>
+      <p class="partner-role" data-en>Global industrial services company, a core partner in the Basque industrial network.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🔌</div>
+        <div>
+          <div class="partner-name">Ormazabal</div>
+          <div class="partner-city">Basque Country, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>전기설비 전문 글로벌 기업. 에너지·인프라 분야 오픈이노베이션 파트너입니다.</p>
+      <p class="partner-role" data-en>Global electrical equipment company, an open innovation partner in energy and infrastructure.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🚗</div>
+        <div>
+          <div class="partner-name">AIC (Automotive Intelligence Center)</div>
+          <div class="partner-city">Basque Country, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>바스크 자동차 산업 클러스터. 모빌리티·부품 기업 네트워크를 보유합니다.</p>
+      <p class="partner-role" data-en>Basque automotive industry cluster with a network of mobility and component companies.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">⚓</div>
+        <div>
+          <div class="partner-name">Bilbao Port Authority</div>
+          <div class="partner-city">Bilbao, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>해양·조선·물류 분야 오픈이노베이션을 추진하는 재단법인</p>
+      <p class="partner-role" data-en>Foundation driving open innovation in maritime, shipbuilding, and logistics.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🎯</div>
+        <div>
+          <div class="partner-name">Teamlabs</div>
+          <div class="partner-city">Barcelona, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>바르셀로나 기반 혁신 스튜디오. 교육·창업 생태계와의 연계 허브</p>
+      <p class="partner-role" data-en>Barcelona-based innovation studio. A hub connecting education and startup ecosystems.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🌆</div>
+        <div>
+          <div class="partner-name">Barcelona Activa</div>
+          <div class="partner-city">Barcelona, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>바르셀로나 시 공식 창업 지원 기관. 현지 네트워크 및 인프라 지원</p>
+      <p class="partner-role" data-en>Official startup support agency of Barcelona. Local network and infrastructure support.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">💶</div>
+        <div>
+          <div class="partner-name">Futuro Perfecto</div>
+          <div class="partner-city">Madrid, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>EU 펀딩 · EIC 액셀러레이터 신청 전문 컨설팅사. 300+ 프로젝트, €100M+ 펀딩을 조성했습니다.</p>
+      <p class="partner-role" data-en>EU funding & EIC Accelerator application specialist, with 300+ projects and €100M+ raised.</p>
+    </div>
+  </div>
+
+  <p class="partner-cat-label reveal" data-ko>유럽 각지</p>
+  <p class="partner-cat-label reveal" data-en>Elsewhere in Europe</p>
+  <div class="partners-grid">
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">💡</div>
+        <div>
+          <div class="partner-name">Luxinnovation</div>
+          <div class="partner-city">Luxembourg</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>룩셈부르크 정부 산하 혁신·투자유치 기관. R&D·투자 유치 프로그램 매칭을 지원합니다.</p>
+      <p class="partner-role" data-en>Luxembourg's government-backed innovation and investment agency, matching startups to R&D and investment programs.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">💼</div>
+        <div>
+          <div class="partner-name">Creative Valley</div>
+          <div class="partner-city">Paris, France</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>파리 스타트업 인큐베이터 · 코워킹 네트워크</p>
+      <p class="partner-role" data-en>Paris-based startup incubator and coworking network.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🧭</div>
+        <div>
+          <div class="partner-name">betahaus</div>
+          <div class="partner-city">Berlin, Germany</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>베를린 최대 규모 코워킹 · 스타트업 커뮤니티</p>
+      <p class="partner-role" data-en>Berlin's largest coworking and startup community.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🌍</div>
+        <div>
+          <div class="partner-name">Timii Akatemia Global</div>
+          <div class="partner-city">UK · Netherlands · France · Finland</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>핀란드식 팀 학습 기반의 글로벌 창업 교육 네트워크</p>
+      <p class="partner-role" data-en>Global entrepreneurship education network based on Finnish team learning methodology.</p>
+      <span class="partner-tag" data-ko>UK · Netherlands · France 등</span>
+      <span class="partner-tag" data-en>UK · Netherlands · France +</span>
+    </div>
+  </div>
+
+  <p class="partner-cat-label reveal" data-ko>아시아 · 라틴아메리카 · 아프리카</p>
+  <p class="partner-cat-label reveal" data-en>Asia · Latin America · Africa</p>
+  <div class="partners-grid">
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🌎</div>
+        <div>
+          <div class="partner-name">Dots</div>
+          <div class="partner-city">Santiago, Chile</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>칠레를 베이스캠프로 페루·아르헨티나·콜롬비아를 잇는 아시아-라틴아메리카 커넥터</p>
+      <p class="partner-role" data-en>An Asia-Latin America connector based in Chile, extending into Peru, Argentina, and Colombia.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🌍</div>
+        <div>
+          <div class="partner-name">B2Africa</div>
+          <div class="partner-city">Pan-Africa Network</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>아프리카 진출 지원 비즈니스 네트워크</p>
+      <p class="partner-role" data-en>Business network supporting expansion into Africa.</p>
+    </div>
+  </div>
+
+  <p class="partner-cat-label reveal" data-ko>한국</p>
+  <p class="partner-cat-label reveal" data-en>Korea</p>
+  <div class="partners-grid">
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🌐</div>
+        <div>
+          <div class="partner-name">BTI Korea Office</div>
+          <div class="partner-city">Seoul, Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>바스크 무역투자청(BTI)의 한국사무소. 바스크-한국 교류의 현지 접점입니다.</p>
+      <p class="partner-role" data-en>Korea office of the Basque Trade & Investment agency, the on-the-ground link between Basque and Korea.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-head">
+        <div class="partner-icon">🏅</div>
+        <div>
+          <div class="partner-name">Seoul Venture Forum (SVF)</div>
+          <div class="partner-city">Seoul, Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>국내 스타트업 생태계 허브. GOIS 프로그램의 한국 운영 기반 및 스타트업 풀 공급</p>
+      <p class="partner-role" data-en>Korea's startup ecosystem hub. Korean operational base and startup pipeline for GOIS programs.</p>
+    </div>
+  </div>
+  <div class="eco-stats">
+    <div class="eco-stat reveal">
+      <div class="eco-stat-n">6개</div>
+      <div class="eco-stat-l" data-ko>유럽 거점 도시</div>
+      <div class="eco-stat-l" data-en>European Hubs</div>
+    </div>
+    <div class="eco-stat reveal">
+      <div class="eco-stat-n">7+</div>
+      <div class="eco-stat-l" data-ko>시즌별 참여 스타트업</div>
+      <div class="eco-stat-l" data-en>Startups per Season</div>
+    </div>
+    <div class="eco-stat reveal">
+      <div class="eco-stat-n">3회</div>
+      <div class="eco-stat-l" data-ko>연간 프로그램</div>
+      <div class="eco-stat-l" data-en>Annual Programs</div>
+    </div>
+    <div class="eco-stat reveal">
+      <div class="eco-stat-n">20+</div>
+      <div class="eco-stat-l" data-ko>파트너 기관</div>
+      <div class="eco-stat-l" data-en>Partner Organizations</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TEAM ═══ -->
+<section id="team">
+  <p class="t-eyebrow reveal" data-ko>Our People</p>
+  <p class="t-eyebrow reveal" data-en>Our People</p>
+  <h2 class="t-heading reveal" data-ko style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--g-white);margin:0.8rem 0 0.6rem;">함께하는 사람들</h2>
+  <h2 class="t-heading reveal" data-en style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--g-white);margin:0.8rem 0 0.6rem;">Our People</h2>
+  <p class="reveal" data-ko style="font-size:0.88rem;color:rgba(255,255,255,0.38);font-style:italic;">사람이 생태계의 씨앗입니다. 신뢰할 수 있는 사람들이 GOIS를 만들어갑니다.</p>
+  <p class="reveal" data-en style="font-size:0.88rem;color:rgba(255,255,255,0.38);font-style:italic;">People are the seeds of the ecosystem. Trustworthy people build GOIS.</p>
+  <div class="team-grid">
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/01.john.jpeg" alt="원종호 John" loading="lazy">
+      </div>
+      <div class="team-info">
+        <div class="team-name">원종호 (John)</div>
+        <div class="team-role" data-ko>대표이사</div>
+        <div class="team-role" data-en>CEO</div>
+        <div class="team-role-sub">Representative Director</div>
+        <p class="team-bio" data-ko>GOIS의 설립자이자 대표. 한국-유럽 오픈 이노베이션 생태계 구축을 위해 직접 현장을 뛰며 파트너십을 만들어갑니다.</p>
+        <p class="team-bio" data-en>Founder & CEO of GOIS. Builds partnerships on the ground to connect the Korean and European open innovation ecosystems.</p>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/03.rio.png" alt="김강현 Rio" loading="lazy">
+      </div>
+      <div class="team-info">
+        <div class="team-name">김강현 (Rio)</div>
+        <div class="team-role" data-ko>CMO · Co-founder</div>
+        <div class="team-role" data-en>CMO · Co-founder</div>
+        <div class="team-role-sub" data-ko>B.nomad 대표 · MTA LEINN 팀코치</div>
+        <div class="team-role-sub" data-en>B.nomad CEO · MTA LEINN Coach</div>
+        <p class="team-bio" data-ko>GOIS 공동 창업자. B.nomad 대표이자 MTA LEINN International 팀코치. 브랜드 전략과 생태계 커뮤니케이션을 담당합니다.</p>
+        <p class="team-bio" data-en>GOIS co-founder. CEO of B.nomad and MTA LEINN International team coach. Leads brand strategy and ecosystem communications.</p>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/02.paul.jpeg" alt="이주열 Paul" loading="lazy">
+      </div>
+      <div class="team-info">
+        <div class="team-name">이주열 (Paul)</div>
+        <div class="team-role" data-ko>자문교수</div>
+        <div class="team-role" data-en>Advisory Professor</div>
+        <div class="team-role-sub">Advisory Professor · SVF Founder</div>
+        <p class="team-bio" data-ko>몬드라곤대학 서울랩 팀프러너십 센터장 · 서울벤처대학원대학교 교수. SVF 창립자이자 GOIS 자문교수로 글로벌 OI 프로세스 설계를 이끕니다.</p>
+        <p class="team-bio" data-en>Director of Mondragon University Seoul Lab · Professor at Seoul Venture Graduate University. SVF founder and GOIS advisory professor leading global OI process design.</p>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="https://raw.githubusercontent.com/johnwon120-hub/GOIS/refs/heads/main/04.jon.jpeg" alt="Jon Ander 욘" loading="lazy">
+      </div>
+      <div class="team-info">
+        <div class="team-name">Jon Ander (욘)</div>
+        <div class="team-role" data-ko>스페인 파트너</div>
+        <div class="team-role" data-en>Spanish Partner</div>
+        <div class="team-role-sub">Spanish Partner · Shareholder</div>
+        <p class="team-bio" data-ko>BerriUp 대표이사. 바스크 생태계의 깊은 네트워크를 보유한 GOIS의 유럽 파트너이자 공동 주주입니다.</p>
+        <p class="team-bio" data-en>CEO of BerriUp. European partner and co-shareholder of GOIS with deep roots in the Basque ecosystem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="contact-divider"></div>
+  <div class="contact-inner">
+    <div class="contact-symbol"></div>
+    <h2 class="contact-title reveal" data-ko>함께 씨앗을 심겠습니다</h2>
+    <h2 class="contact-title reveal" data-en>Let's Plant Seeds Together</h2>
+    <p class="t-body reveal" data-ko style="color:rgba(255,255,255,0.35);max-width:480px;margin:0 auto 0.8rem;">작은 시작을 귀하게 여기며, 파트너와 함께 뿌리내리는 생태계를 만들어갑니다.</p>
+    <p class="t-body reveal" data-en style="color:rgba(255,255,255,0.35);max-width:480px;margin:0 auto 0.8rem;">We cherish small beginnings, building an ecosystem that takes root together with our partners.</p>
+    <p class="contact-verse reveal" data-ko>"보잘것없는 것 하나가 세상을 채웁니다"</p>
+    <p class="contact-verse reveal" data-en>"Where local roots grow global."</p>
+    <div class="contact-box reveal">
+      <div class="contact-items">
+        <div class="contact-item">
+          <span class="contact-item-icon">✉️</span>
+          <span><a href="mailto:connect@gois.kr">connect@gois.kr</a></span>
+        </div>
+        <div class="contact-rule"></div>
+        <div class="contact-item">
+          <span class="contact-item-icon">🌐</span>
+          <span><a href="https://gois.kr" target="_blank">gois.kr</a></span>
+        </div>
+        <div class="contact-rule"></div>
+        <div class="contact-item loc">
+          <span class="contact-item-icon">📍</span>
+          <span>충남 천안시, 대한민국</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-logo">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="13" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="61.3 20.4"/>
+      <circle cx="16" cy="16" r="2.5" fill="#1D9E75"/>
+    </svg>
+    <span class="footer-logo-text">GOIS</span>
+  </div>
+  <span class="footer-copy" data-ko>Glocal Open Innovation Studio · 주식회사 글로컬오픈이노베이션스튜디오</span>
+  <span class="footer-copy" data-en>Glocal Open Innovation Studio · GOIS Co., Ltd.</span>
+  <div class="footer-sns">
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/company/gois-kr" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+    </a>
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/gois.kr" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    </a>
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/gois.kr" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+      </svg>
+    </a>
+  </div>
+  <span class="footer-copy">© 2026 GOIS</span>
+</footer>
+
+<script>
+// ── Scroll reveal ──
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const currentLang = localStorage.getItem('gois-lang') || 'ko';
+    // Skip if this element belongs to the inactive language
+    if (currentLang === 'en' && el.hasAttribute('data-ko')) { io.unobserve(el); return; }
+    if (currentLang === 'ko' && el.hasAttribute('data-en')) { io.unobserve(el); return; }
+    const siblings = [...el.parentElement.querySelectorAll('.reveal')];
+    const idx = siblings.indexOf(el);
+    setTimeout(() => {
+      el.classList.add('visible');
+      // If this is EN and we're in EN mode, ensure it's visible
+      if (el.hasAttribute('data-en') && currentLang === 'en') {
+        el.style.setProperty('opacity', '1', 'important');
+      }
+    }, idx * 70);
+    io.unobserve(el);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── Nav shrink ──
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.style.height = window.scrollY > 60 ? '52px' : '64px';
+}, { passive: true });
+
+// ── Language toggle ──
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  if (lang === 'en') {
+    document.documentElement.classList.add('lang-en');
+  } else {
+    document.documentElement.classList.remove('lang-en');
+  }
+  document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  localStorage.setItem('gois-lang', lang);
+
+  // Direct DOM manipulation for reliability
+  document.querySelectorAll('[data-ko]').forEach(el => {
+    el.style.setProperty('display', lang === 'ko' ? '' : 'none', 'important');
+    el.style.setProperty('opacity', lang === 'ko' ? '' : '0', 'important');
+  });
+  document.querySelectorAll('[data-en]').forEach(el => {
+    if (lang === 'en') {
+      const tag = el.tagName.toLowerCase();
+      const blockTags = ['h1','h2','h3','p','div','section','ul','ol','nav','footer','header'];
+      const inlineTags = ['span','a','strong','em','small'];
+      let disp = blockTags.includes(tag) ? 'block' : inlineTags.includes(tag) ? 'inline' : 'block';
+      if (tag === 'li') disp = 'list-item';
+      el.style.setProperty('display', disp, 'important');
+      el.style.setProperty('opacity', '1', 'important');
+      el.classList.add('visible');
+    } else {
+      el.style.setProperty('display', 'none', 'important');
+      el.style.setProperty('opacity', '0', 'important');
+    }
+  });
+}
+// Restore saved lang
+const savedLang = localStorage.getItem('gois-lang');
+if (savedLang && savedLang !== 'ko') {
+  setTimeout(() => setLang(savedLang), 100);
+} else {
+  // Initialize KO display
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.style.setProperty('display', 'none', 'important');
+  });
+}
+
+// ── Nav active section highlight ──
+const sections = [...document.querySelectorAll('section[id]')];
+const links = [...document.querySelectorAll('.nav-links a')];
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  links.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#'+cur
+      ? 'var(--g-primary)' : 'rgba(255,255,255,0.55)';
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
