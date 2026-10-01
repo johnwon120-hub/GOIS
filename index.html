@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GOIS — Glocal Open Innovation Studio</title>
 <meta property="og:title" content="GOIS — Glocal Open Innovation Studio">
-<meta property="og:description" content="Where local roots grow global. Your innovation connected to the world.">
+<meta property="og:description" content="Glocal Open Innovation Studio. Where local roots grow global. Your innovation connected to the world.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gois.kr">
 <meta property="og:image" content="https://gois.kr/og-image.png">
@@ -13,7 +13,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="GOIS — Glocal Open Innovation Studio">
-<meta name="twitter:description" content="Where local roots grow global. Your innovation connected to the world.">
+<meta name="twitter:description" content="Glocal Open Innovation Studio. Where local roots grow global. Your innovation connected to the world.">
 <meta name="twitter:image" content="https://gois.kr/og-image.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' stroke='%231D9E75' stroke-width='2' fill='none' stroke-dasharray='61.3 20.4' transform='rotate(-58 16 16)'/><circle cx='16' cy='16' r='3' fill='%231D9E75'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,15 +131,19 @@ nav {
 .nav-wordmark {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 1.3rem; font-weight: 400;
-  color: var(--g-white); letter-spacing: 0.25em;
+  letter-spacing: 0.25em;
 }
-.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-wordmark .wm-go { color: var(--g-primary); font-style: italic; }
+.nav-wordmark .wm-is { color: var(--g-white); }
+.nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+.nav-links > li { position: relative; }
 .nav-links a {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 0.72rem; font-weight: 300;
   letter-spacing: 0.15em; text-transform: uppercase;
   color: rgba(255,255,255,0.55); text-decoration: none;
   transition: color 0.2s;
+  display: inline-flex; align-items: center; gap: 0.3rem;
 }
 .nav-links a:hover { color: var(--g-primary); }
 .nav-cta {
@@ -152,6 +156,37 @@ nav {
   transition: background 0.2s;
 }
 .nav-cta:hover { background: var(--g-dark); color: var(--g-white); }
+
+/* Nav dropdown (Programs archive) */
+.nav-links li.has-dd .dd-caret { font-size: 0.6rem; opacity: 0.6; transition: transform 0.2s; }
+.nav-links li.has-dd:hover .dd-caret { transform: rotate(180deg); }
+.nav-dd {
+  position: absolute; top: calc(100% + 14px); left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: rgba(8,15,11,0.98);
+  border: 1px solid rgba(29,158,117,0.2);
+  min-width: 240px; padding: 0.5rem 0;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+}
+.nav-links li.has-dd:hover .nav-dd {
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
+}
+.nav-dd a {
+  display: flex; justify-content: space-between; gap: 1rem;
+  padding: 0.6rem 1.2rem; font-size: 0.68rem; letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.55); text-decoration: none; white-space: nowrap;
+  text-transform: none;
+}
+.nav-dd a:hover { color: var(--g-primary); background: rgba(29,158,117,0.08); }
+.nav-dd a .dd-tag {
+  font-family: 'Noto Sans KR', sans-serif; font-size: 0.65rem;
+  color: rgba(255,255,255,0.25);
+}
+.nav-dd-sep {
+  height: 1px; background: rgba(29,158,117,0.12); margin: 0.4rem 1rem;
+}
 
 /* ── HERO ── */
 #hero {
@@ -201,6 +236,7 @@ nav {
 }
 
 @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes goBounce { 0%,100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
 
 /* Grain overlay */
 #hero::before {
@@ -239,6 +275,8 @@ h1.hero-title {
   opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
 }
 h1.hero-title .accent { color: var(--g-primary); }
+h1.hero-title .go-accent { color: var(--g-primary); font-style: italic; display: inline-block; animation: goBounce 2.4s ease-in-out infinite; }
+h1.hero-title .is-accent { color: var(--g-white); border-bottom: 3px solid var(--g-primary); padding-bottom: 2px; }
 
 .hero-tagline {
   font-family: 'Josefin Sans', sans-serif;
@@ -311,6 +349,48 @@ section { padding: 110px 6%; }
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── IDENTITY (GO + IS) ── */
+#identity { background: var(--g-black); position: relative; overflow: hidden; text-align: center; }
+#identity::before {
+  content:''; position:absolute; width:600px; height:600px;
+  background: radial-gradient(circle, rgba(29,158,117,0.06) 0%, transparent 65%);
+  top: -220px; right: -120px; pointer-events:none;
+}
+.goison-wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; }
+.goison-head {
+  font-family: 'Josefin Sans', sans-serif; font-weight: 100;
+  font-size: clamp(2.6rem, 6.5vw, 4.4rem); color: var(--g-white);
+  line-height: 1.1; margin: 1rem 0 1.3rem;
+}
+.goison-head .go { color: var(--g-primary); font-style: italic; display: inline-block; }
+.goison-head .plus { color: rgba(255,255,255,0.22); padding: 0 0.15em; }
+.goison-head .is { color: var(--g-white); border-bottom: 4px solid var(--g-primary); padding-bottom: 3px; }
+.goison-sub { font-size: 0.92rem; color: rgba(255,255,255,0.4); max-width: 620px; margin: 0 auto 3.5rem; line-height: 1.85; }
+.goison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(255,255,255,0.06); text-align: left; }
+.goison-col { background: #0A130D; padding: 2.6rem 2.4rem; }
+.goison-col.go-col { border-top: 3px solid var(--g-primary); }
+.goison-col.is-col { border-top: 3px solid rgba(255,255,255,0.3); }
+.goison-letter { font-family: 'Josefin Sans', sans-serif; font-size: 3.4rem; font-weight: 100; line-height: 1; margin-bottom: 1rem; }
+.go-col .goison-letter { color: var(--g-primary); font-style: italic; }
+.is-col .goison-letter { color: var(--g-white); }
+.goison-tag {
+  font-family: 'Josefin Sans', sans-serif; font-size: 0.66rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem;
+}
+.go-col .goison-tag { color: rgba(29,158,117,0.7); }
+.goison-text { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.9; }
+.goison-text b { color: rgba(255,255,255,0.88); font-weight: 700; }
+.goison-merge {
+  margin-top: 2px; background: rgba(29,158,117,0.07); border: 1px solid rgba(29,158,117,0.18);
+  padding: 1.7rem 2rem; text-align: center;
+}
+.goison-merge p {
+  font-size: 0.95rem; color: rgba(255,255,255,0.6); font-style: italic;
+  font-family: 'Josefin Sans', sans-serif; font-weight: 300;
+}
+.goison-merge strong { color: var(--g-primary); font-style: normal; font-weight: 600; }
+@media (max-width: 760px) { .goison-grid { grid-template-columns: 1fr; } }
 
 /* ── ABOUT ── */
 #about {
@@ -385,9 +465,6 @@ section { padding: 110px 6%; }
 @media (max-width: 640px) {
   .about-cards { grid-template-columns: 1fr; }
 }
-
-/* ── PHILOSOPHY ── */
-/* philosophy section removed */
 
 /* ── SERVICES ── */
 #services { background: var(--g-white); }
@@ -515,17 +592,35 @@ section { padding: 110px 6%; }
   background: radial-gradient(circle, rgba(29,158,117,0.04) 0%, transparent 65%);
   bottom: 0; right: 5%; pointer-events:none;
 }
+.eco-note {
+  font-size: 0.82rem; color: rgba(255,255,255,0.35); font-style: italic;
+  max-width: 700px; line-height: 1.8; margin-top: 0.4rem;
+  position: relative; z-index: 1;
+}
+.eco-filters {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin: 2.2rem 0 0.5rem; position: relative; z-index: 1;
+}
+.eco-filter-btn {
+  font-family: 'Josefin Sans', sans-serif; font-size: 0.66rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(255,255,255,0.45);
+  background: transparent; border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.45rem 1rem; cursor: pointer; transition: all 0.2s;
+}
+.eco-filter-btn:hover { border-color: var(--g-primary); color: var(--g-primary); }
+.eco-filter-btn.active { background: var(--g-primary); border-color: var(--g-primary); color: var(--g-black); }
 .partners-grid {
   display: grid; grid-template-columns: repeat(4,1fr);
-  gap: 1.2rem; margin-top: 3rem; position:relative; z-index:1;
+  gap: 1.2rem; margin-top: 2.2rem; position:relative; z-index:1;
 }
 .partner-card {
   background: var(--g-card-bg);
   border: 1px solid rgba(29,158,117,0.12);
   border-left: 2px solid var(--g-primary);
   padding: 1.3rem 1.4rem;
-  transition: background 0.25s, transform 0.2s;
+  transition: background 0.25s, transform 0.2s, opacity 0.3s, filter 0.3s;
 }
+.partner-card.dimmed { opacity: 0.15; filter: grayscale(70%); }
 .partner-card:nth-child(4n+2) { border-left-color: var(--g-dark); }
 .partner-card:nth-child(4n+3) { border-left-color: #2A6A50; }
 .partner-card:nth-child(4n+4) { border-left-color: #1A5040; }
@@ -541,6 +636,12 @@ section { padding: 110px 6%; }
   padding: 0.15rem 0.6rem; font-size: 0.68rem; color: rgba(29,158,117,0.8);
   font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.05em;
 }
+.partner-domain-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.7rem; }
+.partner-domain-tag {
+  font-size: 0.62rem; letter-spacing: 0.04em; color: rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.15); padding: 0.15rem 0.5rem;
+  font-family: 'Josefin Sans', sans-serif;
+}
 .partner-cat-label {
   font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.75rem;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--g-primary);
@@ -548,6 +649,10 @@ section { padding: 110px 6%; }
   border-bottom: 1px solid rgba(29,158,117,0.15); position: relative; z-index: 1;
 }
 .partner-cat-label:first-of-type { margin-top: 0; }
+.partner-cat-sub {
+  font-size: 0.76rem; color: rgba(255,255,255,0.32); font-style: italic;
+  margin: -0.6rem 0 1.2rem; position: relative; z-index: 1;
+}
 /* Stats strip */
 .eco-stats {
   display: grid; grid-template-columns: repeat(4,1fr);
@@ -717,14 +822,44 @@ footer {
   </a>
   <ul class="nav-links">
     <li data-ko><a href="#about">소개</a></li>
-    <li data-ko><a href="#program">프로그램</a></li>
-    <li data-ko><a href="#process">프로세스</a></li>
-    <li data-ko><a href="#ecosystem">파트너</a></li>
-    <li data-ko><a href="#team">팀</a></li>
     <li data-en><a href="#about">About</a></li>
+    <li data-ko><a href="#identity">GO+IS</a></li>
+    <li data-en><a href="#identity">GO+IS</a></li>
+    <li data-ko><a href="#program">프로그램</a></li>
     <li data-en><a href="#program">Program</a></li>
-    <li data-en><a href="#process">Process</a></li>
+    <li class="has-dd" data-ko>
+      <a href="#process">프로세스</a>
+    </li>
+    <li class="has-dd" data-en>
+      <a href="#process">Process</a>
+    </li>
+    <li class="has-dd" data-ko>
+      <a href="#">지난 활동 <span class="dd-caret">▾</span></a>
+      <div class="nav-dd">
+        <a href="https://gois.kr/bilbao02/">Bilbao Season 2 <span class="dd-tag">2026.05</span></a>
+        <a href="https://gois.kr/bilbao03/">Bilbao Season 3 <span class="dd-tag">2026.11</span></a>
+        <a href="https://gois.kr/vivatech2026">VivaTech 2026 <span class="dd-tag">Paris</span></a>
+        <div class="nav-dd-sep"></div>
+        <a href="https://gois.kr/journey01/">Mondragon Journey <span class="dd-tag">서울랩</span></a>
+        <a href="https://gois.kr/seminar01/">Seminar Vol.1</a>
+        <a href="https://gois.kr/seminar02/">Seminar Vol.2 <span class="dd-tag">로컬 OI</span></a>
+      </div>
+    </li>
+    <li class="has-dd" data-en>
+      <a href="#">Archive <span class="dd-caret">▾</span></a>
+      <div class="nav-dd">
+        <a href="https://gois.kr/bilbao02/">Bilbao Season 2 <span class="dd-tag">May 2026</span></a>
+        <a href="https://gois.kr/bilbao03/">Bilbao Season 3 <span class="dd-tag">Nov 2026</span></a>
+        <a href="https://gois.kr/vivatech2026">VivaTech 2026 <span class="dd-tag">Paris</span></a>
+        <div class="nav-dd-sep"></div>
+        <a href="https://gois.kr/journey01/">Mondragon Journey <span class="dd-tag">Seoul Lab</span></a>
+        <a href="https://gois.kr/seminar01/">Seminar Vol.1</a>
+        <a href="https://gois.kr/seminar02/">Seminar Vol.2 <span class="dd-tag">Local OI</span></a>
+      </div>
+    </li>
+    <li data-ko><a href="#ecosystem">파트너</a></li>
     <li data-en><a href="#ecosystem">Partners</a></li>
+    <li data-ko><a href="#team">팀</a></li>
     <li data-en><a href="#team">Team</a></li>
   </ul>
   <div class="lang-toggle">
@@ -747,7 +882,8 @@ footer {
   <div class="hero-content">
     <div class="hero-eyebrow">
       <div class="hero-eyebrow-dot"></div>
-      <span class="t-eyebrow">Glocal Open Innovation Studio · 2026</span>
+      <span class="t-eyebrow" data-ko>글로컬오픈이노베이션스튜디오 · 2026</span>
+      <span class="t-eyebrow" data-en>Glocal Open Innovation Studio · 2026</span>
     </div>
     <h1 class="hero-title" data-ko>
       글로벌<br>
@@ -770,9 +906,9 @@ footer {
 
     <div class="hero-actions">
       <a href="https://gois.kr/season03/" target="_blank" class="btn-primary" data-ko>프로그램 보기</a>
-      <a href="#about" class="btn-ghost" data-ko>GOIS 알아보기 →</a>
+      <a href="#identity" class="btn-ghost" data-ko>GOIS 알아보기 →</a>
       <a href="https://gois.kr/season03/" target="_blank" class="btn-primary" data-en>View Program</a>
-      <a href="#about" class="btn-ghost" data-en>About GOIS →</a>
+      <a href="#identity" class="btn-ghost" data-en>About GOIS →</a>
     </div>
 
   <div class="hero-stats">
@@ -795,7 +931,7 @@ footer {
     </div>
     <div class="hero-stats-divider"></div>
     <div>
-      <div class="hero-stat-n">20+</div>
+      <div class="hero-stat-n">46+</div>
       <div class="hero-stat-l" data-ko>파트너 기관</div>
       <div class="hero-stat-l" data-en>Partner Orgs</div>
     </div>
@@ -918,6 +1054,51 @@ footer {
   </div>
 </section>
 
+<!-- ═══ IDENTITY — GO + IS ═══ -->
+<section id="identity">
+  <div class="goison-wrap">
+    <p class="t-eyebrow reveal" data-ko>How The Two Meet</p>
+    <p class="t-eyebrow reveal" data-en>How The Two Meet</p>
+    <h2 class="goison-head reveal"><span class="go">GO</span><span class="plus">+</span><span class="is">IS</span></h2>
+    <p class="goison-sub reveal" data-ko>이름 안에 일하는 방식이 있습니다. GO는 움직임이고, IS는 뿌리입니다. 이 둘의 균형이 GOIS가 일하는 방식입니다.</p>
+    <p class="goison-sub reveal" data-en>Our way of working lives in our name. GO is movement, IS is roots. Balancing the two is how GOIS works.</p>
+
+    <div class="goison-grid">
+      <div class="goison-col go-col reveal">
+        <div class="goison-letter">GO</div>
+        <div class="goison-tag" data-ko>행동 · 역동성</div>
+        <div class="goison-tag" data-en>Action · Momentum</div>
+        <p class="goison-text" data-ko>
+          GO는 행동입니다. 전시회, 매칭, 현지 미팅 — 우리는 책상에 머물지 않고 직접 바스크로, 유럽으로 나갑니다.
+          <b>해외로 나가 액션하는 것</b>, 그것이 GO가 의미하는 역동성입니다.
+        </p>
+        <p class="goison-text" data-en>
+          GO is action. Exhibitions, matchmaking, on-the-ground meetings — we don't stay at a desk.
+          We go to the Basque Country, to Europe, in person. GO is the momentum of <b>going abroad and taking action</b>.
+        </p>
+      </div>
+      <div class="goison-col is-col reveal">
+        <div class="goison-letter">IS</div>
+        <div class="goison-tag" data-ko>정체성 · 뿌리내림</div>
+        <div class="goison-tag" data-en>Identity · Roots</div>
+        <p class="goison-text" data-ko>
+          IS는 정체성입니다. 10년 넘게 쌓아온 바스크 네트워크, 겨자씨처럼 작지만 분명한 원칙 —
+          어디를 가도 흔들리지 않는 GOIS다움을 지킵니다. <b>뿌리내린다는 것</b>, 그것이 IS가 의미하는 정체성입니다.
+        </p>
+        <p class="goison-text" data-en>
+          IS is identity. A decade-plus of roots in the Basque Country, principles as small and certain
+          as a mustard seed — wherever we go, we stay unmistakably GOIS. IS is the identity of <b>staying rooted</b>.
+        </p>
+      </div>
+    </div>
+
+    <div class="goison-merge reveal">
+      <p data-ko>GO와 IS가 만나 <strong>Glocal</strong>이 됩니다 — 세계로 나아가되(Global), 지역에 뿌리내립니다(Local).</p>
+      <p data-en>GO meets IS to become <strong>Glocal</strong> — going Global, rooted Local.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ SERVICES ═══ -->
 <section id="services">
   <p class="t-eyebrow reveal" data-ko>What We Do</p>
@@ -988,14 +1169,20 @@ footer {
         <div class="season-flag">🇪🇸</div>
         <div class="season-month" data-ko>3월</div>
         <div class="season-month" data-en>March</div>
-        <div class="season-city" data-ko>바르셀로나, 스페인</div>
-        <div class="season-city" data-en>Barcelona, Spain</div>
+        <div class="season-city" data-ko>바르셀로나 · 빌바오</div>
+        <div class="season-city" data-en>Barcelona · Bilbao</div>
       </div>
       <div class="season-bd">
-        <div class="season-event">4YFN · MWC Barcelona</div>
+        <div class="season-event">4YFN · MWC <span style="opacity:.55;font-weight:300;" data-ko>— 바르셀로나</span><span style="opacity:.55;font-weight:300;" data-en>— Barcelona</span></div>
         <p class="season-desc" data-ko>모바일·ICT 분야 세계 최대 행사와 연계, 글로벌 기업 및 투자자와의 접점을 만듭니다.</p>
         <p class="season-desc" data-en>The world's largest mobile·ICT event. We create connections with global enterprises and investors.</p>
-        <div class="season-partner">Teamlabs · Barcelona Activa</div>
+        <div style="border-top:1px solid var(--g-line);margin-top:0.9rem;padding-top:0.9rem;">
+          <div class="season-event" data-ko>시즌 킥오프 <span style="opacity:.55;font-weight:300;">— 빌바오</span></div>
+          <div class="season-event" data-en>Season Kickoff <span style="opacity:.55;font-weight:300;">— Bilbao</span></div>
+          <p class="season-desc" data-ko>BerriUp·BEAZ 방문과 바스크 현지 파트너 미팅으로 한 해의 프로그램을 엽니다.</p>
+          <p class="season-desc" data-en>Opens the year's program with BerriUp·BEAZ visits and Basque partner meetings.</p>
+        </div>
+        <div class="season-partner">Teamlabs · Barcelona Activa · BerriUp · BEAZ</div>
       </div>
     </div>
     <div class="season-card reveal">
@@ -1020,43 +1207,55 @@ footer {
     </div>
     <div class="season-card reveal">
       <div class="season-hd">
-        <div class="season-flag">🇪🇸 🇱🇺 🇩🇪</div>
+        <div class="season-flag">🇪🇸 🇵🇹 🇫🇮</div>
         <div class="season-month" data-ko>11월</div>
         <div class="season-month" data-en>November</div>
-        <div class="season-city" data-ko>마드리드 · 룩셈부르크 · 베를린</div>
-        <div class="season-city" data-en>Madrid · Luxembourg · Berlin</div>
+        <div class="season-city" data-ko>마드리드 · 리스본 · 헬싱키</div>
+        <div class="season-city" data-en>Madrid · Lisbon · Helsinki</div>
       </div>
       <div class="season-bd">
         <div class="season-event">Horizon Deep Tech Summit <span style="opacity:.55;font-weight:300;" data-ko>— 마드리드</span><span style="opacity:.55;font-weight:300;" data-en>— Madrid</span></div>
         <p class="season-desc" data-ko>딥테크 스타트업을 위한 글로벌 투자유치 서밋. 200+ 연사, 300+ 투자자, 500+ 스타트업이 참여합니다. (2026.11.10–12)</p>
         <p class="season-desc" data-en>Global fundraising summit for deep tech startups — 200+ speakers, 300+ investors, 500+ startups. (Nov 10–12, 2026)</p>
         <div style="border-top:1px solid var(--g-line);margin-top:0.9rem;padding-top:0.9rem;">
-          <div class="season-event">Luxinnovation <span style="opacity:.55;font-weight:300;" data-ko>— 룩셈부르크</span><span style="opacity:.55;font-weight:300;" data-en>— Luxembourg</span></div>
-          <p class="season-desc" data-ko>룩셈부르크 정부 산하 혁신·투자유치 기관과의 매칭. R&D·투자 유치 프로그램에 연결합니다. (2026.11.23–24)</p>
-          <p class="season-desc" data-en>Matching with Luxembourg's government-backed innovation and investment agency, connecting to R&D and investment programs. (Nov 23–24, 2026)</p>
+          <div class="season-event">Web Summit <span style="opacity:.55;font-weight:300;" data-ko>— 리스본</span><span style="opacity:.55;font-weight:300;" data-en>— Lisbon</span></div>
+          <p class="season-desc" data-ko>세계 최대 규모 테크 컨퍼런스 중 하나. 글로벌 투자자·기업과의 접점을 넓힙니다.</p>
+          <p class="season-desc" data-en>One of the world's largest tech conferences, widening our reach to global investors and enterprises.</p>
         </div>
         <div style="border-top:1px solid var(--g-line);margin-top:0.9rem;padding-top:0.9rem;">
-          <div class="season-event">Asia-Berlin Summit <span style="opacity:.55;font-weight:300;" data-ko>— 베를린</span><span style="opacity:.55;font-weight:300;" data-en>— Berlin</span></div>
-          <p class="season-desc" data-ko>아시아와 유럽 스타트업을 잇는 교류의 장. 독일·유럽 시장 진출 네트워크를 구축합니다. (2026.11.23–27)</p>
-          <p class="season-desc" data-en>A gathering connecting Asian and European startups, building networks for entry into the German and European market. (Nov 23–27, 2026)</p>
+          <div class="season-event">Slush <span style="opacity:.55;font-weight:300;" data-ko>— 헬싱키</span><span style="opacity:.55;font-weight:300;" data-en>— Helsinki</span></div>
+          <p class="season-desc" data-ko>북유럽 대표 스타트업 컨퍼런스. 헬싱키 파트너스와 함께 현지 생태계와 연결됩니다.</p>
+          <p class="season-desc" data-en>The Nordic region's leading startup conference, connecting into the local ecosystem with Helsinki Partners.</p>
         </div>
-        <div class="season-partner">Futuro Perfecto · Luxinnovation  ·  betahaus</div>
+        <div class="season-partner">Futuro Perfecto · Web Summit · Slush</div>
       </div>
     </div>
     <div class="season-card reveal">
       <div class="season-hd">
-        <div class="season-flag">🇪🇸</div>
+        <div class="season-flag">🇪🇸 🇱🇺 🇩🇪</div>
         <div class="season-month" data-ko style="font-size:1.5rem;line-height:1.2;">연중<br>상시</div>
         <div class="season-month" data-en style="font-size:1.5rem;line-height:1.2;">Year<br>Round</div>
-        <div class="season-city" data-ko>빌바오, 스페인</div>
-        <div class="season-city" data-en>Bilbao, Spain</div>
+        <div class="season-city" data-ko>빌바오 · 룩셈부르크 · 베를린</div>
+        <div class="season-city" data-en>Bilbao · Luxembourg · Berlin</div>
       </div>
       <div class="season-bd">
-        <div class="season-event" data-ko>방문 프로그램</div>
-        <div class="season-event" data-en>Visit Program</div>
+        <div class="season-event" data-ko>방문 프로그램 <span style="opacity:.55;font-weight:300;">— 빌바오</span></div>
+        <div class="season-event" data-en>Visit Program <span style="opacity:.55;font-weight:300;">— Bilbao</span></div>
         <p class="season-desc" data-ko>바스크 혁신 생태계 거점 방문. 파트너 미팅, PoC 논의, 소프트랜딩 지원을 연중 상시로 운영합니다.</p>
         <p class="season-desc" data-en>Basque innovation hub visits. Partner meetings, PoC discussions, and soft-landing support available year-round.</p>
-        <div class="season-partner">BerriUp · BEAZ · BIND 4.0</div>
+        <div style="border-top:1px solid var(--g-line);margin-top:0.9rem;padding-top:0.9rem;">
+          <div class="season-event" data-ko>Luxinnovation 파트너십 <span style="opacity:.55;font-weight:300;">— 룩셈부르크</span></div>
+          <div class="season-event" data-en>Luxinnovation Partnership <span style="opacity:.55;font-weight:300;">— Luxembourg</span></div>
+          <p class="season-desc" data-ko>룩셈부르크 정부 산하 혁신·투자유치 기관과 상시 매칭 채널을 운영합니다.</p>
+          <p class="season-desc" data-en>An ongoing matching channel with Luxembourg's government-backed innovation and investment agency.</p>
+        </div>
+        <div style="border-top:1px solid var(--g-line);margin-top:0.9rem;padding-top:0.9rem;">
+          <div class="season-event" data-ko>betahaus 프로그램 <span style="opacity:.55;font-weight:300;">— 베를린</span></div>
+          <div class="season-event" data-en>betahaus Program <span style="opacity:.55;font-weight:300;">— Berlin</span></div>
+          <p class="season-desc" data-ko>베를린 최대 코워킹·커뮤니티와 함께 상시 운영되는 현지 매칭 프로그램입니다.</p>
+          <p class="season-desc" data-en>A year-round local matching program run with Berlin's largest coworking community.</p>
+        </div>
+        <div class="season-partner">BerriUp · BEAZ · BIND 4.0 · Luxinnovation · betahaus</div>
       </div>
     </div>
   </div>
@@ -1181,10 +1380,31 @@ footer {
   <h2 class="t-heading reveal" data-en style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--g-white);margin:0.8rem 0 0.6rem;">Ecosystem We Build Together</h2>
   <p class="reveal" data-ko style="font-size:0.88rem;color:rgba(255,255,255,0.4);font-style:italic;max-width:600px;">GOIS의 파트너는 단순한 계약 관계가 아닙니다. 같은 방향을 바라보며 함께 생태계를 가꾸는 동반자들입니다.</p>
   <p class="reveal" data-en style="font-size:0.88rem;color:rgba(255,255,255,0.4);font-style:italic;max-width:600px;">GOIS partners are not just contractual relationships. They are companions who look in the same direction and cultivate the ecosystem together.</p>
+
+  <p class="eco-note reveal" data-ko>아래에서는 지역을 기준으로 나누었지만, 실제로는 하나의 역할로 딱 잘라 구분되지 않는 파트너들입니다. 그 경계가 흐릿한 것 자체가 GOIS 생태계의 매력이라고 생각합니다. 영역 필터로도 함께 살펴보세요.</p>
+  <p class="eco-note reveal" data-en>Grouped by region below — but in practice, few partners fit neatly into one role. We think that blurred boundary is part of what makes this ecosystem interesting. Explore by domain with the filters too.</p>
+
+  <div class="eco-filters reveal">
+    <button class="eco-filter-btn active" onclick="filterEco('all', this)" data-ko>전체</button>
+    <button class="eco-filter-btn active" onclick="filterEco('all', this)" data-en style="display:none;">All</button>
+    <button class="eco-filter-btn" onclick="filterEco('gov', this)" data-ko>정부·공공</button>
+    <button class="eco-filter-btn" onclick="filterEco('gov', this)" data-en style="display:none;">Gov &amp; Public</button>
+    <button class="eco-filter-btn" onclick="filterEco('accel', this)" data-ko>액셀러레이터</button>
+    <button class="eco-filter-btn" onclick="filterEco('accel', this)" data-en style="display:none;">Accelerator</button>
+    <button class="eco-filter-btn" onclick="filterEco('edu', this)" data-ko>교육</button>
+    <button class="eco-filter-btn" onclick="filterEco('edu', this)" data-en style="display:none;">Education</button>
+    <button class="eco-filter-btn" onclick="filterEco('corp', this)" data-ko>산업·기업</button>
+    <button class="eco-filter-btn" onclick="filterEco('corp', this)" data-en style="display:none;">Industry</button>
+    <button class="eco-filter-btn" onclick="filterEco('fund', this)" data-ko>펀딩·컨설팅</button>
+    <button class="eco-filter-btn" onclick="filterEco('fund', this)" data-en style="display:none;">Funding &amp; Consulting</button>
+    <button class="eco-filter-btn" onclick="filterEco('local', this)" data-ko>로컬 커뮤니티</button>
+    <button class="eco-filter-btn" onclick="filterEco('local', this)" data-en style="display:none;">Local Community</button>
+  </div>
+
   <p class="partner-cat-label reveal" data-ko>스페인 · 바스크</p>
   <p class="partner-cat-label reveal" data-en>Spain · Basque Country</p>
   <div class="partners-grid">
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="gov">
       <div class="partner-head">
         <div class="partner-icon">🏦</div>
         <div>
@@ -1194,8 +1414,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>바스크 정부 산하 오픈이노베이션 총괄 기관. BIND 4.0 플랫폼을 운영합니다.</p>
       <p class="partner-role" data-en>The Basque Government's open innovation authority, operating the BIND 4.0 platform.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>정부·공공</span><span class="partner-domain-tag" data-en style="display:none;">Gov &amp; Public</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="accel">
       <div class="partner-head">
         <div class="partner-icon">🚀</div>
         <div>
@@ -1205,8 +1426,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>바스크 지역 대표 액셀러레이터. 스페인 정부 연계 프로그램 및 현지 소프트랜딩 지원</p>
       <p class="partner-role" data-en>Basque region's leading accelerator. Spanish government-linked programs and local soft-landing support.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>액셀러레이터</span><span class="partner-domain-tag" data-en style="display:none;">Accelerator</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="gov">
       <div class="partner-head">
         <div class="partner-icon">🏢</div>
         <div>
@@ -1214,10 +1436,11 @@ footer {
           <div class="partner-city">Bilbao, Spain</div>
         </div>
       </div>
-      <p class="partner-role" data-ko>바스크 지역 스타트업 창업지원 · 액셀러레이션 전문 기관</p>
-      <p class="partner-role" data-en>Basque region's startup incubation and acceleration institution.</p>
+      <p class="partner-role" data-ko>바스크 지역 스타트업 창업지원 · 액셀러레이션을 담당하는 공공기관</p>
+      <p class="partner-role" data-en>Public institution driving startup incubation and acceleration in the Basque region.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>정부·공공</span><span class="partner-domain-tag" data-en style="display:none;">Gov &amp; Public</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="edu">
       <div class="partner-head">
         <div class="partner-icon">🎓</div>
         <div>
@@ -1227,8 +1450,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>몬드라곤 협동조합 기반 대학. LEINN 프로그램을 통한 글로벌 팀프러너십 교육 거점</p>
       <p class="partner-role" data-en>Mondragon cooperative-based university. Global team entrepreneurship education hub through the LEINN program.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="edu">
       <div class="partner-head">
         <div class="partner-icon">📚</div>
         <div>
@@ -1238,8 +1462,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>몬드라곤 협동조합 네트워크. 사회혁신·기술 특화. 전 세계 20개국+ 파트너 네트워크</p>
       <p class="partner-role" data-en>Mondragon cooperative network. Social innovation & tech specialization. 20+ country global partner network.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="corp">
       <div class="partner-head">
         <div class="partner-icon">🏛️</div>
         <div>
@@ -1249,8 +1474,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>세계 최대 협동조합 그룹. 산업·기술·금융 등 다양한 분야의 글로벌 협동조합 생태계</p>
       <p class="partner-role" data-en>World's largest cooperative group. Global cooperative ecosystem across industry, tech, and finance.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>산업·기업</span><span class="partner-domain-tag" data-en style="display:none;">Industry</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="corp">
       <div class="partner-head">
         <div class="partner-icon">⚙️</div>
         <div>
@@ -1260,8 +1486,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>산업 서비스 전문 글로벌 기업. 바스크 산업 파트너 네트워크의 핵심 기업입니다.</p>
       <p class="partner-role" data-en>Global industrial services company, a core partner in the Basque industrial network.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>산업·기업</span><span class="partner-domain-tag" data-en style="display:none;">Industry</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="corp">
       <div class="partner-head">
         <div class="partner-icon">🔌</div>
         <div>
@@ -1271,8 +1498,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>전기설비 전문 글로벌 기업. 에너지·인프라 분야 오픈이노베이션 파트너입니다.</p>
       <p class="partner-role" data-en>Global electrical equipment company, an open innovation partner in energy and infrastructure.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>산업·기업</span><span class="partner-domain-tag" data-en style="display:none;">Industry</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="corp">
       <div class="partner-head">
         <div class="partner-icon">🚗</div>
         <div>
@@ -1282,19 +1510,21 @@ footer {
       </div>
       <p class="partner-role" data-ko>바스크 자동차 산업 클러스터. 모빌리티·부품 기업 네트워크를 보유합니다.</p>
       <p class="partner-role" data-en>Basque automotive industry cluster with a network of mobility and component companies.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>산업·기업</span><span class="partner-domain-tag" data-en style="display:none;">Industry</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="gov">
       <div class="partner-head">
         <div class="partner-icon">⚓</div>
         <div>
-          <div class="partner-name">Bilbao Port Authority</div>
+          <div class="partner-name">Bilbao PortLab</div>
           <div class="partner-city">Bilbao, Spain</div>
         </div>
       </div>
       <p class="partner-role" data-ko>해양·조선·물류 분야 오픈이노베이션을 추진하는 재단법인</p>
       <p class="partner-role" data-en>Foundation driving open innovation in maritime, shipbuilding, and logistics.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>정부·공공</span><span class="partner-domain-tag" data-en style="display:none;">Gov &amp; Public</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="edu">
       <div class="partner-head">
         <div class="partner-icon">🎯</div>
         <div>
@@ -1304,8 +1534,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>바르셀로나 기반 혁신 스튜디오. 교육·창업 생태계와의 연계 허브</p>
       <p class="partner-role" data-en>Barcelona-based innovation studio. A hub connecting education and startup ecosystems.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="gov">
       <div class="partner-head">
         <div class="partner-icon">🌆</div>
         <div>
@@ -1315,8 +1546,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>바르셀로나 시 공식 창업 지원 기관. 현지 네트워크 및 인프라 지원</p>
       <p class="partner-role" data-en>Official startup support agency of Barcelona. Local network and infrastructure support.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>정부·공공</span><span class="partner-domain-tag" data-en style="display:none;">Gov &amp; Public</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="fund">
       <div class="partner-head">
         <div class="partner-icon">💶</div>
         <div>
@@ -1326,13 +1558,14 @@ footer {
       </div>
       <p class="partner-role" data-ko>EU 펀딩 · EIC 액셀러레이터 신청 전문 컨설팅사. 300+ 프로젝트, €100M+ 펀딩을 조성했습니다.</p>
       <p class="partner-role" data-en>EU funding & EIC Accelerator application specialist, with 300+ projects and €100M+ raised.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>펀딩·컨설팅</span><span class="partner-domain-tag" data-en style="display:none;">Funding &amp; Consulting</span></div>
     </div>
   </div>
 
   <p class="partner-cat-label reveal" data-ko>유럽 각지</p>
   <p class="partner-cat-label reveal" data-en>Elsewhere in Europe</p>
   <div class="partners-grid">
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="gov">
       <div class="partner-head">
         <div class="partner-icon">💡</div>
         <div>
@@ -1342,8 +1575,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>룩셈부르크 정부 산하 혁신·투자유치 기관. R&D·투자 유치 프로그램 매칭을 지원합니다.</p>
       <p class="partner-role" data-en>Luxembourg's government-backed innovation and investment agency, matching startups to R&D and investment programs.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>정부·공공</span><span class="partner-domain-tag" data-en style="display:none;">Gov &amp; Public</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="accel">
       <div class="partner-head">
         <div class="partner-icon">💼</div>
         <div>
@@ -1353,8 +1587,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>파리 스타트업 인큐베이터 · 코워킹 네트워크</p>
       <p class="partner-role" data-en>Paris-based startup incubator and coworking network.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>액셀러레이터</span><span class="partner-domain-tag" data-en style="display:none;">Accelerator</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="local">
       <div class="partner-head">
         <div class="partner-icon">🧭</div>
         <div>
@@ -1364,8 +1599,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>베를린 최대 규모 코워킹 · 스타트업 커뮤니티</p>
       <p class="partner-role" data-en>Berlin's largest coworking and startup community.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>로컬 커뮤니티</span><span class="partner-domain-tag" data-en style="display:none;">Local Community</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="edu">
       <div class="partner-head">
         <div class="partner-icon">🌍</div>
         <div>
@@ -1377,13 +1613,98 @@ footer {
       <p class="partner-role" data-en>Global entrepreneurship education network based on Finnish team learning methodology.</p>
       <span class="partner-tag" data-ko>UK · Netherlands · France 등</span>
       <span class="partner-tag" data-en>UK · Netherlands · France +</span>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="gov">
+      <div class="partner-head">
+        <div class="partner-icon">🏛️</div>
+        <div>
+          <div class="partner-name">Enter Espoo</div>
+          <div class="partner-city">Espoo, Finland</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>에스포시 산하 공공기관. 알토대·VTT 기반 북유럽 딥테크 생태계 매칭을 지원합니다.</p>
+      <p class="partner-role" data-en>Public agency of the City of Espoo, matching into the Aalto University · VTT-based Nordic deep tech ecosystem.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>정부·공공</span><span class="partner-domain-tag" data-en style="display:none;">Gov &amp; Public</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="gov">
+      <div class="partner-head">
+        <div class="partner-icon">🏛️</div>
+        <div>
+          <div class="partner-name">Helsinki Partners</div>
+          <div class="partner-city">Helsinki, Finland</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>헬싱키시 공식 투자유치·기업유치 공공기관</p>
+      <p class="partner-role" data-en>Official public investment and business promotion agency for the City of Helsinki.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>정부·공공</span><span class="partner-domain-tag" data-en style="display:none;">Gov &amp; Public</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="gov">
+      <div class="partner-head">
+        <div class="partner-icon">🏛️</div>
+        <div>
+          <div class="partner-name">hub.brussels</div>
+          <div class="partner-city">Brussels, Belgium</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>브뤼셀 공식 기업 지원 공공기관. 유럽 진출 컨설팅과 네트워킹을 지원합니다.</p>
+      <p class="partner-role" data-en>Brussels' official public business support agency, offering market-entry consulting and networking.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>정부·공공</span><span class="partner-domain-tag" data-en style="display:none;">Gov &amp; Public</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="accel">
+      <div class="partner-head">
+        <div class="partner-icon">🧪</div>
+        <div>
+          <div class="partner-name">Techpol</div>
+          <div class="partner-city">Tallinn, Estonia</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>에스토니아 테크 생태계 거점. 현지 스타트업·파트너 매칭을 지원합니다.</p>
+      <p class="partner-role" data-en>A hub in Estonia's tech ecosystem, supporting local startup and partner matching.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>액셀러레이터</span><span class="partner-domain-tag" data-en style="display:none;">Accelerator</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="local">
+      <div class="partner-head">
+        <div class="partner-icon">🧭</div>
+        <div>
+          <div class="partner-name">amvisions</div>
+          <div class="partner-city">Berlin, Germany</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>베를린 기반 스타트업·오픈이노베이션 커뮤니티 파트너</p>
+      <p class="partner-role" data-en>Berlin-based startup and open innovation community partner.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>로컬 커뮤니티</span><span class="partner-domain-tag" data-en style="display:none;">Local Community</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="local">
+      <div class="partner-head">
+        <div class="partner-icon">🏭</div>
+        <div>
+          <div class="partner-name">123factory</div>
+          <div class="partner-city">Berlin, Germany</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>베를린 기반 스타트업 스튜디오 · 커뮤니티 파트너</p>
+      <p class="partner-role" data-en>Berlin-based startup studio and community partner.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>로컬 커뮤니티</span><span class="partner-domain-tag" data-en style="display:none;">Local Community</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="accel">
+      <div class="partner-head">
+        <div class="partner-icon">🚀</div>
+        <div>
+          <div class="partner-name">WILCO</div>
+          <div class="partner-city">Paris, France</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>파리 기반 스타트업 액셀러레이션 프로그램</p>
+      <p class="partner-role" data-en>Paris-based startup acceleration program.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>액셀러레이터</span><span class="partner-domain-tag" data-en style="display:none;">Accelerator</span></div>
     </div>
   </div>
 
   <p class="partner-cat-label reveal" data-ko>아시아 · 라틴아메리카 · 아프리카</p>
   <p class="partner-cat-label reveal" data-en>Asia · Latin America · Africa</p>
   <div class="partners-grid">
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="fund">
       <div class="partner-head">
         <div class="partner-icon">🌎</div>
         <div>
@@ -1393,8 +1714,9 @@ footer {
       </div>
       <p class="partner-role" data-ko>칠레를 베이스캠프로 페루·아르헨티나·콜롬비아를 잇는 아시아-라틴아메리카 커넥터</p>
       <p class="partner-role" data-en>An Asia-Latin America connector based in Chile, extending into Peru, Argentina, and Colombia.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>펀딩·컨설팅</span><span class="partner-domain-tag" data-en style="display:none;">Funding &amp; Consulting</span></div>
     </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="fund">
       <div class="partner-head">
         <div class="partner-icon">🌍</div>
         <div>
@@ -1404,24 +1726,38 @@ footer {
       </div>
       <p class="partner-role" data-ko>아프리카 진출 지원 비즈니스 네트워크</p>
       <p class="partner-role" data-en>Business network supporting expansion into Africa.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>펀딩·컨설팅</span><span class="partner-domain-tag" data-en style="display:none;">Funding &amp; Consulting</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="local">
+      <div class="partner-head">
+        <div class="partner-icon">🤝</div>
+        <div>
+          <div class="partner-name">VCIL</div>
+          <div class="partner-city">Vietnam</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>베트남 현지 민간 사회적기업. 혁신·창업 생태계 매칭을 지원합니다.</p>
+      <p class="partner-role" data-en>A private social enterprise in Vietnam, supporting innovation and startup ecosystem matching.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>로컬 커뮤니티</span><span class="partner-domain-tag" data-en style="display:none;">Local Community</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="local">
+      <div class="partner-head">
+        <div class="partner-icon">🤝</div>
+        <div>
+          <div class="partner-name">KOTO</div>
+          <div class="partner-city">Vietnam</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>베트남 민간 사회적기업. 소외계층 청년 교육·고용을 통해 로컬 커뮤니티와 연결됩니다.</p>
+      <p class="partner-role" data-en>A private social enterprise in Vietnam connecting with local communities through education and employment for disadvantaged youth.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>로컬 커뮤니티</span><span class="partner-domain-tag" data-en style="display:none;">Local Community</span></div>
     </div>
   </div>
 
-  <p class="partner-cat-label reveal" data-ko>한국</p>
-  <p class="partner-cat-label reveal" data-en>Korea</p>
+  <p class="partner-cat-label reveal" data-ko>한국 — 글로벌 네트워크</p>
+  <p class="partner-cat-label reveal" data-en>Korea — Global Network</p>
   <div class="partners-grid">
-    <div class="partner-card reveal">
-      <div class="partner-head">
-        <div class="partner-icon">🌐</div>
-        <div>
-          <div class="partner-name">BTI Korea Office</div>
-          <div class="partner-city">Seoul, Korea</div>
-        </div>
-      </div>
-      <p class="partner-role" data-ko>바스크 무역투자청(BTI)의 한국사무소. 바스크-한국 교류의 현지 접점입니다.</p>
-      <p class="partner-role" data-en>Korea office of the Basque Trade & Investment agency, the on-the-ground link between Basque and Korea.</p>
-    </div>
-    <div class="partner-card reveal">
+    <div class="partner-card reveal" data-domain="local">
       <div class="partner-head">
         <div class="partner-icon">🏅</div>
         <div>
@@ -1431,8 +1767,221 @@ footer {
       </div>
       <p class="partner-role" data-ko>국내 스타트업 생태계 허브. GOIS 프로그램의 한국 운영 기반 및 스타트업 풀 공급</p>
       <p class="partner-role" data-en>Korea's startup ecosystem hub. Korean operational base and startup pipeline for GOIS programs.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>로컬 커뮤니티</span><span class="partner-domain-tag" data-en style="display:none;">Local Community</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="corp">
+      <div class="partner-head">
+        <div class="partner-icon">🎨</div>
+        <div>
+          <div class="partner-name">씨닷 (c.dot)</div>
+          <div class="partner-city">Seoul, Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>사회혁신·소셜 디자인 전문 민간기업. GOIS 네트워크의 디자인·기획 파트너입니다.</p>
+      <p class="partner-role" data-en>A private social innovation and social design firm, a design and planning partner in the GOIS network.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>산업·기업</span><span class="partner-domain-tag" data-en style="display:none;">Industry</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="fund">
+      <div class="partner-head">
+        <div class="partner-icon">💡</div>
+        <div>
+          <div class="partner-name">더이노베이터스</div>
+          <div class="partner-city">Seoul, Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>국내 투자사. GOIS 네트워크 기업의 투자유치를 함께 지원합니다.</p>
+      <p class="partner-role" data-en>A Korean investment firm, supporting fundraising for companies in the GOIS network.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>펀딩·컨설팅</span><span class="partner-domain-tag" data-en style="display:none;">Funding &amp; Consulting</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="gov">
+      <div class="partner-head">
+        <div class="partner-icon">🌐</div>
+        <div>
+          <div class="partner-name">BTI Korea Office</div>
+          <div class="partner-city">Seoul, Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>바스크 무역투자청(BTI)의 한국사무소. 바스크-한국 교류의 현지 접점입니다.</p>
+      <p class="partner-role" data-en>Korea office of the Basque Trade & Investment agency, the on-the-ground link between Basque and Korea.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>정부·공공</span><span class="partner-domain-tag" data-en style="display:none;">Gov &amp; Public</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="edu">
+      <div class="partner-head">
+        <div class="partner-icon">🧳</div>
+        <div>
+          <div class="partner-name">TZBZ / Traveling University</div>
+          <div class="partner-city">Basque Country, Spain</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>바스크 기반 트래블링 유니버시티. 학습연수 프로그램을 현지에서 함께 설계·운영합니다.</p>
+      <p class="partner-role" data-en>A Basque-based traveling university, co-designing and operating learning journey programs on the ground.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
     </div>
   </div>
+
+  <p class="partner-cat-label reveal" data-ko>한국 — 로컬 프로젝트 파트너</p>
+  <p class="partner-cat-label reveal" data-en>Korea — Local Project Partners</p>
+  <p class="partner-cat-sub reveal" data-ko>해외 진출뿐 아니라, 국내 로컬 현장에서 함께 뛴 파트너들입니다.</p>
+  <p class="partner-cat-sub reveal" data-en>Partners who worked alongside us on the ground in Korea's own local projects — not only abroad.</p>
+  <div class="partners-grid">
+    <div class="partner-card reveal" data-domain="edu">
+      <div class="partner-head">
+        <div class="partner-icon">🎓</div>
+        <div>
+          <div class="partner-name">Mondragon University Seoul Lab (HBM)</div>
+          <div class="partner-city">Seoul, Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>몬드라곤대학교 서울랩. 바스크 학습연수·세미나 등 국내 로컬 프로그램을 주최합니다.</p>
+      <p class="partner-role" data-en>Mondragon University's Seoul Lab, hosting Basque learning journeys and seminars as local programs in Korea.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="edu">
+      <div class="partner-head">
+        <div class="partner-icon">📚</div>
+        <div>
+          <div class="partner-name">LEINN Korea</div>
+          <div class="partner-city">Seoul, Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>몬드라곤대 LEINN 팀프러너십 프로그램의 한국 운영 파트너</p>
+      <p class="partner-role" data-en>Korean operating partner for Mondragon University's LEINN team entrepreneurship program.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="local">
+      <div class="partner-head">
+        <div class="partner-icon">🚐</div>
+        <div>
+          <div class="partner-name">해피쿱투어협동조합</div>
+          <div class="partner-city">Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>협동조합 기반 여행·운영 파트너. 바스크 학습연수의 국내 운영을 지원합니다.</p>
+      <p class="partner-role" data-en>A cooperative-based travel and operations partner supporting Basque learning journeys in Korea.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>로컬 커뮤니티</span><span class="partner-domain-tag" data-en style="display:none;">Local Community</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="edu">
+      <div class="partner-head">
+        <div class="partner-icon">🎓</div>
+        <div>
+          <div class="partner-name">한국기술교육대학교</div>
+          <div class="partner-city">Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>로컬 오픈이노베이션 프로그램을 함께한 국내 대학 파트너</p>
+      <p class="partner-role" data-en>A Korean university partner in local open innovation programs.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="edu">
+      <div class="partner-head">
+        <div class="partner-icon">🎓</div>
+        <div>
+          <div class="partner-name">성공회대학교</div>
+          <div class="partner-city">Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>로컬 오픈이노베이션 프로그램을 함께한 국내 대학 파트너</p>
+      <p class="partner-role" data-en>A Korean university partner in local open innovation programs.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="edu">
+      <div class="partner-head">
+        <div class="partner-icon">🎓</div>
+        <div>
+          <div class="partner-name">서울시립대학교</div>
+          <div class="partner-city">Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>로컬 오픈이노베이션 프로그램을 함께한 국내 대학 파트너</p>
+      <p class="partner-role" data-en>A Korean university partner in local open innovation programs.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="edu">
+      <div class="partner-head">
+        <div class="partner-icon">🎓</div>
+        <div>
+          <div class="partner-name">차의과학대학교</div>
+          <div class="partner-city">Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>로컬 오픈이노베이션 프로그램을 함께한 국내 대학 파트너</p>
+      <p class="partner-role" data-en>A Korean university partner in local open innovation programs.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="edu">
+      <div class="partner-head">
+        <div class="partner-icon">🎓</div>
+        <div>
+          <div class="partner-name">한동대학교</div>
+          <div class="partner-city">Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>로컬 오픈이노베이션 프로그램을 함께한 국내 대학 파트너</p>
+      <p class="partner-role" data-en>A Korean university partner in local open innovation programs.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="edu">
+      <div class="partner-head">
+        <div class="partner-icon">🎓</div>
+        <div>
+          <div class="partner-name">건국대학교</div>
+          <div class="partner-city">Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>로컬 오픈이노베이션 프로그램을 함께한 국내 대학 파트너</p>
+      <p class="partner-role" data-en>A Korean university partner in local open innovation programs.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="edu">
+      <div class="partner-head">
+        <div class="partner-icon">🎓</div>
+        <div>
+          <div class="partner-name">경상국립대학교</div>
+          <div class="partner-city">Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>로컬 오픈이노베이션 프로그램을 함께한 국내 대학 파트너</p>
+      <p class="partner-role" data-en>A Korean university partner in local open innovation programs.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="local fund">
+      <div class="partner-head">
+        <div class="partner-icon">🤝</div>
+        <div>
+          <div class="partner-name">큐네스티 (CunaeST)</div>
+          <div class="partner-city">Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>로컬 프로젝트를 함께한 파트너이자 투자사</p>
+      <p class="partner-role" data-en>A local project partner and investment firm.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>로컬 커뮤니티</span><span class="partner-domain-tag" data-en style="display:none;">Local Community</span><span class="partner-domain-tag" data-ko>펀딩·컨설팅</span><span class="partner-domain-tag" data-en style="display:none;">Funding &amp; Consulting</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="local fund">
+      <div class="partner-head">
+        <div class="partner-icon">🤝</div>
+        <div>
+          <div class="partner-name">부산창경</div>
+          <div class="partner-city">Busan, Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>로컬 프로젝트를 함께한 파트너이자 투자사</p>
+      <p class="partner-role" data-en>A local project partner and investment firm.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>로컬 커뮤니티</span><span class="partner-domain-tag" data-en style="display:none;">Local Community</span><span class="partner-domain-tag" data-ko>펀딩·컨설팅</span><span class="partner-domain-tag" data-en style="display:none;">Funding &amp; Consulting</span></div>
+    </div>
+    <div class="partner-card reveal" data-domain="edu">
+      <div class="partner-head">
+        <div class="partner-icon">📖</div>
+        <div>
+          <div class="partner-name">한국경영학회</div>
+          <div class="partner-city">Korea</div>
+        </div>
+      </div>
+      <p class="partner-role" data-ko>국내 대표 경영학 학술단체. 사회적가치 페스타 세션을 통해 로컬 오픈이노베이션 담론을 함께 만들었습니다.</p>
+      <p class="partner-role" data-en>Korea's leading academic society for management studies, co-shaping the discourse on local open innovation.</p>
+      <div class="partner-domain-tags"><span class="partner-domain-tag" data-ko>교육</span><span class="partner-domain-tag" data-en style="display:none;">Education</span></div>
+    </div>
+  </div>
+
   <div class="eco-stats">
     <div class="eco-stat reveal">
       <div class="eco-stat-n">6개</div>
@@ -1450,7 +1999,7 @@ footer {
       <div class="eco-stat-l" data-en>Annual Programs</div>
     </div>
     <div class="eco-stat reveal">
-      <div class="eco-stat-n">20+</div>
+      <div class="eco-stat-n">46+</div>
       <div class="eco-stat-l" data-ko>파트너 기관</div>
       <div class="eco-stat-l" data-en>Partner Organizations</div>
     </div>
@@ -1618,6 +2167,27 @@ window.addEventListener('scroll', () => {
   nav.style.height = window.scrollY > 60 ? '52px' : '64px';
 }, { passive: true });
 
+// ── Ecosystem domain filter ──
+function filterEco(domain, btn) {
+  const group = btn.parentElement;
+  group.querySelectorAll('.eco-filter-btn').forEach(b => {
+    // Keep ko/en pairs in sync by matching their onclick domain
+    if (b.getAttribute('onclick') === btn.getAttribute('onclick')) {
+      b.classList.add('active');
+    } else {
+      b.classList.remove('active');
+    }
+  });
+  document.querySelectorAll('.partner-card').forEach(c => {
+    const doms = (c.getAttribute('data-domain') || '').split(' ');
+    if (domain === 'all' || doms.includes(domain)) {
+      c.classList.remove('dimmed');
+    } else {
+      c.classList.add('dimmed');
+    }
+  });
+}
+
 // ── Language toggle ──
 function setLang(lang) {
   document.documentElement.lang = lang;
@@ -1642,6 +2212,7 @@ function setLang(lang) {
       const inlineTags = ['span','a','strong','em','small'];
       let disp = blockTags.includes(tag) ? 'block' : inlineTags.includes(tag) ? 'inline' : 'block';
       if (tag === 'li') disp = 'list-item';
+      if (tag === 'button') disp = 'inline-block';
       el.style.setProperty('display', disp, 'important');
       el.style.setProperty('opacity', '1', 'important');
       el.classList.add('visible');
@@ -1664,7 +2235,7 @@ if (savedLang && savedLang !== 'ko') {
 
 // ── Nav active section highlight ──
 const sections = [...document.querySelectorAll('section[id]')];
-const links = [...document.querySelectorAll('.nav-links a')];
+const links = [...document.querySelectorAll('.nav-links > li > a')];
 window.addEventListener('scroll', () => {
   let cur = '';
   sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
